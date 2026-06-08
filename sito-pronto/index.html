@@ -21,6 +21,8 @@
 <link rel="icon" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/img/foto-02-sm.webp" media="(max-width:700px)">
+<link rel="preload" as="image" href="assets/img/foto-02.webp" media="(min-width:701px)">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
@@ -92,7 +94,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px}
 .burger span{width:24px;height:2px;background:var(--navy-deep);display:block;transition:.2s}
 /* Hero */
-.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+.hero{position:relative;min-height:88vh;min-height:88svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
 .hero-bg{position:absolute;inset:0}
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center}
 .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,28,60,.25) 0%,rgba(15,28,60,.15) 40%,rgba(13,25,55,.78) 100%)}
@@ -160,7 +162,7 @@ ul.amen{padding:0;margin:0}
 .reqform .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 .reqform label{display:flex;flex-direction:column;gap:.3rem;font-size:.82rem;font-weight:600;color:var(--navy-deep)}
 .reqform label.full{margin-bottom:12px}
-.reqform input,.reqform select,.reqform textarea{font:inherit;font-weight:400;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:.6rem .7rem;background:#fff;width:100%}
+.reqform input,.reqform select,.reqform textarea{font:inherit;font-size:16px;font-weight:400;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:.6rem .7rem;background:#fff;width:100%;min-height:44px}
 .reqform input:focus,.reqform select:focus,.reqform textarea:focus{outline:none;border-color:var(--azure);box-shadow:0 0 0 3px var(--azure-light)}
 .reqform textarea{resize:vertical}
 .reqbtns{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:4px}
@@ -204,21 +206,65 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
 .lb .x{position:absolute;top:18px;right:24px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none}
 .lb .arrow{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2.4rem;cursor:pointer;background:none;border:none;padding:0 12px;user-select:none}
 .lb .prev{left:8px}.lb .next{right:8px}
+/* Sticky mobile CTA bar */
+.sticky-cta{display:none}
 /* Responsive */
 @media(max-width:860px){
   .menu{position:fixed;inset:70px 0 auto 0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line);padding:10px 0;transform:translateY(-120%);transition:.25s;box-shadow:var(--shadow)}
   .menu.open{transform:translateY(0)}
-  .menu a{padding:.8rem 20px;width:100%}
-  .burger{display:flex}
+  .menu a{padding:1rem 20px;width:100%;font-size:1.05rem}
+  .burger{display:flex;padding:12px;margin:-6px}
   .split{grid-template-columns:1fr;gap:26px}
   .book-grid{grid-template-columns:1fr}
-  .gallery{grid-template-columns:repeat(2,1fr)}
   .rev-grid{columns:1}
   footer .fcols{grid-template-columns:1fr}
   section{padding:52px 0}
-  .hero{min-height:80vh}
+  .hero{min-height:78vh;min-height:78svh;align-items:flex-end}
 }
-@media(max-width:520px){ .badges{gap:.5rem}.badge{font-size:.8rem} }
+@media(max-width:700px){
+  /* Gallery: filmstrip orizzontale con snap */
+  .gallery{display:flex;overflow-x:auto;gap:10px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:10px;margin:0 -20px;padding-left:20px;padding-right:20px;scrollbar-width:none}
+  .gallery::-webkit-scrollbar{display:none}
+  .gallery img{flex:0 0 72%;scroll-snap-align:center;aspect-ratio:3/4;border-radius:12px}
+  /* Recensioni: carosello orizzontale */
+  .rev-grid{display:flex;overflow-x:auto;gap:14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:0 20px 12px;columns:auto;scrollbar-width:none}
+  .rev-grid::-webkit-scrollbar{display:none}
+  .rev{flex:0 0 84%;scroll-snap-align:center;margin-bottom:0}
+  /* POI Nicosia: scorrimento orizzontale */
+  .poi{display:flex;overflow-x:auto;gap:14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:0 20px 12px;scrollbar-width:none}
+  .poi::-webkit-scrollbar{display:none}
+  .poi-card{flex:0 0 78%;scroll-snap-align:center}
+  .media-stack{grid-template-columns:1fr 1fr}
+  .map-wrap iframe{height:280px}
+  /* hint di scorrimento */
+  .swipe-hint{display:block;text-align:center;font-size:.78rem;color:var(--muted);margin-top:2px}
+  /* sticky CTA */
+  .sticky-cta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));gap:10px;align-items:center;justify-content:space-between;box-shadow:0 -8px 24px rgba(20,48,110,.10)}
+  .sticky-cta .p{font-size:.8rem;color:var(--muted);line-height:1.25}
+  .sticky-cta .p b{display:block;font-size:1.05rem;color:var(--navy-deep);font-family:'Playfair Display',serif}
+  .sticky-cta .btn{padding:.7rem 1.2rem;font-size:.95rem;white-space:nowrap}
+  body{padding-bottom:76px}
+  footer{padding-bottom:96px}
+  .cookie{bottom:84px}
+  /* hero piu' compatto e leggibile */
+  .hero-inner{padding-bottom:34px}
+  .hero p{font-size:1rem}
+  .hero-cta .btn{width:100%;justify-content:center}
+  .hero-cta{flex-direction:column;gap:.6rem;width:100%}
+  .badges{margin-top:1.1rem}
+  .cin-top{font-size:.6rem;top:8px;right:10px}
+  .hl-grid{grid-template-columns:repeat(3,1fr);gap:.6rem}
+  .hl{padding:.8rem .5rem}
+  .hl .ico{font-size:1.2rem}
+  .hl b{font-size:.95rem}
+  .hl span{font-size:.72rem}
+  .contact-grid{grid-template-columns:1fr}
+  .reqbtns .btn{width:100%;justify-content:center}
+  h2{font-size:1.55rem}
+  .lead{font-size:1rem}
+}
+@media(max-width:520px){ .badges{gap:.5rem}.badge{font-size:.78rem;padding:.4rem .7rem} }
+@media(min-width:701px){ .swipe-hint{display:none} }
 </style>
 </head>
 <body>
@@ -252,7 +298,7 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
 <!-- HERO -->
 <section class="hero" id="top" style="padding:0">
   <div class="cin-top">CIN IT086012C2KM8BBUCU</div>
-  <div class="hero-bg"><img src="assets/img/foto-02.webp" alt="Soggiorno de La Mansarda con soffitto in legno a vista, Nicosia" fetchpriority="high"></div>
+  <div class="hero-bg"><img src="assets/img/foto-02.webp" srcset="assets/img/foto-02-sm.webp 640w, assets/img/foto-02.webp 1440w" sizes="100vw" alt="Soggiorno de La Mansarda con soffitto in legno a vista, Nicosia" fetchpriority="high"></div>
   <div class="wrap hero-inner">
     <div class="eyebrow" style="color:#bfe0f7" data-i18n="hero_eyebrow">Affitto breve · Nicosia, Sicilia</div>
     <h1 data-i18n="hero_title">La Mansarda, il tuo rifugio nel cuore della Sicilia</h1>
@@ -293,9 +339,9 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
       <a href="#prenota" class="btn" data-i18n="apt_cta">Prenota il tuo soggiorno</a>
     </div>
     <div class="media-stack">
-      <img src="assets/img/foto-25.webp" alt="Camera con due letti singoli e biancheria nuova" loading="lazy">
-      <img src="assets/img/foto-04.webp" alt="Angolo studio sotto il soffitto in legno" loading="lazy">
-      <img src="assets/img/foto-15.webp" alt="Cucina attrezzata" loading="lazy">
+      <img src="assets/img/foto-25.webp" srcset="assets/img/foto-25-sm.webp 640w, assets/img/foto-25.webp 1440w" sizes="(max-width:860px) 50vw, 30vw" alt="Camera con due letti singoli e biancheria nuova" loading="lazy">
+      <img src="assets/img/foto-04.webp" srcset="assets/img/foto-04-sm.webp 640w, assets/img/foto-04.webp 1440w" sizes="(max-width:860px) 50vw, 25vw" alt="Angolo studio sotto il soffitto in legno" loading="lazy">
+      <img src="assets/img/foto-15.webp" srcset="assets/img/foto-15-sm.webp 640w, assets/img/foto-15.webp 1440w" sizes="(max-width:860px) 50vw, 25vw" alt="Cucina attrezzata" loading="lazy">
     </div>
   </div>
 </section>
@@ -306,6 +352,7 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
     <div class="eyebrow" data-i18n="gal_eyebrow">Galleria</div>
     <h2 data-i18n="gal_title">Dai un'occhiata a ogni angolo</h2>
     <div class="gallery" id="gallery"></div>
+    <span class="swipe-hint" data-i18n="gal_swipe">← Scorri per vedere tutte le foto →</span>
   </div>
 </section>
 
@@ -341,12 +388,12 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
     <h2 data-i18n="nic_title">Scopri Nicosia, la Sicilia autentica</h2>
     <p class="lead" data-i18n="nic_lead">Borgo medievale nel cuore dei Nebrodi, lontano dal turismo di massa: vicoli, chiese, panorami sui monti e natura a pochi passi dall'appartamento.</p>
     <div class="poi">
-      <div class="poi-card"><img src="assets/img/nicosia/nicosia-01-centro.webp" alt="Centro storico di Nicosia" loading="lazy"><div class="pc"><h3 data-i18n="poi1_t">Centro storico</h3><p data-i18n="poi1_d">Vicoli medievali, scorci e piazze a pochi minuti a piedi.</p></div></div>
-      <div class="poi-card"><img src="assets/img/nicosia/nicosia-03-basilica.webp" alt="Basilica di Santa Maria Maggiore" loading="lazy"><div class="pc"><h3 data-i18n="poi2_t">Basiliche e cattedrale</h3><p data-i18n="poi2_d">San Nicola, Santa Maria Maggiore e portali barocchi.</p></div></div>
-      <div class="poi-card"><img src="assets/img/nicosia/nicosia-06-feste.webp" alt="Feste popolari a Nicosia" loading="lazy"><div class="pc"><h3 data-i18n="poi3_t">Tradizioni e feste</h3><p data-i18n="poi3_d">Eventi, processioni e sapori della cultura locale.</p></div></div>
-      <div class="poi-card"><img src="assets/img/nicosia/nicosia-08-altesina.webp" alt="Monte Altesina" loading="lazy"><div class="pc"><h3 data-i18n="poi4_t">Monte Altesina</h3><p data-i18n="poi4_d">Trekking e panorami sul cuore della Sicilia.</p></div></div>
-      <div class="poi-card"><img src="assets/img/nicosia/nicosia-09-lago.webp" alt="Laghi vicino a Nicosia" loading="lazy"><div class="pc"><h3 data-i18n="poi5_t">Laghi e natura</h3><p data-i18n="poi5_d">Laghetti Campanito e riserve dei Nebrodi.</p></div></div>
-      <div class="poi-card"><img src="assets/img/nicosia/nicosia-10-rupestri.webp" alt="Insediamenti rupestri" loading="lazy"><div class="pc"><h3 data-i18n="poi6_t">Insediamenti rupestri</h3><p data-i18n="poi6_d">Storia millenaria scavata nella roccia.</p></div></div>
+      <div class="poi-card"><img src="assets/img/nicosia/nicosia-01-centro.webp" srcset="assets/img/nicosia/nicosia-01-centro-sm.webp 640w, assets/img/nicosia/nicosia-01-centro.webp 1400w" sizes="(max-width:700px) 78vw, 30vw" alt="Centro storico di Nicosia" loading="lazy"><div class="pc"><h3 data-i18n="poi1_t">Centro storico</h3><p data-i18n="poi1_d">Vicoli medievali, scorci e piazze a pochi minuti a piedi.</p></div></div>
+      <div class="poi-card"><img src="assets/img/nicosia/nicosia-03-basilica.webp" srcset="assets/img/nicosia/nicosia-03-basilica-sm.webp 640w, assets/img/nicosia/nicosia-03-basilica.webp 1400w" sizes="(max-width:700px) 78vw, 30vw" alt="Basilica di Santa Maria Maggiore" loading="lazy"><div class="pc"><h3 data-i18n="poi2_t">Basiliche e cattedrale</h3><p data-i18n="poi2_d">San Nicola, Santa Maria Maggiore e portali barocchi.</p></div></div>
+      <div class="poi-card"><img src="assets/img/nicosia/nicosia-06-feste.webp" srcset="assets/img/nicosia/nicosia-06-feste-sm.webp 640w, assets/img/nicosia/nicosia-06-feste.webp 1400w" sizes="(max-width:700px) 78vw, 30vw" alt="Feste popolari a Nicosia" loading="lazy"><div class="pc"><h3 data-i18n="poi3_t">Tradizioni e feste</h3><p data-i18n="poi3_d">Eventi, processioni e sapori della cultura locale.</p></div></div>
+      <div class="poi-card"><img src="assets/img/nicosia/nicosia-08-altesina.webp" srcset="assets/img/nicosia/nicosia-08-altesina-sm.webp 640w, assets/img/nicosia/nicosia-08-altesina.webp 1400w" sizes="(max-width:700px) 78vw, 30vw" alt="Monte Altesina" loading="lazy"><div class="pc"><h3 data-i18n="poi4_t">Monte Altesina</h3><p data-i18n="poi4_d">Trekking e panorami sul cuore della Sicilia.</p></div></div>
+      <div class="poi-card"><img src="assets/img/nicosia/nicosia-09-lago.webp" srcset="assets/img/nicosia/nicosia-09-lago-sm.webp 640w, assets/img/nicosia/nicosia-09-lago.webp 1400w" sizes="(max-width:700px) 78vw, 30vw" alt="Laghi vicino a Nicosia" loading="lazy"><div class="pc"><h3 data-i18n="poi5_t">Laghi e natura</h3><p data-i18n="poi5_d">Laghetti Campanito e riserve dei Nebrodi.</p></div></div>
+      <div class="poi-card"><img src="assets/img/nicosia/nicosia-10-rupestri.webp" srcset="assets/img/nicosia/nicosia-10-rupestri-sm.webp 640w, assets/img/nicosia/nicosia-10-rupestri.webp 1400w" sizes="(max-width:700px) 78vw, 30vw" alt="Insediamenti rupestri" loading="lazy"><div class="pc"><h3 data-i18n="poi6_t">Insediamenti rupestri</h3><p data-i18n="poi6_d">Storia millenaria scavata nella roccia.</p></div></div>
     </div>
     <div class="map-wrap">
       <iframe loading="lazy" title="Mappa Nicosia" src="https://www.openstreetmap.org/export/embed.html?bbox=14.36%2C37.73%2C14.43%2C37.76&amp;layer=mapnik&amp;marker=37.7459%2C14.3973"></iframe>
@@ -467,6 +514,12 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
   </div>
 </footer>
 
+<!-- STICKY CTA (mobile) -->
+<div class="sticky-cta" id="stickyCta">
+  <div class="p"><span data-i18n="cta_from">da</span> <b>49 € <span style="font-size:.75rem;font-family:Inter,sans-serif;color:var(--muted);font-weight:400" data-i18n="cta_night">/ notte</span></b></div>
+  <a href="#prenota" class="btn" data-i18n="cta_btn">Richiedi le date</a>
+</div>
+
 <!-- COOKIE BANNER -->
 <div class="cookie hidden" id="cookie">
   <p data-i18n="cookie_text">Usiamo solo cookie tecnici necessari al funzionamento del sito. Nessun tracciamento è attivo senza il tuo consenso. Vedi la <a href="cookie.html">Cookie Policy</a>.</p>
@@ -549,7 +602,7 @@ const I18N={
   foot_cin:"National Identification Code",foot_nav:"Navigate",foot_legal:"Legal",foot_privacy:"Privacy Policy",foot_cookie:"Cookie Policy",
   foot_owner:"Owner: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Direct booking · No platform fees",foot_credit:"Website by Stefano Compagnone",
   cookie_text:"We only use technical cookies needed for the site to work. No tracking is active without your consent. See the <a href='cookie.html'>Cookie Policy</a>.",
-  cookie_accept:"Accept all",cookie_decline:"Necessary only"
+  cookie_accept:"Accept all",cookie_decline:"Necessary only",cta_from:"from",cta_night:"/ night",cta_btn:"Request dates",gal_swipe:"← Swipe to see all photos →"
  },
  de:{
   meta_title:"La Mansarda Nicosia — Kurzurlaub im Herzen Siziliens",
@@ -598,7 +651,7 @@ const I18N={
   foot_cin:"Nationaler Identifikationscode",foot_nav:"Navigation",foot_legal:"Rechtliches",foot_privacy:"Datenschutz",foot_cookie:"Cookie-Richtlinie",
   foot_owner:"Inhaber: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Direktbuchung · Keine Plattformgebühren",foot_credit:"Website von Stefano Compagnone",
   cookie_text:"Wir verwenden nur technisch notwendige Cookies. Ohne Ihre Zustimmung ist kein Tracking aktiv. Siehe die <a href='cookie.html'>Cookie-Richtlinie</a>.",
-  cookie_accept:"Alle akzeptieren",cookie_decline:"Nur notwendige"
+  cookie_accept:"Alle akzeptieren",cookie_decline:"Nur notwendige",cta_from:"ab",cta_night:"/ Nacht",cta_btn:"Termine anfragen",gal_swipe:"← Wischen für alle Fotos →"
  },
  fr:{
   meta_title:"La Mansarda Nicosia — Court séjour au cœur de la Sicile",
@@ -647,7 +700,7 @@ const I18N={
   foot_cin:"Code d'identification national",foot_nav:"Navigation",foot_legal:"Mentions légales",foot_privacy:"Politique de confidentialité",foot_cookie:"Politique de cookies",
   foot_owner:"Titulaire : Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Réservation directe · Sans frais de plateforme",foot_credit:"Site créé par Stefano Compagnone",
   cookie_text:"Nous utilisons uniquement des cookies techniques nécessaires au fonctionnement du site. Aucun suivi n'est actif sans votre consentement. Voir la <a href='cookie.html'>Politique de cookies</a>.",
-  cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement"
+  cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Demander des dates",gal_swipe:"← Faites défiler les photos →"
  },
  es:{
   meta_title:"La Mansarda Nicosia — Estancia corta en el corazón de Sicilia",
@@ -696,17 +749,19 @@ const I18N={
   foot_cin:"Código de Identificación Nacional",foot_nav:"Navegar",foot_legal:"Información legal",foot_privacy:"Política de privacidad",foot_cookie:"Política de cookies",
   foot_owner:"Titular: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Reserva directa · Sin comisiones de plataforma",foot_credit:"Sitio creado por Stefano Compagnone",
   cookie_text:"Solo usamos cookies técnicas necesarias para el funcionamiento del sitio. No hay seguimiento activo sin tu consentimiento. Consulta la <a href='cookie.html'>Política de cookies</a>.",
-  cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias"
+  cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",cta_from:"desde",cta_night:"/ noche",cta_btn:"Solicitar fechas",gal_swipe:"← Desliza para ver todas las fotos →"
  }
 };
 
-/* ---------- Build gallery ---------- */
+/* ---------- Build gallery (responsive srcset) ---------- */
 const galWrap=document.getElementById('gallery');
 galleryOrder.forEach(n=>{
   const s=String(n).padStart(2,'0');
   const img=document.createElement('img');
-  img.src=`assets/img/foto-${s}.webp`;img.loading='lazy';img.alt='La Mansarda Nicosia';
-  img.dataset.full=`assets/img/foto-${s}.webp`;
+  img.src=`assets/img/foto-${s}.webp`;
+  img.srcset=`assets/img/foto-${s}-sm.webp 640w, assets/img/foto-${s}.webp 1440w`;
+  img.sizes='(max-width:700px) 72vw, 25vw';
+  img.loading='lazy';img.decoding='async';img.alt='La Mansarda Nicosia';
   img.addEventListener('click',()=>openLB(galleryOrder.indexOf(n)));
   galWrap.appendChild(img);
 });
@@ -723,13 +778,30 @@ function renderReviews(){
 }
 renderReviews();
 
-/* ---------- Lightbox ---------- */
+/* ---------- Lightbox (con swipe touch) ---------- */
 let lbIndex=0,lbEl=null;
-function openLB(i){lbIndex=i;if(!lbEl){lbEl=document.createElement('div');lbEl.className='lb';lbEl.innerHTML='<button class="x">×</button><button class="arrow prev">‹</button><img><button class="arrow next">›</button>';document.body.appendChild(lbEl);lbEl.querySelector('.x').onclick=()=>lbEl.remove()||(lbEl=null);lbEl.querySelector('.prev').onclick=e=>{e.stopPropagation();nav(-1)};lbEl.querySelector('.next').onclick=e=>{e.stopPropagation();nav(1)};lbEl.onclick=e=>{if(e.target===lbEl){lbEl.remove();lbEl=null}};}
-  setLB();}
+function closeLB(){if(lbEl){lbEl.remove();lbEl=null;document.body.style.overflow='';}}
+function openLB(i){lbIndex=i;if(!lbEl){
+  lbEl=document.createElement('div');lbEl.className='lb';
+  lbEl.innerHTML='<button class="x" aria-label="Chiudi">×</button><button class="arrow prev" aria-label="Precedente">‹</button><img><button class="arrow next" aria-label="Successiva">›</button>';
+  document.body.appendChild(lbEl);
+  lbEl.querySelector('.x').onclick=closeLB;
+  lbEl.querySelector('.prev').onclick=e=>{e.stopPropagation();nav(-1)};
+  lbEl.querySelector('.next').onclick=e=>{e.stopPropagation();nav(1)};
+  lbEl.onclick=e=>{if(e.target===lbEl)closeLB();};
+  let tx=0,ty=0;
+  lbEl.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+  lbEl.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){nav(dx<0?1:-1);}
+    else if(dy>80&&Math.abs(dy)>Math.abs(dx)){closeLB();}
+  },{passive:true});
+  document.body.style.overflow='hidden';
+ }
+ setLB();}
 function setLB(){const n=String(galleryOrder[lbIndex]).padStart(2,'0');lbEl.querySelector('img').src=`assets/img/foto-${n}.webp`;}
 function nav(d){lbIndex=(lbIndex+d+galleryOrder.length)%galleryOrder.length;setLB();}
-document.addEventListener('keydown',e=>{if(lbEl){if(e.key==='Escape'){lbEl.remove();lbEl=null}if(e.key==='ArrowLeft')nav(-1);if(e.key==='ArrowRight')nav(1)}});
+document.addEventListener('keydown',e=>{if(lbEl){if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft')nav(-1);if(e.key==='ArrowRight')nav(1)}});
 
 /* ---------- Mobile menu ---------- */
 const burger=document.getElementById('burger'),menu=document.getElementById('menu');
@@ -768,6 +840,10 @@ const REQL={
  fr:{t:"Demande de réservation – La Mansarda",name:"Nom",cin:"Arrivée",cout:"Départ",g:"Voyageurs",m:"Message"},
  es:{t:"Solicitud de reserva – La Mansarda",name:"Nombre",cin:"Entrada",cout:"Salida",g:"Huéspedes",m:"Mensaje"}
 };
+function fmtDate(iso){ // YYYY-MM-DD -> DD/MM/YYYY (formato italiano/europeo)
+  const p=iso.split('-');
+  return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:iso;
+}
 function buildReq(){
   const L=REQL[document.documentElement.lang]||REQL.it;
   const i=document.getElementById('rIn').value,o=document.getElementById('rOut').value;
@@ -775,7 +851,7 @@ function buildReq(){
   if(!i||!o){err.classList.remove('hidden');return null;}
   err.classList.add('hidden');
   const g=document.getElementById('rGuests').value,n=document.getElementById('rName').value.trim(),m=document.getElementById('rMsg').value.trim();
-  let t=`${L.t}\n${L.cin}: ${i}\n${L.cout}: ${o}\n${L.g}: ${g}`;
+  let t=`${L.t}\n${L.cin}: ${fmtDate(i)}\n${L.cout}: ${fmtDate(o)}\n${L.g}: ${g}`;
   if(n)t+=`\n${L.name}: ${n}`;
   if(m)t+=`\n${L.m}: ${m}`;
   return t;
@@ -792,6 +868,16 @@ document.getElementById('cookieAccept').onclick=()=>{setCookie('all');/* place a
 document.getElementById('cookieDecline').onclick=()=>setCookie('necessary');
 
 document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* ---------- Sticky CTA: nascondi quando il form prenotazione è visibile ---------- */
+const stickyCta=document.getElementById('stickyCta');
+const bookSec=document.getElementById('prenota');
+if('IntersectionObserver' in window && stickyCta && bookSec){
+  new IntersectionObserver(entries=>{
+    stickyCta.style.transform=entries[0].isIntersecting?'translateY(120%)':'';
+    stickyCta.style.transition='transform .25s';
+  },{threshold:.15}).observe(bookSec);
+}
 </script>
 </body>
 </html>
