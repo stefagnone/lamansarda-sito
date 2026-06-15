@@ -50,13 +50,43 @@
     {"@type":"LocationFeatureSpecification","name":"Kitchen","value":true},
     {"@type":"LocationFeatureSpecification","name":"Breakfast","value":true}
   ],
-  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.83", "bestRating": "5", "ratingCount": "48" },
+  "telephone": "+39 347 7054576",
+  "petsAllowed": false,
+  "numberOfBedrooms": 1,
+  "smokingAllowed": false,
+  "checkinTime": "14:00",
+  "checkoutTime": "10:30",
+  "priceRange": "€49–€59",
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.83", "bestRating": "5", "worstRating": "1", "ratingCount": "6", "reviewCount": "6" },
+  "review": [
+    {"@type":"Review","author":{"@type":"Person","name":"Luciano"},"datePublished":"2025-12","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5","worstRating":"1"},"reviewBody":"Stef è stato un genio, ci ha accolti, mostrato la posizione e consigliato posti. Casa bellissima, letti comodi, pulita, calda, vista sui monti, tranquilla."},
+    {"@type":"Review","author":{"@type":"Person","name":"Mauro"},"datePublished":"2026-05","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5","worstRating":"1"},"reviewBody":"Sono stato benissimo, ci ritornerò."},
+    {"@type":"Review","author":{"@type":"Person","name":"Inès"},"datePublished":"2026-01","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5","worstRating":"1"},"reviewBody":"Ottima sistemazione, appartamento ben attrezzato e accogliente. Lo consigliamo."},
+    {"@type":"Review","author":{"@type":"Person","name":"Marie-Eve"},"datePublished":"2025-09","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5","worstRating":"1"},"reviewBody":"Alloggio molto pulito e ordinato, la colazione è un plus. Grazioso villaggio."},
+    {"@type":"Review","author":{"@type":"Person","name":"Jan"},"datePublished":"2025-04","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5","worstRating":"1"},"reviewBody":"Molto accogliente e ben attrezzato. Nicosia tranquilla, strade pulite e sicure. Consiglio vivamente."},
+    {"@type":"Review","author":{"@type":"Person","name":"Gianluca"},"datePublished":"2025-04","reviewRating":{"@type":"Rating","ratingValue":"4","bestRating":"5","worstRating":"1"},"reviewBody":"Corrisponde alle foto, prezzo giusto. 4º piano senza ascensore."}
+  ],
   "identifier": { "@type": "PropertyValue", "name": "CIN", "value": "IT086012C2KM8BBUCU" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Quali sono gli orari di check-in e check-out?","acceptedAnswer":{"@type":"Answer","text":"Check-in dalle 14:00 alle 00:00 (comunicaci l'orario di arrivo); check-out tra le 10:00 e le 10:30."}},
+    {"@type":"Question","name":"C'è il parcheggio?","acceptedAnswer":{"@type":"Answer","text":"Sì, parcheggio privato gratuito in loco, accessibile anche per moto."}},
+    {"@type":"Question","name":"Sono ammessi animali?","acceptedAnswer":{"@type":"Answer","text":"No, gli animali non sono ammessi."}},
+    {"@type":"Question","name":"Sono ammessi i bambini?","acceptedAnswer":{"@type":"Answer","text":"Sì, i bambini sono benvenuti, nel limite di 2 ospiti totali."}},
+    {"@type":"Question","name":"C'è l'ascensore?","acceptedAnswer":{"@type":"Answer","text":"No. L'appartamento è al 4º piano con 4 rampe di scale."}},
+    {"@type":"Question","name":"Come funziona il pagamento?","acceptedAnswer":{"@type":"Answer","text":"Invii la richiesta con le date, noi confermiamo la disponibilità e concordiamo direttamente il pagamento (bonifico, PayPal o all'arrivo). La colazione di base è inclusa."}},
+    {"@type":"Question","name":"Qual è la politica di cancellazione?","acceptedAnswer":{"@type":"Answer","text":"Cancellazione rigida: rimborso del 50% fino a 30 giorni prima dell'arrivo, nessun rimborso oltre tale termine."}}
+  ]
 }
 </script>
 <style>
 :root{
-  --navy:#1f3a8a; --navy-deep:#14306e; --azure:#3e97d1; --azure-light:#eaf4fb;
+  --navy:#1f3a8a; --navy-deep:#14306e; --azure:#3e97d1; --azure-ink:#1c6c98; --azure-light:#eaf4fb;
   --ink:#1b2230; --muted:#5c6675; --line:#e6e9ef; --bg:#ffffff; --soft:#f7f9fc;
   --radius:14px; --maxw:1160px; --shadow:0 10px 30px rgba(20,48,110,.08);
 }
@@ -72,18 +102,18 @@ a{color:var(--navy);text-decoration:none}
 img{max-width:100%;display:block}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
 section{padding:72px 0}
-.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:600;color:var(--azure);margin-bottom:.5rem}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:600;color:var(--azure-ink);margin-bottom:.5rem}
 .lead{font-size:1.1rem;color:var(--muted);max-width:60ch}
 .btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--navy);color:#fff;padding:.85rem 1.5rem;border-radius:999px;font-weight:600;border:none;cursor:pointer;transition:.2s;font-size:1rem}
 .btn:hover{background:var(--navy-deep);transform:translateY(-1px)}
 .btn.ghost{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
 .btn.ghost:hover{background:var(--azure-light)}
-.btn.wa{background:#25d366}.btn.wa:hover{background:#1eb858}
+.btn.wa{background:#12833c}.btn.wa:hover{background:#0f6e32}
 /* Header */
 header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:70px;gap:1rem}
-.brand{display:flex;align-items:center;gap:.6rem;font-family:'Playfair Display',serif;font-weight:700;color:var(--navy-deep);font-size:1.25rem}
-.brand img{height:42px;width:auto}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:'Playfair Display',serif;font-weight:700;color:var(--navy-deep);font-size:1.25rem;flex-shrink:0}
+.brand img{height:42px;width:auto;max-width:none}
 .menu{display:flex;align-items:center;gap:1.4rem}
 .menu a{color:var(--ink);font-weight:500;font-size:.95rem}
 .menu a:hover{color:var(--azure)}
@@ -130,6 +160,7 @@ ul.amen{padding:0;margin:0}
 /* Nicosia */
 .nicosia{background:var(--navy-deep);color:#eaf0fb}
 .nicosia h2,.nicosia h3{color:#fff}
+.nicosia .eyebrow{color:#bfe0f7}
 .nicosia .lead{color:#c5d2ec}
 .poi{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:8px}
 .poi-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);overflow:hidden}
@@ -189,7 +220,7 @@ ul.amen{padding:0;margin:0}
 /* Footer */
 footer{background:#0f1c3c;color:#aeb9d4;padding:48px 0 28px;font-size:.9rem}
 footer .fcols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;margin-bottom:28px}
-footer h4{color:#fff;font-size:1rem;margin:0 0 .6rem}
+footer h3{font-family:'Inter',system-ui,sans-serif;font-weight:600;color:#fff;font-size:1rem;line-height:1.3;margin:0 0 .6rem}
 footer a{color:#cdd6ec;display:block;margin:.25rem 0}
 .cin-box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:.7rem .9rem;display:inline-block;margin-top:.5rem}
 .cin-box b{color:#fff;letter-spacing:.04em}
@@ -264,16 +295,65 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
   .lead{font-size:1rem}
 }
 @media(max-width:520px){ .badges{gap:.5rem}.badge{font-size:.78rem;padding:.4rem .7rem} }
+/* Mobile header: keep logo + lingue + burger entro la viewport (la Prenota è coperta da hero e sticky CTA) */
+@media(max-width:520px){ .brand img{height:32px} .nav-right>.btn{display:none} .nav{gap:.5rem} .nav-right{gap:.5rem} }
 @media(min-width:701px){ .swipe-hint{display:none} }
+/* Accessibility: visible focus */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--azure);outline-offset:2px;border-radius:6px}
+.skip-link{position:absolute;left:-999px;top:0;z-index:200;background:var(--navy);color:#fff;padding:.7rem 1rem;border-radius:0 0 10px 0;font-weight:600}
+.skip-link:focus{left:0}
+#main:focus{outline:none}
+#main:focus-visible{outline:none}
+/* Scroll reveal — enhances already-visible content, only when JS+motion allow it */
+.js-reveal .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.js-reveal .reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.js-reveal .reveal{opacity:1!important;transform:none!important;transition:none}}
+/* Headings: balanced wrapping */
+h1,h2,h3{text-wrap:balance}
+.lead,p{text-wrap:pretty}
+/* Card / image hover polish */
+.poi-card{transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}
+.poi-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.25)}
+.hl{transition:transform .2s cubic-bezier(.16,1,.3,1),border-color .2s}
+.hl:hover{transform:translateY(-3px);border-color:var(--azure)}
+.media-stack img{transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.media-stack img:hover{transform:scale(1.02)}
+.cc{transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s}
+.cc:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+/* Trust signals under booking buttons */
+.trust{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)}
+.trust span{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--muted)}
+.trust .ico{color:#2bb673;font-weight:700}
+/* Live price estimate inside price card */
+.estimate{margin-top:.9rem;padding:.9rem 1rem;border-radius:10px;background:var(--azure-light);border:1px solid #d4e8f7}
+.estimate.empty{color:var(--muted);font-size:.88rem;text-align:center}
+.estimate .erow{display:flex;justify-content:space-between;align-items:baseline;font-size:.9rem;color:var(--ink);margin-bottom:.3rem}
+.estimate .erow:last-child{margin-bottom:0}
+.estimate .etot{font-size:1.5rem;font-weight:700;color:var(--navy-deep);font-family:'Playfair Display',serif}
+/* Host section */
+.host{display:grid;grid-template-columns:.8fr 1.2fr;gap:42px;align-items:center}
+.host-emblem{aspect-ratio:4/5;border-radius:var(--radius);background:linear-gradient(160deg,var(--azure-light),#fff);border:1px solid var(--line);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:2rem}
+.host-emblem img{width:80%;max-width:300px;height:auto;aspect-ratio:auto;object-fit:contain}
+.host .sig{margin-top:1rem;font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy-deep)}
+.host .placeholder-note{font-size:.72rem;color:var(--azure-ink);background:var(--azure-light);border:1px dashed var(--azure);border-radius:6px;padding:.2rem .5rem;display:inline-block;margin-top:.6rem}
+/* Getting here */
+.routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:8px}
+.route{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:1rem 1.1rem}
+.route b{display:block;color:#fff;font-size:1.15rem;font-family:'Playfair Display',serif}
+.route span{font-size:.85rem;color:#c5d2ec}
+.route .km{color:#bfe0f7;font-weight:600;font-size:.82rem}
+@media(max-width:860px){.host{grid-template-columns:1fr;gap:24px}.host-emblem{max-width:380px;margin-inline:auto;aspect-ratio:16/9}}
+@media(max-width:700px){.routes{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link" data-i18n="skip">Vai al contenuto</a>
 
 <!-- HEADER -->
 <header>
   <div class="wrap nav">
-    <a href="#top" class="brand"><img src="logo-mansarda.png" alt="La Mansarda Nicosia"></a>
-    <nav class="menu" id="menu">
+    <a href="#top" class="brand"><img src="logo-mansarda.png" alt="La Mansarda Nicosia" width="1174" height="590"></a>
+    <nav class="menu" id="menu" aria-label="Navigazione principale">
       <a href="#appartamento" data-i18n="nav_apt">L'appartamento</a>
       <a href="#galleria" data-i18n="nav_gallery">Galleria</a>
       <a href="#servizi" data-i18n="nav_amen">Servizi</a>
@@ -282,19 +362,20 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
       <a href="#contatti" data-i18n="nav_contact">Contatti</a>
     </nav>
     <div class="nav-right">
-      <div class="langs" id="langs">
-        <button data-lang="it" class="active">IT</button>
-        <button data-lang="en">EN</button>
-        <button data-lang="de">DE</button>
-        <button data-lang="fr">FR</button>
-        <button data-lang="es">ES</button>
+      <div class="langs" id="langs" role="group" aria-label="Lingua / Language">
+        <button data-lang="it" class="active" lang="it" aria-label="Italiano">IT</button>
+        <button data-lang="en" lang="en" aria-label="English">EN</button>
+        <button data-lang="de" lang="de" aria-label="Deutsch">DE</button>
+        <button data-lang="fr" lang="fr" aria-label="Français">FR</button>
+        <button data-lang="es" lang="es" aria-label="Español">ES</button>
       </div>
       <a href="#prenota" class="btn" data-i18n="nav_book">Prenota</a>
-      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+      <button class="burger" id="burger" aria-label="Apri menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
 
+<main id="main" tabindex="-1">
 <!-- HERO -->
 <section class="hero" id="top" style="padding:0">
   <div class="cin-top">CIN IT086012C2KM8BBUCU</div>
@@ -395,8 +476,34 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
       <div class="poi-card"><img src="assets/img/nicosia/nicosia-09-lago.webp" srcset="assets/img/nicosia/nicosia-09-lago-sm.webp 640w, assets/img/nicosia/nicosia-09-lago.webp 1400w" sizes="(max-width:700px) 78vw, 30vw" alt="Laghi vicino a Nicosia" loading="lazy"><div class="pc"><h3 data-i18n="poi5_t">Laghi e natura</h3><p data-i18n="poi5_d">Laghetti Campanito e riserve dei Nebrodi.</p></div></div>
       <div class="poi-card"><img src="assets/img/nicosia/nicosia-10-rupestri.webp" srcset="assets/img/nicosia/nicosia-10-rupestri-sm.webp 640w, assets/img/nicosia/nicosia-10-rupestri.webp 1400w" sizes="(max-width:700px) 78vw, 30vw" alt="Insediamenti rupestri" loading="lazy"><div class="pc"><h3 data-i18n="poi6_t">Insediamenti rupestri</h3><p data-i18n="poi6_d">Storia millenaria scavata nella roccia.</p></div></div>
     </div>
-    <div class="map-wrap">
+    <h3 style="margin-top:42px" data-i18n="routes_title">Come arrivare</h3>
+    <div class="routes">
+      <div class="route"><b>~1h40</b><span data-i18n="route_cta">Aeroporto di Catania</span><br><span class="km" data-i18n="route_cta_km">≈ 110 km in auto</span></div>
+      <div class="route"><b>~2h20</b><span data-i18n="route_pmo">Aeroporto di Palermo</span><br><span class="km" data-i18n="route_pmo_km">≈ 180 km in auto</span></div>
+      <div class="route"><b>~50 min</b><span data-i18n="route_enna">Enna</span><br><span class="km" data-i18n="route_enna_km">≈ 45 km in auto</span></div>
+      <div class="route"><b>~1h30</b><span data-i18n="route_etna">Etna</span><br><span class="km" data-i18n="route_etna_km">≈ 90 km in auto</span></div>
+    </div>
+    <p style="font-size:.78rem;color:#9fb0d4;margin-top:.8rem" data-i18n="routes_note">Distanze indicative in auto, da confermare.</p>
+    <div class="map-wrap" style="margin-top:22px">
       <iframe loading="lazy" title="Mappa Nicosia" src="https://www.openstreetmap.org/export/embed.html?bbox=14.36%2C37.73%2C14.43%2C37.76&amp;layer=mapnik&amp;marker=37.7459%2C14.3973"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- HOST -->
+<section id="host" class="highlights">
+  <div class="wrap host">
+    <div class="reveal">
+      <div class="host-emblem">
+        <img src="logo-mansarda.png" alt="La Mansarda" width="1174" height="590" loading="lazy">
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="eyebrow" data-i18n="host_eyebrow">Gli host</div>
+      <h2 data-i18n="host_title">I tuoi host: Paolo e Stefano</h2>
+      <p data-i18n="host_p1">La Mansarda è una casa di famiglia, non un albergo. Quando arrivi ti accogliamo di persona, ti consegniamo le chiavi e ti raccontiamo i posti giusti dove mangiare e cosa vedere a Nicosia. Troverai un piccolo kit di benvenuto e la colazione di base pronta per te.</p>
+      <p data-i18n="host_p2">Rispondiamo in fretta a ogni messaggio: per noi conta che ti senta a casa, dal primo contatto fino alla partenza.</p>
+      <div class="sig">Paolo &amp; Stefano</div>
     </div>
   </div>
 </section>
@@ -440,6 +547,11 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
             <button type="button" id="reqWa" class="btn wa" data-i18n="req_wa">Invia su WhatsApp</button>
             <button type="button" id="reqMail" class="btn ghost" data-i18n="req_mail">Invia per email</button>
           </div>
+          <div class="trust">
+            <span><span class="ico">✓</span> <span data-i18n="trust_reply">Rispondiamo in genere in poche ore</span></span>
+            <span><span class="ico">✓</span> <span data-i18n="trust_noprepay">Nessun anticipo richiesto online</span></span>
+            <span><span class="ico">✓</span> <span data-i18n="trust_nofee">Prezzo diretto, senza commissioni</span></span>
+          </div>
         </form>
       </div>
       <div class="price-card">
@@ -448,6 +560,7 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
         <div class="row"><span data-i18n="price_dep">Deposito cauzionale</span><b data-i18n="price_dep_v">Nessuno</b></div>
         <div class="row"><span data-i18n="price_checkin">Check-in</span><b>14:00 – 00:00</b></div>
         <div class="row"><span data-i18n="price_checkout">Check-out</span><b>10:00 – 10:30</b></div>
+        <div class="estimate empty" id="estimate" aria-live="polite" aria-atomic="true">Scegli le date per vedere il totale stimato.</div>
         <p class="policy" data-i18n="price_policy"><b>Cancellazione rigida:</b> rimborso del 50% fino a 30 giorni prima dell'arrivo. Pagamento concordato direttamente con l'host. Colazione inclusa.</p>
       </div>
     </div>
@@ -482,25 +595,26 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
     </div>
   </div>
 </section>
+</main>
 
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="fcols">
       <div>
-        <h4>La Mansarda</h4>
+        <h3>La Mansarda</h3>
         <p data-i18n="foot_about">Bilocale per affitti brevi nel centro storico di Nicosia (EN), Sicilia. Prenotazione diretta, senza commissioni.</p>
         <div class="cin-box"><span data-i18n="foot_cin">Codice Identificativo Nazionale</span><br><b>CIN IT086012C2KM8BBUCU</b></div>
       </div>
       <div>
-        <h4 data-i18n="foot_nav">Naviga</h4>
+        <h3 data-i18n="foot_nav">Naviga</h3>
         <a href="#appartamento" data-i18n="nav_apt">L'appartamento</a>
         <a href="#galleria" data-i18n="nav_gallery">Galleria</a>
         <a href="#nicosia" data-i18n="nav_nicosia">Nicosia</a>
         <a href="#prenota" data-i18n="nav_book">Prenota</a>
       </div>
       <div>
-        <h4 data-i18n="foot_legal">Informazioni legali</h4>
+        <h3 data-i18n="foot_legal">Informazioni legali</h3>
         <a href="privacy.html" data-i18n="foot_privacy">Privacy Policy</a>
         <a href="cookie.html" data-i18n="foot_cookie">Cookie Policy</a>
         <p style="margin-top:.6rem;font-size:.82rem" data-i18n="foot_owner">Titolare: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)</p>
@@ -522,7 +636,7 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
 
 <!-- COOKIE BANNER -->
 <div class="cookie hidden" id="cookie">
-  <p data-i18n="cookie_text">Usiamo solo cookie tecnici necessari al funzionamento del sito. Nessun tracciamento è attivo senza il tuo consenso. Vedi la <a href="cookie.html">Cookie Policy</a>.</p>
+  <p data-i18n="cookie_text">Usiamo cookie tecnici necessari e, solo con il tuo consenso, cookie statistici di Google Analytics 4 per migliorare il sito. Senza consenso nessun tracciamento è attivo. Vedi la <a href="cookie.html">Cookie Policy</a>.</p>
   <div class="cbtns">
     <button class="btn" id="cookieAccept" data-i18n="cookie_accept">Accetta tutto</button>
     <button class="btn ghost" id="cookieDecline" data-i18n="cookie_decline">Solo necessari</button>
@@ -534,6 +648,12 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
 const galleryOrder=[2,26,25,3,9,4,6,11,13,1,8,12,16,18,20,21,24,15];
 /* ---------- Reviews (REAL, from Airbnb + Booking) ---------- */
 const REVIEWS=[
+ {n:"Luciano",src:"Airbnb",stars:5,date:"12/2025",t:"Stef è stato un genio, ci ha accolti, mostrato la posizione e consigliato posti. Casa bellissima, letti comodi, pulita, calda, vista sui monti, tranquilla."},
+ {n:"Mauro",src:"Airbnb",stars:5,date:"05/2026",t:"Sono stato benissimo, ci ritornerò."},
+ {n:"Inès",src:"Airbnb",stars:5,date:"01/2026",t:"Ottima sistemazione, appartamento ben attrezzato e accogliente. Lo consigliamo."},
+ {n:"Marie-Eve",src:"Airbnb",stars:5,date:"09/2025",t:"Alloggio molto pulito e ordinato, la colazione è un plus. Grazioso villaggio."},
+ {n:"Jan",src:"Airbnb",stars:5,date:"04/2025",t:"Molto accogliente e ben attrezzato. Nicosia tranquilla, strade pulite e sicure. Consiglio vivamente."},
+ {n:"Gianluca",src:"Airbnb",stars:4,date:"04/2025",t:"Corrisponde alle foto, prezzo giusto. 4º piano senza ascensore."},
  {n:"Andrea",cc:"cz",c:"Repubblica Ceca",src:"Booking",t:"I never experienced accommodation that clean, really. It was such a lovely apartment to stay. There was everything we need, and quite a lot of space to safely park a car nearby. Thank you."},
  {n:"Yanika",cc:"mt",c:"Malta",src:"Booking",t:"The property was clean and the location was quiet. The host met us in person to hand us the keys. Punctual and very helpful. We were offered a complimentary breakfast."},
  {n:"Helena",cc:"si",c:"Slovenia",src:"Booking",t:"The host was very responsive, friendly and helpful. The flat is newly and tastefully furnished and comfortable. Everything is spotless, a short walk from the city centre. Great value for money."},
@@ -601,8 +721,16 @@ const I18N={
   foot_about:"One-bedroom short-stay flat in the old town of Nicosia (EN), Sicily. Direct booking, no fees.",
   foot_cin:"National Identification Code",foot_nav:"Navigate",foot_legal:"Legal",foot_privacy:"Privacy Policy",foot_cookie:"Cookie Policy",
   foot_owner:"Owner: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Direct booking · No platform fees",foot_credit:"Website by Stefano Compagnone",
-  cookie_text:"We only use technical cookies needed for the site to work. No tracking is active without your consent. See the <a href='cookie.html'>Cookie Policy</a>.",
-  cookie_accept:"Accept all",cookie_decline:"Necessary only",cta_from:"from",cta_night:"/ night",cta_btn:"Request dates",gal_swipe:"← Swipe to see all photos →"
+  cookie_text:"We use necessary technical cookies and, only with your consent, Google Analytics 4 statistics cookies to improve the site. No tracking is active without consent. See the <a href='cookie.html'>Cookie Policy</a>.",
+  cookie_accept:"Accept all",cookie_decline:"Necessary only",cta_from:"from",cta_night:"/ night",cta_btn:"Request dates",gal_swipe:"← Swipe to see all photos →",
+  skip:"Skip to content",
+  trust_reply:"We usually reply within a few hours",trust_noprepay:"No online prepayment required",trust_nofee:"Direct price, no fees",
+  routes_title:"How to get here",routes_note:"Approximate driving distances, to be confirmed.",
+  route_cta:"Catania Airport",route_cta_km:"≈ 110 km by car",route_pmo:"Palermo Airport",route_pmo_km:"≈ 180 km by car",route_enna:"Enna",route_enna_km:"≈ 45 km by car",route_etna:"Etna",route_etna_km:"≈ 90 km by car",
+  host_eyebrow:"Your hosts",host_title:"Your hosts: Paolo and Stefano",
+  host_p1:"La Mansarda is a family home, not a hotel. When you arrive we welcome you in person, hand over the keys and share the best places to eat and see in Nicosia. You'll find a small welcome kit and a basic breakfast ready for you.",
+  host_p2:"We reply quickly to every message: what matters to us is that you feel at home, from the first contact to check-out.",
+  host_ph:"Placeholder text & photo — replace with Paolo's real photo and bio."
  },
  de:{
   meta_title:"La Mansarda Nicosia — Kurzurlaub im Herzen Siziliens",
@@ -650,8 +778,16 @@ const I18N={
   foot_about:"Ein-Zimmer-Ferienwohnung in der Altstadt von Nicosia (EN), Sizilien. Direktbuchung, keine Gebühren.",
   foot_cin:"Nationaler Identifikationscode",foot_nav:"Navigation",foot_legal:"Rechtliches",foot_privacy:"Datenschutz",foot_cookie:"Cookie-Richtlinie",
   foot_owner:"Inhaber: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Direktbuchung · Keine Plattformgebühren",foot_credit:"Website von Stefano Compagnone",
-  cookie_text:"Wir verwenden nur technisch notwendige Cookies. Ohne Ihre Zustimmung ist kein Tracking aktiv. Siehe die <a href='cookie.html'>Cookie-Richtlinie</a>.",
-  cookie_accept:"Alle akzeptieren",cookie_decline:"Nur notwendige",cta_from:"ab",cta_night:"/ Nacht",cta_btn:"Termine anfragen",gal_swipe:"← Wischen für alle Fotos →"
+  cookie_text:"Wir verwenden technisch notwendige Cookies und, nur mit Ihrer Zustimmung, Statistik-Cookies von Google Analytics 4 zur Verbesserung der Website. Ohne Zustimmung ist kein Tracking aktiv. Siehe die <a href='cookie.html'>Cookie-Richtlinie</a>.",
+  cookie_accept:"Alle akzeptieren",cookie_decline:"Nur notwendige",cta_from:"ab",cta_night:"/ Nacht",cta_btn:"Termine anfragen",gal_swipe:"← Wischen für alle Fotos →",
+  skip:"Zum Inhalt springen",
+  trust_reply:"Wir antworten meist innerhalb weniger Stunden",trust_noprepay:"Keine Online-Vorauszahlung nötig",trust_nofee:"Direktpreis, keine Gebühren",
+  routes_title:"Anreise",routes_note:"Ungefähre Fahrstrecken, ohne Gewähr.",
+  route_cta:"Flughafen Catania",route_cta_km:"≈ 110 km mit dem Auto",route_pmo:"Flughafen Palermo",route_pmo_km:"≈ 180 km mit dem Auto",route_enna:"Enna",route_enna_km:"≈ 45 km mit dem Auto",route_etna:"Ätna",route_etna_km:"≈ 90 km mit dem Auto",
+  host_eyebrow:"Ihre Gastgeber",host_title:"Ihre Gastgeber: Paolo und Stefano",
+  host_p1:"La Mansarda ist ein Familienhaus, kein Hotel. Bei der Ankunft begrüßen wir Sie persönlich, übergeben die Schlüssel und verraten Ihnen die besten Orte zum Essen und Sehen in Nicosia. Ein kleines Willkommensset und ein einfaches Frühstück warten auf Sie.",
+  host_p2:"Wir antworten schnell auf jede Nachricht: Uns ist wichtig, dass Sie sich wie zu Hause fühlen – vom ersten Kontakt bis zur Abreise.",
+  host_ph:"Platzhaltertext & -foto — durch echtes Foto und Bio von Paolo ersetzen."
  },
  fr:{
   meta_title:"La Mansarda Nicosia — Court séjour au cœur de la Sicile",
@@ -699,8 +835,16 @@ const I18N={
   foot_about:"Studio en court séjour dans la vieille ville de Nicosia (EN), Sicile. Réservation directe, sans frais.",
   foot_cin:"Code d'identification national",foot_nav:"Navigation",foot_legal:"Mentions légales",foot_privacy:"Politique de confidentialité",foot_cookie:"Politique de cookies",
   foot_owner:"Titulaire : Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Réservation directe · Sans frais de plateforme",foot_credit:"Site créé par Stefano Compagnone",
-  cookie_text:"Nous utilisons uniquement des cookies techniques nécessaires au fonctionnement du site. Aucun suivi n'est actif sans votre consentement. Voir la <a href='cookie.html'>Politique de cookies</a>.",
-  cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Demander des dates",gal_swipe:"← Faites défiler les photos →"
+  cookie_text:"Nous utilisons des cookies techniques nécessaires et, uniquement avec votre consentement, des cookies statistiques Google Analytics 4 pour améliorer le site. Aucun suivi n'est actif sans consentement. Voir la <a href='cookie.html'>Politique de cookies</a>.",
+  cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Demander des dates",gal_swipe:"← Faites défiler les photos →",
+  skip:"Aller au contenu",
+  trust_reply:"Nous répondons généralement en quelques heures",trust_noprepay:"Aucun prépaiement en ligne requis",trust_nofee:"Prix direct, sans frais",
+  routes_title:"Comment venir",routes_note:"Distances routières indicatives, à confirmer.",
+  route_cta:"Aéroport de Catane",route_cta_km:"≈ 110 km en voiture",route_pmo:"Aéroport de Palerme",route_pmo_km:"≈ 180 km en voiture",route_enna:"Enna",route_enna_km:"≈ 45 km en voiture",route_etna:"Etna",route_etna_km:"≈ 90 km en voiture",
+  host_eyebrow:"Vos hôtes",host_title:"Vos hôtes : Paolo et Stefano",
+  host_p1:"La Mansarda est une maison de famille, pas un hôtel. À votre arrivée, nous vous accueillons en personne, vous remettons les clés et vous indiquons les meilleurs endroits où manger et que voir à Nicosia. Un petit kit de bienvenue et un petit-déjeuner de base vous attendent.",
+  host_p2:"Nous répondons vite à chaque message : ce qui compte pour nous, c'est que vous vous sentiez chez vous, du premier contact au départ.",
+  host_ph:"Texte et photo provisoires — à remplacer par la vraie photo et bio de Paolo."
  },
  es:{
   meta_title:"La Mansarda Nicosia — Estancia corta en el corazón de Sicilia",
@@ -748,21 +892,32 @@ const I18N={
   foot_about:"Apartamento de estancia corta en el casco antiguo de Nicosia (EN), Sicilia. Reserva directa, sin comisiones.",
   foot_cin:"Código de Identificación Nacional",foot_nav:"Navegar",foot_legal:"Información legal",foot_privacy:"Política de privacidad",foot_cookie:"Política de cookies",
   foot_owner:"Titular: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Reserva directa · Sin comisiones de plataforma",foot_credit:"Sitio creado por Stefano Compagnone",
-  cookie_text:"Solo usamos cookies técnicas necesarias para el funcionamiento del sitio. No hay seguimiento activo sin tu consentimiento. Consulta la <a href='cookie.html'>Política de cookies</a>.",
-  cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",cta_from:"desde",cta_night:"/ noche",cta_btn:"Solicitar fechas",gal_swipe:"← Desliza para ver todas las fotos →"
+  cookie_text:"Usamos cookies técnicas necesarias y, solo con tu consentimiento, cookies estadísticas de Google Analytics 4 para mejorar el sitio. Sin consentimiento no hay seguimiento activo. Consulta la <a href='cookie.html'>Política de cookies</a>.",
+  cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",cta_from:"desde",cta_night:"/ noche",cta_btn:"Solicitar fechas",gal_swipe:"← Desliza para ver todas las fotos →",
+  skip:"Saltar al contenido",
+  trust_reply:"Solemos responder en pocas horas",trust_noprepay:"Sin pago anticipado online",trust_nofee:"Precio directo, sin comisiones",
+  routes_title:"Cómo llegar",routes_note:"Distancias en coche aproximadas, a confirmar.",
+  route_cta:"Aeropuerto de Catania",route_cta_km:"≈ 110 km en coche",route_pmo:"Aeropuerto de Palermo",route_pmo_km:"≈ 180 km en coche",route_enna:"Enna",route_enna_km:"≈ 45 km en coche",route_etna:"Etna",route_etna_km:"≈ 90 km en coche",
+  host_eyebrow:"Tus anfitriones",host_title:"Tus anfitriones: Paolo y Stefano",
+  host_p1:"La Mansarda es una casa de familia, no un hotel. Cuando llegas te recibimos en persona, te entregamos las llaves y te contamos los mejores sitios para comer y ver en Nicosia. Encontrarás un pequeño kit de bienvenida y un desayuno básico listo para ti.",
+  host_p2:"Respondemos rápido a cada mensaje: lo que nos importa es que te sientas como en casa, desde el primer contacto hasta la salida.",
+  host_ph:"Texto y foto provisionales — sustitúyelos por la foto y bio reales de Paolo."
  }
 };
 
 /* ---------- Build gallery (responsive srcset) ---------- */
 const galWrap=document.getElementById('gallery');
-galleryOrder.forEach(n=>{
+galleryOrder.forEach((n,idx)=>{
   const s=String(n).padStart(2,'0');
   const img=document.createElement('img');
   img.src=`assets/img/foto-${s}.webp`;
   img.srcset=`assets/img/foto-${s}-sm.webp 640w, assets/img/foto-${s}.webp 1440w`;
   img.sizes='(max-width:700px) 72vw, 25vw';
-  img.loading='lazy';img.decoding='async';img.alt='La Mansarda Nicosia';
-  img.addEventListener('click',()=>openLB(galleryOrder.indexOf(n)));
+  img.loading='lazy';img.decoding='async';img.width=600;img.height=800;
+  img.alt=`La Mansarda Nicosia — foto ${idx+1}`;
+  img.tabIndex=0;img.setAttribute('role','button');img.setAttribute('aria-label',`Apri foto ${idx+1} a schermo intero`);
+  img.addEventListener('click',()=>openLB(idx));
+  img.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLB(idx);}});
   galWrap.appendChild(img);
 });
 
@@ -772,18 +927,28 @@ function renderReviews(){
   revGrid.innerHTML='';
   REVIEWS.forEach(r=>{
     const el=document.createElement('div');el.className='rev';
-    el.innerHTML=`<div class="stars">★★★★★</div><p>${r.t}</p><div class="who"><b><img class="flag" src="https://flagcdn.com/w20/${r.cc}.png" alt="${r.c}" loading="lazy"> ${r.n}</b><span>${r.c} · <span class="src">${r.src}</span></span></div>`;
+    const n=r.stars||5;
+    const stars='★'.repeat(n)+'☆'.repeat(5-n);
+    const flag=r.cc?`<img class="flag" src="https://flagcdn.com/w20/${r.cc}.png" alt="${r.c||''}" loading="lazy"> `:'';
+    const meta=[r.c,`<span class="src">${r.src}</span>`,r.date].filter(Boolean).join(' · ');
+    el.innerHTML=`<div class="stars" aria-label="${n}/5">${stars}</div><p>${r.t}</p><div class="who"><b>${flag}${r.n}</b><span>${meta}</span></div>`;
     revGrid.appendChild(el);
   });
 }
 renderReviews();
+/* icone/emoji decorative: nascoste agli screen reader (il testo accanto è già esplicito) */
+document.querySelectorAll('.ico').forEach(e=>e.setAttribute('aria-hidden','true'));
 
 /* ---------- Lightbox (con swipe touch) ---------- */
-let lbIndex=0,lbEl=null;
-function closeLB(){if(lbEl){lbEl.remove();lbEl=null;document.body.style.overflow='';}}
+let lbIndex=0,lbEl=null,lbLastFocus=null;
+const LB_PHOTO={it:'Foto',en:'Photo',de:'Foto',fr:'Photo',es:'Foto'};
+function lbBg(hidden){['header','#main','footer'].forEach(s=>{const el=document.querySelector(s);if(el){if(hidden)el.setAttribute('aria-hidden','true');else el.removeAttribute('aria-hidden');}});}
+function closeLB(){if(lbEl){lbEl.remove();lbEl=null;document.body.style.overflow='';lbBg(false);if(lbLastFocus){lbLastFocus.focus();lbLastFocus=null;}}}
 function openLB(i){lbIndex=i;if(!lbEl){
+  lbLastFocus=document.activeElement;
   lbEl=document.createElement('div');lbEl.className='lb';
-  lbEl.innerHTML='<button class="x" aria-label="Chiudi">×</button><button class="arrow prev" aria-label="Precedente">‹</button><img><button class="arrow next" aria-label="Successiva">›</button>';
+  lbEl.setAttribute('role','dialog');lbEl.setAttribute('aria-modal','true');lbEl.setAttribute('aria-label','Galleria foto');
+  lbEl.innerHTML='<button class="x" aria-label="Chiudi">×</button><button class="arrow prev" aria-label="Precedente">‹</button><img alt=""><button class="arrow next" aria-label="Successiva">›</button>';
   document.body.appendChild(lbEl);
   lbEl.querySelector('.x').onclick=closeLB;
   lbEl.querySelector('.prev').onclick=e=>{e.stopPropagation();nav(-1)};
@@ -797,16 +962,27 @@ function openLB(i){lbIndex=i;if(!lbEl){
     else if(dy>80&&Math.abs(dy)>Math.abs(dx)){closeLB();}
   },{passive:true});
   document.body.style.overflow='hidden';
+  lbBg(true);
+  lbEl.querySelector('.x').focus();
+  /* focus trap minimale dentro la lightbox */
+  lbEl.addEventListener('keydown',e=>{
+    if(e.key!=='Tab')return;
+    const f=lbEl.querySelectorAll('button');const first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  });
  }
  setLB();}
-function setLB(){const n=String(galleryOrder[lbIndex]).padStart(2,'0');lbEl.querySelector('img').src=`assets/img/foto-${n}.webp`;}
+function setLB(){const n=String(galleryOrder[lbIndex]).padStart(2,'0');const img=lbEl.querySelector('img');img.src=`assets/img/foto-${n}.webp`;const label=(LB_PHOTO[document.documentElement.lang]||'Foto')+` ${lbIndex+1}/${galleryOrder.length}`;img.alt=label;lbEl.setAttribute('aria-label',label);}
 function nav(d){lbIndex=(lbIndex+d+galleryOrder.length)%galleryOrder.length;setLB();}
 document.addEventListener('keydown',e=>{if(lbEl){if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft')nav(-1);if(e.key==='ArrowRight')nav(1)}});
 
 /* ---------- Mobile menu ---------- */
 const burger=document.getElementById('burger'),menu=document.getElementById('menu');
-burger.onclick=()=>menu.classList.toggle('open');
-menu.querySelectorAll('a').forEach(a=>a.onclick=()=>menu.classList.remove('open'));
+function setMenu(open){menu.classList.toggle('open',open);burger.setAttribute('aria-expanded',open?'true':'false');burger.setAttribute('aria-label',open?'Chiudi menu':'Apri menu');}
+burger.onclick=()=>setMenu(!menu.classList.contains('open'));
+menu.querySelectorAll('a').forEach(a=>a.onclick=()=>setMenu(false));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.classList.contains('open'))setMenu(false);});
 
 /* ---------- i18n ---------- */
 // store IT originals so we can switch back
@@ -815,6 +991,7 @@ document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('d
 function applyLang2(lang){
   document.documentElement.lang=lang;const dict=I18N[lang]||{};
   document.querySelectorAll('[data-i18n]').forEach(el=>{
+    if(el.id==='reqErr'&&!el.classList.contains('hidden'))return; // non sovrascrivere un errore già mostrato
     const k=el.getAttribute('data-i18n');const attr=el.getAttribute('data-i18n-attr');
     let val=(lang==='it')?IT_ORIG[k]:(dict[k]!=null?dict[k]:IT_ORIG[k]);
     if(attr) el.setAttribute(attr,val); else el.innerHTML=val;
@@ -822,7 +999,7 @@ function applyLang2(lang){
   document.querySelectorAll('.langs button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
   try{localStorage.setItem('lamansarda_lang',lang)}catch(e){}
 }
-document.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>applyLang2(b.dataset.lang));
+document.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{applyLang2(b.dataset.lang);if(typeof updateEstimate==='function')updateEstimate();});
 (function initLang(){
   const url=new URLSearchParams(location.search).get('lang');
   let saved=null;try{saved=localStorage.getItem('lamansarda_lang')}catch(e){}
@@ -834,24 +1011,62 @@ document.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>applyLang2(b
 /* ---------- Booking request (WhatsApp / email, no backend) ---------- */
 const WA_NUMBER='393477054576', REQ_EMAIL='paolocompagnone63@gmail.com';
 const REQL={
- it:{t:"Richiesta prenotazione – La Mansarda",name:"Nome",cin:"Arrivo",cout:"Partenza",g:"Ospiti",m:"Messaggio"},
- en:{t:"Booking request – La Mansarda",name:"Name",cin:"Check-in",cout:"Check-out",g:"Guests",m:"Message"},
- de:{t:"Buchungsanfrage – La Mansarda",name:"Name",cin:"Anreise",cout:"Abreise",g:"Gäste",m:"Nachricht"},
- fr:{t:"Demande de réservation – La Mansarda",name:"Nom",cin:"Arrivée",cout:"Départ",g:"Voyageurs",m:"Message"},
- es:{t:"Solicitud de reserva – La Mansarda",name:"Nombre",cin:"Entrada",cout:"Salida",g:"Huéspedes",m:"Mensaje"}
+ it:{t:"Richiesta prenotazione – La Mansarda",name:"Nome",cin:"Arrivo",cout:"Partenza",g:"Ospiti",m:"Messaggio",nights:"Notti",total:"Totale stimato"},
+ en:{t:"Booking request – La Mansarda",name:"Name",cin:"Check-in",cout:"Check-out",g:"Guests",m:"Message",nights:"Nights",total:"Estimated total"},
+ de:{t:"Buchungsanfrage – La Mansarda",name:"Name",cin:"Anreise",cout:"Abreise",g:"Gäste",m:"Nachricht",nights:"Nächte",total:"Geschätzte Summe"},
+ fr:{t:"Demande de réservation – La Mansarda",name:"Nom",cin:"Arrivée",cout:"Départ",g:"Voyageurs",m:"Message",nights:"Nuits",total:"Total estimé"},
+ es:{t:"Solicitud de reserva – La Mansarda",name:"Nombre",cin:"Entrada",cout:"Salida",g:"Huéspedes",m:"Mensaje",nights:"Noches",total:"Total estimado"}
 };
+const NIGHTS_LBL={it:"notti",en:"nights",de:"Nächte",fr:"nuits",es:"noches"};
+const NIGHT_ONE={it:"notte",en:"night",de:"Nacht",fr:"nuit",es:"noche"};
+const EST_EMPTY={it:"Scegli le date per vedere il totale stimato.",en:"Pick your dates to see the estimated total.",de:"Wählen Sie die Daten für die geschätzte Summe.",fr:"Choisissez vos dates pour voir le total estimé.",es:"Elige las fechas para ver el total estimado."};
+const RANGE_ERR={it:"La data di partenza deve essere successiva all'arrivo.",en:"Check-out must be after check-in.",de:"Das Abreisedatum muss nach der Anreise liegen.",fr:"La date de départ doit suivre l'arrivée.",es:"La salida debe ser posterior a la entrada."};
+const RATES={'1':49,'2':59};
 function fmtDate(iso){ // YYYY-MM-DD -> DD/MM/YYYY (formato italiano/europeo)
   const p=iso.split('-');
   return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:iso;
 }
+const rIn=document.getElementById('rIn'),rOut=document.getElementById('rOut'),rGuests=document.getElementById('rGuests');
+/* impedisci date passate e partenza <= arrivo */
+function todayISO(){const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10);}
+rIn.min=todayISO();rOut.min=todayISO();
+function addDayISO(iso){const p=iso.split('-');return new Date(Date.UTC(+p[0],+p[1]-1,+p[2]+1)).toISOString().slice(0,10);}
+rIn.addEventListener('change',()=>{
+  if(rIn.value){rOut.min=addDayISO(rIn.value);
+    if(rOut.value&&rOut.value<=rIn.value)rOut.value='';}
+  updateEstimate();
+});
+rOut.addEventListener('change',updateEstimate);
+rGuests.addEventListener('change',updateEstimate);
+function calcStay(){
+  const i=rIn.value,o=rOut.value;if(!i||!o)return null;
+  const nights=Math.round((new Date(o)-new Date(i))/86400000);
+  if(nights<1)return null;
+  const rate=RATES[rGuests.value]||59;
+  return {nights,rate,total:nights*rate};
+}
+function updateEstimate(){
+  const est=document.getElementById('estimate');const s=calcStay();
+  const lang=document.documentElement.lang;
+  if(!s){est.className='estimate empty';est.textContent=EST_EMPTY[lang]||EST_EMPTY.it;return;}
+  const nlbl=s.nights===1?(NIGHT_ONE[lang]||'notte'):(NIGHTS_LBL[lang]||'notti');
+  const totLbl=(REQL[lang]||REQL.it).total;
+  est.className='estimate';
+  est.innerHTML=`<div class="erow"><span>${s.nights} ${nlbl} × ${s.rate} €</span><span>${s.total} €</span></div><div class="erow"><span>${totLbl}</span><span class="etot">${s.total} €</span></div>`;
+}
+function tr(key,fallback){const lang=document.documentElement.lang;if(lang==='it')return (IT_ORIG[key]!=null?IT_ORIG[key]:fallback);const d=I18N[lang]||{};return d[key]!=null?d[key]:(IT_ORIG[key]!=null?IT_ORIG[key]:fallback);}
+updateEstimate();
 function buildReq(){
   const L=REQL[document.documentElement.lang]||REQL.it;
-  const i=document.getElementById('rIn').value,o=document.getElementById('rOut').value;
+  const i=rIn.value,o=rOut.value;
   const err=document.getElementById('reqErr');
-  if(!i||!o){err.classList.remove('hidden');return null;}
+  if(!i||!o){err.textContent=tr('req_err','Inserisci le date di arrivo e partenza.');err.classList.remove('hidden');return null;}
+  if(o<=i){err.textContent=RANGE_ERR[document.documentElement.lang]||RANGE_ERR.it;err.classList.remove('hidden');return null;}
   err.classList.add('hidden');
-  const g=document.getElementById('rGuests').value,n=document.getElementById('rName').value.trim(),m=document.getElementById('rMsg').value.trim();
+  const g=rGuests.value,n=document.getElementById('rName').value.trim(),m=document.getElementById('rMsg').value.trim();
+  const s=calcStay();
   let t=`${L.t}\n${L.cin}: ${fmtDate(i)}\n${L.cout}: ${fmtDate(o)}\n${L.g}: ${g}`;
+  if(s)t+=`\n${L.nights}: ${s.nights}\n${L.total}: ${s.total} €`;
   if(n)t+=`\n${L.name}: ${n}`;
   if(m)t+=`\n${L.m}: ${m}`;
   return t;
@@ -859,12 +1074,24 @@ function buildReq(){
 document.getElementById('reqWa').onclick=()=>{const t=buildReq();if(t)window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(t),'_blank');};
 document.getElementById('reqMail').onclick=()=>{const t=buildReq();if(t){const L=REQL[document.documentElement.lang]||REQL.it;location.href='mailto:'+REQ_EMAIL+'?subject='+encodeURIComponent(L.t)+'&body='+encodeURIComponent(t);}};
 
-/* ---------- Cookie banner ---------- */
+/* ---------- Cookie banner + Google Analytics 4 (caricato SOLO dopo consenso) ---------- */
+const GA_ID='G-XXXXXXX'; /* <<< SOSTITUISCI con l'ID di misurazione GA4 reale (es. G-AB12CD34EF) */
+let gaLoaded=false;
+function loadGA(){
+  if(gaLoaded||!GA_ID||GA_ID==='G-XXXXXXX')return; /* nessun tracciamento finché l'ID resta segnaposto */
+  gaLoaded=true;
+  const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(GA_ID);document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());
+  gtag('config',GA_ID,{anonymize_ip:true});
+}
 const cookie=document.getElementById('cookie');
 let cc=null;try{cc=localStorage.getItem('lamansarda_cookie')}catch(e){}
-if(!cc)cookie.classList.remove('hidden');
+if(!cc)cookie.classList.remove('hidden');       /* nessuna scelta: mostra banner, niente tracciamento */
+else if(cc==='all')loadGA();                      /* consenso già dato in precedenza */
 function setCookie(v){try{localStorage.setItem('lamansarda_cookie',v)}catch(e){}cookie.classList.add('hidden');}
-document.getElementById('cookieAccept').onclick=()=>{setCookie('all');/* place analytics init here if enabled */};
+document.getElementById('cookieAccept').onclick=()=>{setCookie('all');loadGA();};
 document.getElementById('cookieDecline').onclick=()=>setCookie('necessary');
 
 document.getElementById('yr').textContent=new Date().getFullYear();
@@ -878,6 +1105,28 @@ if('IntersectionObserver' in window && stickyCta && bookSec){
     stickyCta.style.transition='transform .25s';
   },{threshold:.15}).observe(bookSec);
 }
+
+/* ---------- Scroll reveal (sobrio, opt-in via JS, rispetta reduced-motion) ---------- */
+(function(){
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!('IntersectionObserver'in window)||reduce)return; // senza JS o con reduced-motion: contenuto già visibile
+  document.documentElement.classList.add('js-reveal');
+  const groups=['#appartamento .split>div','#host .reveal','.hl','.poi-card','.rev','.route'];
+  const els=[];
+  document.querySelectorAll(groups.join(',')).forEach(el=>{el.classList.add('reveal');els.push(el);});
+  // stagger leggero tra fratelli della stessa classe
+  els.forEach(el=>{
+    const sibs=Array.from(el.parentElement.children).filter(c=>c.classList.contains('reveal'));
+    const i=sibs.indexOf(el);
+    if(i>0)el.dataset.delay=Math.min(i*70,280);
+  });
+  const io=new IntersectionObserver((ents,obs)=>{
+    ents.forEach(en=>{if(en.isIntersecting){const el=en.target;if(el.dataset.delay)el.style.transitionDelay=el.dataset.delay+'ms';el.classList.add('in');obs.unobserve(el);}});
+  },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  els.forEach(el=>io.observe(el));
+  // rete di sicurezza: se qualcosa non scatta, mostra tutto
+  setTimeout(()=>els.forEach(el=>el.classList.add('in')),1500);
+})();
 </script>
 </body>
 </html>
