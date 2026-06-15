@@ -1071,11 +1071,18 @@ function buildReq(){
   if(m)t+=`\n${L.m}: ${m}`;
   return t;
 }
-document.getElementById('reqWa').onclick=()=>{const t=buildReq();if(t)window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(t),'_blank');};
-document.getElementById('reqMail').onclick=()=>{const t=buildReq();if(t){const L=REQL[document.documentElement.lang]||REQL.it;location.href='mailto:'+REQ_EMAIL+'?subject='+encodeURIComponent(L.t)+'&body='+encodeURIComponent(t);}};
+document.getElementById('reqWa').onclick=()=>{const t=buildReq();if(t){gaEvent('generate_lead',{method:'whatsapp'});window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(t),'_blank');}};
+document.getElementById('reqMail').onclick=()=>{const t=buildReq();if(t){gaEvent('generate_lead',{method:'email'});const L=REQL[document.documentElement.lang]||REQL.it;location.href='mailto:'+REQ_EMAIL+'?subject='+encodeURIComponent(L.t)+'&body='+encodeURIComponent(t);}};
+/* Intento di prenotazione: ogni CTA che porta al modulo "Prenota" */
+document.querySelectorAll('a[href="#prenota"]').forEach(a=>{
+  a.addEventListener('click',()=>{
+    const src=(a.closest('[id]')&&a.closest('[id]').id)||'page';
+    gaEvent('book_intent',{cta_source:src});
+  });
+});
 
 /* ---------- Cookie banner + Google Analytics 4 (caricato SOLO dopo consenso) ---------- */
-const GA_ID='G-XXXXXXX'; /* <<< SOSTITUISCI con l'ID di misurazione GA4 reale (es. G-AB12CD34EF) */
+const GA_ID='G-XH10EXD4VS'; /* ID di misurazione GA4 reale */
 let gaLoaded=false;
 function loadGA(){
   if(gaLoaded||!GA_ID||GA_ID==='G-XXXXXXX')return; /* nessun tracciamento finché l'ID resta segnaposto */
@@ -1083,8 +1090,14 @@ function loadGA(){
   const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(GA_ID);document.head.appendChild(s);
   window.dataLayer=window.dataLayer||[];
   function gtag(){dataLayer.push(arguments);}
+  window.gtag=gtag;
   gtag('js',new Date());
   gtag('config',GA_ID,{anonymize_ip:true});
+}
+/* Invia un evento GA4 solo se il tracciamento è attivo (consenso dato + ID reale) */
+function gaEvent(name,params){
+  if(!gaLoaded||typeof window.gtag!=='function')return;
+  window.gtag('event',name,params||{});
 }
 const cookie=document.getElementById('cookie');
 let cc=null;try{cc=localStorage.getItem('lamansarda_cookie')}catch(e){}
