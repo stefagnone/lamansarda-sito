@@ -199,8 +199,14 @@ ul.amen{padding:0;margin:0}
 .cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:.82rem;border-radius:7px;background:#fff;color:var(--ink)}
 .cal-day.empty{background:transparent}
 .cal-day.past{color:#c8ccd4;background:#fafbfc}
-.cal-day.busy{background:#f7d7d7;color:#a23b3b;text-decoration:line-through}
-.cal-day.free{background:#e3f3ea;color:#2f7d56}
+.cal-day.busy{background:#f7d7d7;color:#a23b3b;text-decoration:line-through;cursor:not-allowed}
+.cal-day.free{background:#fff;color:var(--ink);cursor:pointer;border:1px solid var(--line)}
+.cal-day.free:hover{background:var(--azure-light);border-color:var(--azure)}
+.cal-day.sel{background:var(--navy)!important;color:#fff!important;border-color:var(--navy)!important;font-weight:600}
+.cal-day.inrange{background:var(--azure-light)!important;color:var(--navy-deep)!important;border-color:var(--azure-light)!important}
+.cal-day.selstart{border-top-right-radius:0;border-bottom-right-radius:0}
+.cal-day.selend{border-top-left-radius:0;border-bottom-left-radius:0}
+.cal-hint{font-size:.78rem;color:var(--muted);margin:8px 0 0;text-align:center}
 .cal-legend{display:flex;gap:16px;margin-top:10px;font-size:.78rem;color:var(--muted)}
 .cal-legend .dot{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:-1px;margin-right:4px}
 .cal-legend .dot.free{background:#e3f3ea;border:1px solid #2f7d56}
@@ -561,11 +567,12 @@ h1,h2,h3{text-wrap:balance}
             <span><i class="dot free"></i> <span data-i18n="cal_free">Libero</span></span>
             <span><i class="dot busy"></i> <span data-i18n="cal_busy">Occupato</span></span>
           </div>
+          <p class="cal-hint" id="calHint" data-i18n="cal_hint">Tocca una data di arrivo, poi una di partenza.</p>
         </div>
         <form id="reqForm" class="reqform" novalidate>
           <div class="frow">
-            <label><span data-i18n="req_in">Arrivo</span><input type="date" id="rIn"></label>
-            <label><span data-i18n="req_out">Partenza</span><input type="date" id="rOut"></label>
+            <label><span data-i18n="req_in">Arrivo</span><input type="date" id="rIn" readonly></label>
+            <label><span data-i18n="req_out">Partenza</span><input type="date" id="rOut" readonly></label>
           </div>
           <div class="frow">
             <label><span data-i18n="req_guests">Ospiti</span><select id="rGuests"><option value="1">1</option><option value="2" selected>2</option></select></label>
@@ -752,7 +759,7 @@ const I18N={
   foot_cin:"National Identification Code",foot_nav:"Navigate",foot_legal:"Legal",foot_privacy:"Privacy Policy",foot_cookie:"Cookie Policy",
   foot_owner:"Owner: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Direct booking · No platform fees",foot_credit:"Website by Stefano Compagnone",
   cookie_text:"We use necessary technical cookies and, only with your consent, Google Analytics 4 statistics cookies to improve the site. No tracking is active without consent. See the <a href='cookie.html'>Cookie Policy</a>.",
-  cookie_accept:"Accept all",cookie_decline:"Necessary only",cal_free:"Available",cal_busy:"Booked",nic_guide:"→ Read the guide: what to see in Nicosia",cta_from:"from",cta_night:"/ night",cta_btn:"Request dates",gal_swipe:"← Swipe to see all photos →",
+  cookie_accept:"Accept all",cookie_decline:"Necessary only",cal_free:"Available",cal_busy:"Booked",nic_guide:"→ Read the guide: what to see in Nicosia",cta_from:"from",cta_night:"/ night",cta_btn:"Request dates",gal_swipe:"← Swipe to see all photos →",cal_hint:"Tap a check-in date, then a check-out date.",
   skip:"Skip to content",
   trust_reply:"We usually reply within a few hours",trust_noprepay:"No online prepayment required",trust_nofee:"Direct price, no fees",
   routes_title:"How to get here",routes_note:"Approximate driving distances, to be confirmed.",
@@ -866,7 +873,7 @@ const I18N={
   foot_cin:"Code d'identification national",foot_nav:"Navigation",foot_legal:"Mentions légales",foot_privacy:"Politique de confidentialité",foot_cookie:"Politique de cookies",
   foot_owner:"Titulaire : Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Réservation directe · Sans frais de plateforme",foot_credit:"Site créé par Stefano Compagnone",
   cookie_text:"Nous utilisons des cookies techniques nécessaires et, uniquement avec votre consentement, des cookies statistiques Google Analytics 4 pour améliorer le site. Aucun suivi n'est actif sans consentement. Voir la <a href='cookie.html'>Politique de cookies</a>.",
-  cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",cal_free:"Libre",cal_busy:"Occupé",nic_guide:"→ Lire le guide : que voir à Nicosia",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Demander des dates",gal_swipe:"← Faites défiler les photos →",
+  cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",cal_free:"Libre",cal_busy:"Occupé",nic_guide:"→ Lire le guide : que voir à Nicosia",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Demander des dates",gal_swipe:"← Faites défiler les photos →",cal_hint:"Touchez une date d’arrivée, puis de départ.",
   skip:"Aller au contenu",
   trust_reply:"Nous répondons généralement en quelques heures",trust_noprepay:"Aucun prépaiement en ligne requis",trust_nofee:"Prix direct, sans frais",
   routes_title:"Comment venir",routes_note:"Distances routières indicatives, à confirmer.",
@@ -923,7 +930,7 @@ const I18N={
   foot_cin:"Código de Identificación Nacional",foot_nav:"Navegar",foot_legal:"Información legal",foot_privacy:"Política de privacidad",foot_cookie:"Política de cookies",
   foot_owner:"Titular: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Reserva directa · Sin comisiones de plataforma",foot_credit:"Sitio creado por Stefano Compagnone",
   cookie_text:"Usamos cookies técnicas necesarias y, solo con tu consentimiento, cookies estadísticas de Google Analytics 4 para mejorar el sitio. Sin consentimiento no hay seguimiento activo. Consulta la <a href='cookie.html'>Política de cookies</a>.",
-  cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",cal_free:"Libre",cal_busy:"Ocupado",nic_guide:"→ Lee la guía: qué ver en Nicosia",cta_from:"desde",cta_night:"/ noche",cta_btn:"Solicitar fechas",gal_swipe:"← Desliza para ver todas las fotos →",
+  cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",cal_free:"Libre",cal_busy:"Ocupado",nic_guide:"→ Lee la guía: qué ver en Nicosia",cta_from:"desde",cta_night:"/ noche",cta_btn:"Solicitar fechas",gal_swipe:"← Desliza para ver todas las fotos →",cal_hint:"Toca una fecha de entrada, luego una de salida.",
   skip:"Saltar al contenido",
   trust_reply:"Solemos responder en pocas horas",trust_noprepay:"Sin pago anticipado online",trust_nofee:"Precio directo, sin comisiones",
   routes_title:"Cómo llegar",routes_note:"Distancias en coche aproximadas, a confirmar.",
@@ -1039,7 +1046,8 @@ document.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{applyLang2(
   if(lang!=='it')applyLang2(lang);
 })();
 
-/* ---------- Availability calendar (read-only da iCal Airbnb+Booking) ---------- */
+/* ---------- Availability calendar (interattivo, dati iCal Airbnb+Booking) ---------- */
+const CAL={busy:new Set(), inDate:null, outDate:null};
 (function(){
   const cal=document.getElementById('cal'); if(!cal) return;
   const titleEl=document.getElementById('calTitle'), dowEl=document.getElementById('calDow'), daysEl=document.getElementById('calDays');
@@ -1049,32 +1057,64 @@ document.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{applyLang2(
     de:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
     fr:['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'],
     es:['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre']};
-  let busy=new Set(); let view=new Date(); view.setDate(1);
+  const SELHINT={it:'Tocca una data di arrivo, poi una di partenza.',en:'Tap a check-in date, then a check-out date.',de:'Tippen Sie ein Anreisedatum, dann ein Abreisedatum.',fr:'Touchez une date d’arrivée, puis de départ.',es:'Toca una fecha de entrada, luego una de salida.'};
+  const SELOUT={it:'Ora scegli la partenza.',en:'Now pick check-out.',de:'Wählen Sie nun die Abreise.',fr:'Choisissez maintenant le départ.',es:'Ahora elige la salida.'};
+  const BUSYRANGE={it:'Quelle date includono giorni occupati. Scegli un altro periodo.',en:'Those dates include booked days. Pick another period.',de:'Dieser Zeitraum enthält belegte Tage. Wählen Sie einen anderen.',fr:'Cette période inclut des jours occupés. Choisissez-en une autre.',es:'Esas fechas incluyen días ocupados. Elige otro periodo.'};
+  let view=new Date(); view.setDate(1);
   const today=new Date(); today.setHours(0,0,0,0);
   function lang(){return document.documentElement.lang||'it';}
+  function iso(y,m,d){return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;}
+  function hint(msg){const h=document.getElementById('calHint'); if(h) h.textContent=msg;}
+  function rangeHasBusy(a,b){ // a,b iso, esclusiva su b
+    let d=new Date(a+'T00:00:00Z'); const end=new Date(b+'T00:00:00Z');
+    for(;d<end;d.setUTCDate(d.getUTCDate()+1)){ if(CAL.busy.has(d.toISOString().slice(0,10))) return true; }
+    return false;
+  }
+  function pick(dayIso){
+    const L=lang();
+    if(!CAL.inDate || (CAL.inDate && CAL.outDate)){ CAL.inDate=dayIso; CAL.outDate=null; hint(SELOUT[L]||SELOUT.it); }
+    else { // sto scegliendo la partenza
+      if(dayIso<=CAL.inDate){ CAL.inDate=dayIso; CAL.outDate=null; hint(SELOUT[L]||SELOUT.it); }
+      else if(rangeHasBusy(CAL.inDate,dayIso)){ hint(BUSYRANGE[L]||BUSYRANGE.it); }
+      else { CAL.outDate=dayIso; hint(SELHINT[L]||SELHINT.it); }
+    }
+    syncFields(); render();
+  }
+  function syncFields(){
+    const i=document.getElementById('rIn'), o=document.getElementById('rOut');
+    if(i){ i.value=CAL.inDate||''; }
+    if(o){ o.value=CAL.outDate||''; }
+    if(typeof updateEstimate==='function') updateEstimate();
+  }
   function render(){
     const L=lang(); const y=view.getFullYear(), m=view.getMonth();
     titleEl.textContent=(MON[L]||MON.it)[m]+' '+y;
     dowEl.innerHTML=(DOW[L]||DOW.it).map(d=>`<div class="cal-dow">${d}</div>`).join('');
-    let first=new Date(y,m,1).getDay(); first=(first+6)%7; // lun=0
+    let first=new Date(y,m,1).getDay(); first=(first+6)%7;
     const dim=new Date(y,m+1,0).getDate();
     let html='';
     for(let i=0;i<first;i++) html+='<div class="cal-day empty"></div>';
     for(let d=1;d<=dim;d++){
-      const dt=new Date(y,m,d); const iso=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const dt=new Date(y,m,d); const dayIso=iso(y,m,d);
       let cls='cal-day';
       if(dt<today) cls+=' past';
-      else if(busy.has(iso)) cls+=' busy';
-      else cls+=' free';
-      html+=`<div class="${cls}">${d}</div>`;
+      else if(CAL.busy.has(dayIso)) cls+=' busy';
+      else {
+        cls+=' free';
+        if(dayIso===CAL.inDate){cls+=' sel selstart';}
+        else if(dayIso===CAL.outDate){cls+=' sel selend';}
+        else if(CAL.inDate&&CAL.outDate&&dayIso>CAL.inDate&&dayIso<CAL.outDate){cls+=' inrange';}
+      }
+      html+=`<div class="${cls}" data-iso="${dayIso}">${d}</div>`;
     }
     daysEl.innerHTML=html;
+    daysEl.querySelectorAll('.cal-day.free').forEach(el=>{ el.onclick=()=>pick(el.dataset.iso); });
   }
   document.getElementById('calPrev').onclick=()=>{view.setMonth(view.getMonth()-1);render();};
   document.getElementById('calNext').onclick=()=>{view.setMonth(view.getMonth()+1);render();};
   render();
-  fetch('/api/availability').then(r=>r.json()).then(d=>{ if(d&&d.busy){busy=new Set(d.busy);render();} }).catch(()=>{});
-  window.addEventListener('lamansarda:lang',render);
+  fetch('/api/availability').then(r=>r.json()).then(d=>{ if(d&&d.busy){CAL.busy=new Set(d.busy);render();} }).catch(()=>{});
+  window.addEventListener('lamansarda:lang',()=>{const L=lang();hint(SELHINT[L]||SELHINT.it);render();});
 })();
 
 /* ---------- Booking request (WhatsApp / email, no backend) ---------- */
