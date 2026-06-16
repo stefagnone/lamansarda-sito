@@ -13,10 +13,13 @@
 <meta property="og:url" content="https://www.lamansardanicosia.it/privacy.html">
 <link rel="icon" href="assets/img/favicon.png">
 <link rel="preload" as="image" href="logo-mansarda.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/playfair-latin.woff2" crossorigin>
 <style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-latinext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:400 900;font-display:swap;src:url(/assets/fonts/playfair-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:400 900;font-display:swap;src:url(/assets/fonts/playfair-latinext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
 body{font-family:'Inter',system-ui,Arial,sans-serif;color:#1b2230;max-width:820px;margin:0 auto;padding:30px 22px 70px;line-height:1.65}
 h1,h2{font-family:'Playfair Display',serif;color:#14306e}
 h1{font-size:2rem}h2{font-size:1.25rem;margin-top:2rem}h3{font-size:1.05rem;margin-top:1.4rem}
@@ -56,7 +59,7 @@ Struttura: La Mansarda — CIN IT086012C2KM8BBUCU</p>
 <p>I dati sono trattati per: (a) rispondere alle richieste e gestire la prenotazione e il soggiorno (esecuzione di un contratto o misure precontrattuali); (b) adempiere agli obblighi di legge, tra cui la comunicazione dei dati degli ospiti all'Autorità di Pubblica Sicurezza tramite il Portale Alloggiati e, ove richiesto, le comunicazioni statistiche ISTAT (obbligo legale); (c) gestire eventuali contestazioni (legittimo interesse).</p>
 
 <h2>4. Comunicazione a terzi</h2>
-<p>I dati possono essere comunicati a: Portale Alloggiati della Questura e portali statistici regionali/ISTAT, quando previsto dalla legge. La mappa è fornita da OpenStreetMap e i caratteri tipografici da Google Fonts (durante il caricamento può essere trattato il tuo indirizzo IP). Se ci contatti tramite WhatsApp, lo scambio dei messaggi avviene tramite WhatsApp/Meta secondo le sue condizioni. Non vendiamo né cediamo i tuoi dati a fini commerciali.</p>
+<p>I dati possono essere comunicati a: Portale Alloggiati della Questura e portali statistici regionali/ISTAT, quando previsto dalla legge. La mappa è fornita da OpenStreetMap. I caratteri tipografici sono ospitati direttamente sul nostro sito, senza richiamare server esterni. Se ci contatti tramite WhatsApp, lo scambio dei messaggi avviene tramite WhatsApp/Meta secondo le sue condizioni. Non vendiamo né cediamo i tuoi dati a fini commerciali.</p>
 <h3>Responsabili del trattamento e sub-responsabili (sub-processor)</h3>
 <p>Per erogare il servizio ci avvaliamo dei seguenti fornitori esterni, che agiscono come responsabili o sub-responsabili del trattamento (sub-processor) sulla base di appositi accordi sul trattamento dei dati (Data Processing Agreement, DPA) e, ove i dati siano trasferiti fuori dall'Unione Europea, di clausole contrattuali standard (SCC). Ciascuno dispone di una propria informativa privacy:</p>
 <table>
@@ -64,7 +67,6 @@ Struttura: La Mansarda — CIN IT086012C2KM8BBUCU</p>
 <tbody>
 <tr><td>Vercel Inc.</td><td>Hosting del sito e funzione di disponibilità</td><td>Log tecnici, indirizzo IP</td><td>USA (clausole contrattuali standard)</td></tr>
 <tr><td>Google Ireland Ltd. (Analytics 4)</td><td>Statistiche di utilizzo, solo con consenso</td><td>IP anonimizzato, identificatori cookie</td><td>UE/USA (SCC)</td></tr>
-<tr><td>Google Ireland Ltd. (Fonts)</td><td>Caricamento dei caratteri tipografici</td><td>Indirizzo IP</td><td>UE/USA (SCC)</td></tr>
 <tr><td>OpenStreetMap Foundation</td><td>Mappa interattiva</td><td>Indirizzo IP</td><td>UE/Regno Unito</td></tr>
 <tr><td>WhatsApp / Meta Platforms</td><td>Messaggistica (se ci scrivi su WhatsApp)</td><td>Numero, contenuto dei messaggi</td><td>USA (SCC)</td></tr>
 </tbody>
