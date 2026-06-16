@@ -150,7 +150,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 .media-stack img:first-child{grid-row:span 2;height:100%}
 /* Gallery */
 .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.gallery img{border-radius:10px;aspect-ratio:3/4;object-fit:cover;cursor:pointer;transition:.25s}
+.gallery img{border-radius:10px;aspect-ratio:4/3;object-fit:cover;object-position:center;cursor:pointer;transition:.25s}
 .gallery img:hover{transform:scale(1.02);filter:brightness(1.05)}
 /* Amenities */
 .amen{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.6rem 1.6rem}
@@ -286,7 +286,7 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
   /* Gallery: filmstrip orizzontale con snap */
   .gallery{display:flex;overflow-x:auto;gap:10px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:10px;margin:0 -20px;padding-left:20px;padding-right:20px;scrollbar-width:none}
   .gallery::-webkit-scrollbar{display:none}
-  .gallery img{flex:0 0 72%;scroll-snap-align:center;aspect-ratio:3/4;border-radius:12px}
+  .gallery img{flex:0 0 72%;scroll-snap-align:center;aspect-ratio:4/3;border-radius:12px}
   /* Recensioni: carosello orizzontale */
   .rev-grid{display:flex;overflow-x:auto;gap:14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:0 20px 12px;columns:auto;scrollbar-width:none}
   .rev-grid::-webkit-scrollbar{display:none}
@@ -699,7 +699,7 @@ h1,h2,h3{text-wrap:balance}
 
 <script>
 /* ---------- Gallery images ---------- */
-const galleryOrder=[2,26,25,3,9,4,6,11,13,1,8,12,16,18,20,21,24,15];
+const galleryOrder=[2,26,25,3,9,4,6,11,13,1,8,12,28,18,31,21,24,29];
 /* ---------- Reviews (REAL, from Airbnb + Booking) ---------- */
 const REVIEWS=[
  {n:"Luciano",src:"Airbnb",stars:5,date:"12/2025",t:"Stef è stato un genio, ci ha accolti, mostrato la posizione e consigliato posti. Casa bellissima, letti comodi, pulita, calda, vista sui monti, tranquilla."},
