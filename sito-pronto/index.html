@@ -189,6 +189,22 @@ ul.amen{padding:0;margin:0}
 .widget-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;min-height:420px;box-shadow:var(--shadow)}
 .widget-placeholder{border:2px dashed var(--azure);border-radius:10px;padding:40px 24px;text-align:center;color:var(--muted);background:var(--azure-light)}
 .widget-box h3{margin-bottom:.3rem}
+.cal{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:16px;background:var(--soft)}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cal-head strong{font-family:'Playfair Display',serif;color:var(--navy-deep);font-size:1.05rem;text-transform:capitalize}
+.cal-head button{background:#fff;border:1px solid var(--line);border-radius:8px;width:32px;height:32px;cursor:pointer;color:var(--navy);font-size:1.1rem;line-height:1}
+.cal-head button:hover{background:var(--azure-light)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-dow{font-size:.7rem;text-align:center;color:var(--muted);padding:4px 0;font-weight:600}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:.82rem;border-radius:7px;background:#fff;color:var(--ink)}
+.cal-day.empty{background:transparent}
+.cal-day.past{color:#c8ccd4;background:#fafbfc}
+.cal-day.busy{background:#f7d7d7;color:#a23b3b;text-decoration:line-through}
+.cal-day.free{background:#e3f3ea;color:#2f7d56}
+.cal-legend{display:flex;gap:16px;margin-top:10px;font-size:.78rem;color:var(--muted)}
+.cal-legend .dot{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:-1px;margin-right:4px}
+.cal-legend .dot.free{background:#e3f3ea;border:1px solid #2f7d56}
+.cal-legend .dot.busy{background:#f7d7d7;border:1px solid #a23b3b}
 .reqsub{font-size:.92rem;color:var(--muted);margin-bottom:1rem}
 .reqform .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 .reqform label{display:flex;flex-direction:column;gap:.3rem;font-size:.82rem;font-weight:600;color:var(--navy-deep)}
@@ -533,6 +549,19 @@ h1,h2,h3{text-wrap:balance}
       <div class="widget-box">
         <h3 data-i18n="req_t">Richiedi la tua prenotazione</h3>
         <p class="reqsub" data-i18n="req_d">Scegli le date e inviaci la richiesta: verifichiamo la disponibilità e ti rispondiamo subito. Il pagamento si concorda direttamente, senza commissioni.</p>
+        <div class="cal" id="cal">
+          <div class="cal-head">
+            <button type="button" id="calPrev" aria-label="Mese precedente">‹</button>
+            <strong id="calTitle"></strong>
+            <button type="button" id="calNext" aria-label="Mese successivo">›</button>
+          </div>
+          <div class="cal-grid" id="calDow"></div>
+          <div class="cal-grid" id="calDays"></div>
+          <div class="cal-legend">
+            <span><i class="dot free"></i> <span data-i18n="cal_free">Libero</span></span>
+            <span><i class="dot busy"></i> <span data-i18n="cal_busy">Occupato</span></span>
+          </div>
+        </div>
         <form id="reqForm" class="reqform" novalidate>
           <div class="frow">
             <label><span data-i18n="req_in">Arrivo</span><input type="date" id="rIn"></label>
@@ -723,7 +752,7 @@ const I18N={
   foot_cin:"National Identification Code",foot_nav:"Navigate",foot_legal:"Legal",foot_privacy:"Privacy Policy",foot_cookie:"Cookie Policy",
   foot_owner:"Owner: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Direct booking · No platform fees",foot_credit:"Website by Stefano Compagnone",
   cookie_text:"We use necessary technical cookies and, only with your consent, Google Analytics 4 statistics cookies to improve the site. No tracking is active without consent. See the <a href='cookie.html'>Cookie Policy</a>.",
-  cookie_accept:"Accept all",cookie_decline:"Necessary only",nic_guide:"→ Read the guide: what to see in Nicosia",cta_from:"from",cta_night:"/ night",cta_btn:"Request dates",gal_swipe:"← Swipe to see all photos →",
+  cookie_accept:"Accept all",cookie_decline:"Necessary only",cal_free:"Available",cal_busy:"Booked",nic_guide:"→ Read the guide: what to see in Nicosia",cta_from:"from",cta_night:"/ night",cta_btn:"Request dates",gal_swipe:"← Swipe to see all photos →",
   skip:"Skip to content",
   trust_reply:"We usually reply within a few hours",trust_noprepay:"No online prepayment required",trust_nofee:"Direct price, no fees",
   routes_title:"How to get here",routes_note:"Approximate driving distances, to be confirmed.",
@@ -780,7 +809,7 @@ const I18N={
   foot_cin:"Nationaler Identifikationscode",foot_nav:"Navigation",foot_legal:"Rechtliches",foot_privacy:"Datenschutz",foot_cookie:"Cookie-Richtlinie",
   foot_owner:"Inhaber: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Direktbuchung · Keine Plattformgebühren",foot_credit:"Website von Stefano Compagnone",
   cookie_text:"Wir verwenden technisch notwendige Cookies und, nur mit Ihrer Zustimmung, Statistik-Cookies von Google Analytics 4 zur Verbesserung der Website. Ohne Zustimmung ist kein Tracking aktiv. Siehe die <a href='cookie.html'>Cookie-Richtlinie</a>.",
-  cookie_accept:"Alle akzeptieren",cookie_decline:"Nur notwendige",nic_guide:"→ Reiseführer: Was man in Nicosia sehen kann",cta_from:"ab",cta_night:"/ Nacht",cta_btn:"Termine anfragen",gal_swipe:"← Wischen für alle Fotos →",
+  cookie_accept:"Alle akzeptieren",cookie_decline:"Nur notwendige",cal_free:"Frei",cal_busy:"Belegt",nic_guide:"→ Reiseführer: Was man in Nicosia sehen kann",cta_from:"ab",cta_night:"/ Nacht",cta_btn:"Termine anfragen",gal_swipe:"← Wischen für alle Fotos →",
   skip:"Zum Inhalt springen",
   trust_reply:"Wir antworten meist innerhalb weniger Stunden",trust_noprepay:"Keine Online-Vorauszahlung nötig",trust_nofee:"Direktpreis, keine Gebühren",
   routes_title:"Anreise",routes_note:"Ungefähre Fahrstrecken, ohne Gewähr.",
@@ -837,7 +866,7 @@ const I18N={
   foot_cin:"Code d'identification national",foot_nav:"Navigation",foot_legal:"Mentions légales",foot_privacy:"Politique de confidentialité",foot_cookie:"Politique de cookies",
   foot_owner:"Titulaire : Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Réservation directe · Sans frais de plateforme",foot_credit:"Site créé par Stefano Compagnone",
   cookie_text:"Nous utilisons des cookies techniques nécessaires et, uniquement avec votre consentement, des cookies statistiques Google Analytics 4 pour améliorer le site. Aucun suivi n'est actif sans consentement. Voir la <a href='cookie.html'>Politique de cookies</a>.",
-  cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",nic_guide:"→ Lire le guide : que voir à Nicosia",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Demander des dates",gal_swipe:"← Faites défiler les photos →",
+  cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",cal_free:"Libre",cal_busy:"Occupé",nic_guide:"→ Lire le guide : que voir à Nicosia",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Demander des dates",gal_swipe:"← Faites défiler les photos →",
   skip:"Aller au contenu",
   trust_reply:"Nous répondons généralement en quelques heures",trust_noprepay:"Aucun prépaiement en ligne requis",trust_nofee:"Prix direct, sans frais",
   routes_title:"Comment venir",routes_note:"Distances routières indicatives, à confirmer.",
@@ -894,7 +923,7 @@ const I18N={
   foot_cin:"Código de Identificación Nacional",foot_nav:"Navegar",foot_legal:"Información legal",foot_privacy:"Política de privacidad",foot_cookie:"Política de cookies",
   foot_owner:"Titular: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Reserva directa · Sin comisiones de plataforma",foot_credit:"Sitio creado por Stefano Compagnone",
   cookie_text:"Usamos cookies técnicas necesarias y, solo con tu consentimiento, cookies estadísticas de Google Analytics 4 para mejorar el sitio. Sin consentimiento no hay seguimiento activo. Consulta la <a href='cookie.html'>Política de cookies</a>.",
-  cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",nic_guide:"→ Lee la guía: qué ver en Nicosia",cta_from:"desde",cta_night:"/ noche",cta_btn:"Solicitar fechas",gal_swipe:"← Desliza para ver todas las fotos →",
+  cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",cal_free:"Libre",cal_busy:"Ocupado",nic_guide:"→ Lee la guía: qué ver en Nicosia",cta_from:"desde",cta_night:"/ noche",cta_btn:"Solicitar fechas",gal_swipe:"← Desliza para ver todas las fotos →",
   skip:"Saltar al contenido",
   trust_reply:"Solemos responder en pocas horas",trust_noprepay:"Sin pago anticipado online",trust_nofee:"Precio directo, sin comisiones",
   routes_title:"Cómo llegar",routes_note:"Distancias en coche aproximadas, a confirmar.",
@@ -999,6 +1028,7 @@ function applyLang2(lang){
   });
   document.querySelectorAll('.langs button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
   try{localStorage.setItem('lamansarda_lang',lang)}catch(e){}
+  try{window.dispatchEvent(new Event('lamansarda:lang'))}catch(e){}
 }
 document.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{applyLang2(b.dataset.lang);if(typeof updateEstimate==='function')updateEstimate();});
 (function initLang(){
@@ -1007,6 +1037,44 @@ document.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{applyLang2(
   const nav=(navigator.language||'it').slice(0,2);
   const lang=url||saved||(I18N[nav]?nav:'it');
   if(lang!=='it')applyLang2(lang);
+})();
+
+/* ---------- Availability calendar (read-only da iCal Airbnb+Booking) ---------- */
+(function(){
+  const cal=document.getElementById('cal'); if(!cal) return;
+  const titleEl=document.getElementById('calTitle'), dowEl=document.getElementById('calDow'), daysEl=document.getElementById('calDays');
+  const DOW={it:['L','M','M','G','V','S','D'],en:['M','T','W','T','F','S','S'],de:['M','D','M','D','F','S','S'],fr:['L','M','M','J','V','S','D'],es:['L','M','X','J','V','S','D']};
+  const MON={it:['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'],
+    en:['January','February','March','April','May','June','July','August','September','October','November','December'],
+    de:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+    fr:['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'],
+    es:['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre']};
+  let busy=new Set(); let view=new Date(); view.setDate(1);
+  const today=new Date(); today.setHours(0,0,0,0);
+  function lang(){return document.documentElement.lang||'it';}
+  function render(){
+    const L=lang(); const y=view.getFullYear(), m=view.getMonth();
+    titleEl.textContent=(MON[L]||MON.it)[m]+' '+y;
+    dowEl.innerHTML=(DOW[L]||DOW.it).map(d=>`<div class="cal-dow">${d}</div>`).join('');
+    let first=new Date(y,m,1).getDay(); first=(first+6)%7; // lun=0
+    const dim=new Date(y,m+1,0).getDate();
+    let html='';
+    for(let i=0;i<first;i++) html+='<div class="cal-day empty"></div>';
+    for(let d=1;d<=dim;d++){
+      const dt=new Date(y,m,d); const iso=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      let cls='cal-day';
+      if(dt<today) cls+=' past';
+      else if(busy.has(iso)) cls+=' busy';
+      else cls+=' free';
+      html+=`<div class="${cls}">${d}</div>`;
+    }
+    daysEl.innerHTML=html;
+  }
+  document.getElementById('calPrev').onclick=()=>{view.setMonth(view.getMonth()-1);render();};
+  document.getElementById('calNext').onclick=()=>{view.setMonth(view.getMonth()+1);render();};
+  render();
+  fetch('/api/availability').then(r=>r.json()).then(d=>{ if(d&&d.busy){busy=new Set(d.busy);render();} }).catch(()=>{});
+  window.addEventListener('lamansarda:lang',render);
 })();
 
 /* ---------- Booking request (WhatsApp / email, no backend) ---------- */
