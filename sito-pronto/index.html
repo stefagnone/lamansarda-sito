@@ -113,7 +113,7 @@ section{padding:72px 0}
 .btn.ghost:hover{background:var(--azure-light)}
 .btn.wa{background:#12833c}.btn.wa:hover{background:#0f6e32}
 /* Header */
-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.98);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:70px;gap:1rem}
 .brand{display:flex;align-items:center;gap:.6rem;font-family:'Playfair Display',serif;font-weight:700;color:var(--navy-deep);font-size:1.25rem;flex-shrink:0}
 .brand img{height:42px;width:auto;max-width:none}
@@ -161,13 +161,13 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 .amen .ico{color:var(--azure);font-weight:700}
 ul.amen{padding:0;margin:0}
 /* Nicosia */
-.nicosia{background:var(--navy-deep);color:#eaf0fb}
+.nicosia{background:var(--navy-deep);color:#eaf0fb;scroll-margin-top:80px}
 .nicosia h2,.nicosia h3{color:#fff}
 .nicosia .eyebrow{color:#bfe0f7}
 .nicosia .lead{color:#c5d2ec}
 .poi{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:8px}
 .poi-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);overflow:hidden}
-.poi-card img{aspect-ratio:16/10;object-fit:cover;width:100%}
+.poi-card img{aspect-ratio:16/10;object-fit:cover;width:100%;height:auto;display:block}
 .poi-card .pc{padding:.9rem 1rem}
 .poi-card h3{font-size:1.02rem;margin-bottom:.2rem}
 .poi-card p{font-size:.88rem;color:#c5d2ec;margin:0}
@@ -271,7 +271,7 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
 .mini-rev .mr-by{font-size:.78rem;color:var(--azure-ink);font-weight:600}
 .wa-float{position:fixed;right:20px;bottom:20px;z-index:55;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.45);transition:transform .2s,box-shadow .2s}
 .wa-float:hover{transform:scale(1.08);box-shadow:0 8px 26px rgba(37,211,102,.6)}
-@media(max-width:700px){.wa-float{bottom:84px;right:14px;width:52px;height:52px}}
+@media(max-width:700px){.wa-float{bottom:92px;right:14px;width:52px;height:52px}}
 /* Responsive */
 @media(max-width:860px){
   .menu{position:fixed;inset:70px 0 auto 0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line);padding:10px 0;transform:translateY(-120%);transition:.25s;box-shadow:var(--shadow)}
@@ -295,9 +295,14 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
   .rev-grid::-webkit-scrollbar{display:none}
   .rev{flex:0 0 84%;scroll-snap-align:center;margin-bottom:0}
   /* POI Nicosia: scorrimento orizzontale */
-  .poi{display:flex;overflow-x:auto;gap:14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:0 20px 12px;scrollbar-width:none}
+  .poi{display:flex;overflow-x:auto;gap:14px;scroll-snap-type:x mandatory;scroll-padding-left:20px;align-items:stretch;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:0 20px 12px;scrollbar-width:none}
   .poi::-webkit-scrollbar{display:none}
-  .poi-card{flex:0 0 78%;scroll-snap-align:center}
+  .poi-card{flex:0 0 78%;scroll-snap-align:start}
+  .poi-card img{aspect-ratio:4/3}
+  .poi-card:nth-child(1) img{object-position:50% 72%}
+  .poi-card:nth-child(4) img{object-position:50% 68%}
+  .poi-card:nth-child(5) img{object-position:50% 78%}
+  .poi-card:nth-child(6) img{object-position:50% 45%}
   /* Apartment photos: una colonna, taglio 4:3 spostato sulla stanza (niente "solo soffitto") */
   .media-stack{grid-template-columns:1fr;gap:12px}
   .media-stack img,.media-stack img:first-child{grid-row:auto;height:auto;aspect-ratio:4/3;object-position:50% 72%}
@@ -312,7 +317,7 @@ footer a{color:#cdd6ec;display:block;margin:.25rem 0}
   .sticky-cta .p{font-size:.8rem;color:var(--muted);line-height:1.25}
   .sticky-cta .p b{display:block;font-size:1.05rem;color:var(--navy-deep);font-family:'Playfair Display',serif}
   .sticky-cta .btn{padding:.7rem 1.2rem;font-size:.95rem;white-space:nowrap}
-  body{padding-bottom:76px}
+  body{padding-bottom:84px}
   footer{padding-bottom:96px}
   .cookie{bottom:84px}
   /* hero piu' compatto e leggibile */
