@@ -242,6 +242,11 @@ ul.amen{padding:0;margin:0}
 .pay-secure{display:block;text-align:center;font-size:.74rem;color:var(--muted);margin-top:.55rem}
 .pay-notice{margin:0 0 18px;padding:.9rem 1.1rem;border-radius:10px;font-size:.92rem;background:var(--azure-light);border:1px solid #d4e8f7;color:var(--ink)}
 .pay-notice.ok{background:#e7f6ec;border-color:#bce3c9;color:#176a35;font-weight:500}
+.pay-notice{animation:noticeIn .3s ease}
+@keyframes noticeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.45);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;margin-right:.45rem;vertical-align:-2px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.spin{animation:none}.pay-notice{animation:none}}
 /* FAQ */
 .faq details{border:1px solid var(--line);border-radius:10px;margin-bottom:.6rem;padding:.2rem .2rem;background:#fff}
 .faq summary{cursor:pointer;padding:.9rem 1rem;font-weight:600;color:var(--navy-deep);list-style:none;display:flex;justify-content:space-between;align-items:center}
@@ -1129,7 +1134,7 @@ const CAL={busy:new Set(), inDate:null, outDate:null};
     else { // sto scegliendo la partenza
       if(dayIso<=CAL.inDate){ CAL.inDate=dayIso; CAL.outDate=null; hint(SELOUT[L]||SELOUT.it); }
       else if(rangeHasBusy(CAL.inDate,dayIso)){ hint(BUSYRANGE[L]||BUSYRANGE.it); }
-      else { CAL.outDate=dayIso; hint(SELHINT[L]||SELHINT.it); }
+      else { CAL.outDate=dayIso; hint(SELHINT[L]||SELHINT.it); if(typeof track==='function')track('select_dates',{}); }
     }
     syncFields(); render();
   }
@@ -1248,8 +1253,8 @@ function buildReq(){
   if(m)t+=`\n${L.m}: ${m}`;
   return t;
 }
-document.getElementById('reqWa').onclick=()=>{const t=buildReq();if(t)window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(t),'_blank');};
-document.getElementById('reqMail').onclick=()=>{const t=buildReq();if(t){const L=REQL[document.documentElement.lang]||REQL.it;location.href='mailto:'+REQ_EMAIL+'?subject='+encodeURIComponent(L.t)+'&body='+encodeURIComponent(t);}};
+document.getElementById('reqWa').onclick=()=>{const t=buildReq();if(t){if(typeof track==='function')track('booking_request',{method:'whatsapp'});window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(t),'_blank');}};
+document.getElementById('reqMail').onclick=()=>{const t=buildReq();if(t){if(typeof track==='function')track('booking_request',{method:'email'});const L=REQL[document.documentElement.lang]||REQL.it;location.href='mailto:'+REQ_EMAIL+'?subject='+encodeURIComponent(L.t)+'&body='+encodeURIComponent(t);}};
 
 /* ---------- Pagamento online Stripe (importo = totale calcolato dalle date) ---------- */
 function updatePayBtn(s,lang){
@@ -1272,7 +1277,8 @@ function updatePayBtn(s,lang){
     if(!s) return;
     if(err) err.classList.add('hidden');
     if(rangeBusy(rIn.value,rOut.value)){ if(err){err.textContent=PAY_BUSY[L]||PAY_BUSY.it;err.classList.remove('hidden');} return; }
-    b.dataset.loading='1'; b.disabled=true; b.textContent=PAY_WAIT[L]||PAY_WAIT.it;
+    if(typeof track==='function')track('begin_checkout',{currency:'EUR',value:s.total,nights:s.nights,guests:Number(rGuests.value)});
+    b.dataset.loading='1'; b.disabled=true; b.innerHTML='<span class="spin" aria-hidden="true"></span>'+(PAY_WAIT[L]||PAY_WAIT.it);
     try{
       const r=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({checkin:rIn.value,checkout:rOut.value,guests:rGuests.value,lang:L})});
       const data=await r.json().catch(()=>({}));
@@ -1288,7 +1294,7 @@ function updatePayBtn(s,lang){
   const el=document.getElementById('payNotice'); if(!el) return;
   const p=new URLSearchParams(location.search); const L=document.documentElement.lang;
   let msg=null, ok=false;
-  if(p.get('paid')==='1'){ msg=NOTICE_PAID[L]||NOTICE_PAID.it; ok=true; }
+  if(p.get('paid')==='1'){ msg=NOTICE_PAID[L]||NOTICE_PAID.it; ok=true; window.__pendingPurchase={value:Number(p.get('amount'))||undefined,transaction_id:p.get('session_id')||undefined}; if(window.__gaOn&&typeof track==='function'){track('purchase',Object.assign({currency:'EUR'},window.__pendingPurchase));window.__pendingPurchase=null;} }
   else if(p.get('canceled')==='1'){ msg=NOTICE_CANCEL[L]||NOTICE_CANCEL.it; }
   if(!msg) return;
   el.textContent=msg; el.className='pay-notice'+(ok?' ok':''); el.classList.remove('hidden');
@@ -1307,7 +1313,11 @@ function loadGA(){
   function gtag(){dataLayer.push(arguments);}
   gtag('js',new Date());
   gtag('config',GA_ID,{anonymize_ip:true});
+  window.__gaOn=true;
+  if(window.__pendingPurchase){track('purchase',Object.assign({currency:'EUR'},window.__pendingPurchase));window.__pendingPurchase=null;}
 }
+/* GA4 event helper: invia solo dopo consenso (window.__gaOn impostato da loadGA) */
+function track(name,params){try{if(!window.__gaOn)return;(window.dataLayer=window.dataLayer||[]).push(['event',name,params||{}]);}catch(e){}}
 const cookie=document.getElementById('cookie');
 let cc=null;try{cc=localStorage.getItem('lamansarda_cookie')}catch(e){}
 if(!cc)cookie.classList.remove('hidden');       /* nessuna scelta: mostra banner, niente tracciamento */

@@ -17,8 +17,21 @@ function isISODate(s) {
 function dayDiff(a, b) {
   return Math.round((Date.parse(b + 'T00:00:00Z') - Date.parse(a + 'T00:00:00Z')) / 86400000);
 }
+function rangeDays(checkin, checkout) {
+  const out = [];
+  for (let d = new Date(checkin + 'T00:00:00Z'); d < new Date(checkout + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + 1)) {
+    out.push(d.toISOString().slice(0, 10));
+  }
+  return out;
+}
+async function fetchT(url, opts, ms) {
+  const c = new AbortController();
+  const t = setTimeout(() => c.abort(), ms);
+  try { return await fetch(url, { ...opts, signal: c.signal }); }
+  finally { clearTimeout(t); }
+}
 
-// --- Disponibilità (best-effort): legge gli stessi iCal del calendario ---
+// --- Disponibilità da iCal (Airbnb/Booking), best-effort ---
 function parseICS(text) {
   const ranges = [];
   for (const ev of text.split('BEGIN:VEVENT').slice(1)) {
@@ -38,9 +51,9 @@ function expandDays(ranges) {
   }
   return days;
 }
-async function busyDays() {
+async function icalBusy() {
   const urls = [process.env.ICAL_AIRBNB, process.env.ICAL_BOOKING].filter(Boolean);
-  if (urls.length === 0) return null; // non configurato: nessun controllo
+  if (urls.length === 0) return new Set();
   try {
     const texts = await Promise.all(urls.map(u =>
       fetchT(u, { headers: { 'User-Agent': 'LaMansarda/1.0' } }, 4000).then(r => (r.ok ? r.text() : '')).catch(() => '')
@@ -48,14 +61,32 @@ async function busyDays() {
     let ranges = [];
     for (const t of texts) ranges = ranges.concat(parseICS(t));
     return expandDays(ranges);
-  } catch { return null; }
+  } catch { return new Set(); }
 }
-function rangeOverlapsBusy(checkin, checkout, busy) {
-  for (let d = new Date(checkin + 'T00:00:00Z'); d < new Date(checkout + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + 1)) {
-    if (busy.has(d.toISOString().slice(0, 10))) return true;
-  }
-  return false;
+
+// --- Disponibilità dalle prenotazioni pagate sul sito (Stripe è lo store: PI autorizzati o catturati) ---
+async function stripeBusy(key) {
+  if (!key) return new Set();
+  try {
+    const r = await fetchT('https://api.stripe.com/v1/payment_intents?limit=100', {
+      headers: { Authorization: `Bearer ${key}` },
+    }, 5000);
+    if (!r.ok) return new Set();
+    const data = await r.json();
+    const days = new Set();
+    for (const pi of (data.data || [])) {
+      if (pi.status !== 'requires_capture' && pi.status !== 'succeeded' && pi.status !== 'processing') continue;
+      const m = pi.metadata || {};
+      if (!isISODate(m.checkin) || !isISODate(m.checkout)) continue;
+      for (const d of rangeDays(m.checkin, m.checkout)) days.add(d);
+    }
+    return days;
+  } catch { return new Set(); }
 }
+function rangeOverlaps(checkin, checkout, busy) {
+  return rangeDays(checkin, checkout).some(d => busy.has(d));
+}
+
 async function readBody(req) {
   if (req.body && typeof req.body === 'object') return req.body;
   if (typeof req.body === 'string') { try { return JSON.parse(req.body); } catch { return {}; } }
@@ -65,12 +96,6 @@ async function readBody(req) {
     req.on('end', () => { try { resolve(JSON.parse(data || '{}')); } catch { resolve({}); } });
     req.on('error', () => resolve({}));
   });
-}
-async function fetchT(url, opts, ms) {
-  const c = new AbortController();
-  const t = setTimeout(() => c.abort(), ms);
-  try { return await fetch(url, { ...opts, signal: c.signal }); }
-  finally { clearTimeout(t); }
 }
 
 export default async function handler(req, res) {
@@ -100,9 +125,10 @@ export default async function handler(req, res) {
   if (nights > MAX_NIGHTS) return res.status(400).json({ error: 'too_long' });
   if (dayDiff(today, checkin) > MAX_AHEAD_DAYS) return res.status(400).json({ error: 'too_far' });
 
-  // Disponibilità: rifiuta se le date si sovrappongono a giorni occupati (best-effort)
-  const busy = await busyDays();
-  if (busy && rangeOverlapsBusy(checkin, checkout, busy)) {
+  // --- Disponibilità: iCal (Airbnb/Booking) + prenotazioni pagate sul sito (Stripe) ---
+  const [ical, paid] = await Promise.all([icalBusy(), stripeBusy(key)]);
+  const busy = new Set([...ical, ...paid]);
+  if (rangeOverlaps(checkin, checkout, busy)) {
     return res.status(409).json({ error: 'unavailable', message: 'Le date selezionate non sono più disponibili.' });
   }
 
@@ -117,14 +143,20 @@ export default async function handler(req, res) {
 
   const params = new URLSearchParams();
   params.set('mode', 'payment');
-  params.set('success_url', `${origin}/?paid=1&session_id={CHECKOUT_SESSION_ID}`);
+  params.set('success_url', `${origin}/?paid=1&amount=${total}&session_id={CHECKOUT_SESSION_ID}`);
   params.set('cancel_url', `${origin}/?canceled=1#prenota`);
   params.set('line_items[0][quantity]', String(nights));
   params.set('line_items[0][price_data][currency]', 'eur');
   params.set('line_items[0][price_data][unit_amount]', String(rate * 100));
   params.set('line_items[0][price_data][product_data][name]', `Soggiorno La Mansarda Nicosia (${guests} ${guestLabel})`);
   params.set('line_items[0][price_data][product_data][description]', `Check-in ${checkin} · Check-out ${checkout}`);
-  params.set('payment_intent_data[capture_method]', 'manual'); // autorizza ora, l'host cattura dopo aver confermato la disponibilità (entro 7 giorni)
+  // autorizza ora, l'host cattura dopo aver confermato la disponibilità (entro 7 giorni)
+  params.set('payment_intent_data[capture_method]', 'manual');
+  // metadati anche sul PaymentIntent: servono per ricostruire le date occupate (vedi stripeBusy)
+  params.set('payment_intent_data[metadata][checkin]', checkin);
+  params.set('payment_intent_data[metadata][checkout]', checkout);
+  params.set('payment_intent_data[metadata][guests]', guests);
+  params.set('payment_intent_data[metadata][nights]', String(nights));
   params.set('phone_number_collection[enabled]', 'true');
   params.set('billing_address_collection', 'auto');
   params.set('metadata[checkin]', checkin);
