@@ -78,7 +78,7 @@
     {"@type":"Question","name":"Sono ammessi animali?","acceptedAnswer":{"@type":"Answer","text":"No, gli animali non sono ammessi."}},
     {"@type":"Question","name":"Sono ammessi i bambini?","acceptedAnswer":{"@type":"Answer","text":"Sì, i bambini sono benvenuti, nel limite di 2 ospiti totali."}},
     {"@type":"Question","name":"C'è l'ascensore?","acceptedAnswer":{"@type":"Answer","text":"No. L'appartamento è al 4º piano con 4 rampe di scale."}},
-    {"@type":"Question","name":"Come funziona il pagamento?","acceptedAnswer":{"@type":"Answer","text":"Invii la richiesta con le date, noi confermiamo la disponibilità e concordiamo direttamente il pagamento (bonifico, PayPal o all'arrivo). La colazione di base è inclusa."}},
+    {"@type":"Question","name":"Come funziona il pagamento?","acceptedAnswer":{"@type":"Answer","text":"Invii la richiesta con le date, noi confermiamo la disponibilità e concordiamo direttamente il pagamento (bonifico, PayPal, carta con link sicuro o all'arrivo). La colazione di base è inclusa."}},
     {"@type":"Question","name":"Qual è la politica di cancellazione?","acceptedAnswer":{"@type":"Answer","text":"Cancellazione rigida: rimborso del 50% fino a 30 giorni prima dell'arrivo, nessun rimborso oltre tale termine."}}
   ]
 }
@@ -230,6 +230,11 @@ ul.amen{padding:0;margin:0}
 .price-card .row:last-child{border:none}
 .price-card .big{font-size:1.5rem;color:var(--navy-deep);font-weight:700;font-family:'Playfair Display',serif}
 .policy{font-size:.85rem;color:var(--muted);margin-top:.8rem}
+.pay-box{margin-top:1rem;padding-top:1.1rem;border-top:1px solid var(--line)}
+.pay-box h3{margin:0 0 .25rem;font-size:1.05rem}
+.pay-box .pay-sub{font-size:.85rem;color:var(--muted);margin:0 0 .8rem;line-height:1.5}
+.pay-btn{width:100%;justify-content:center}
+.pay-secure{display:block;text-align:center;font-size:.74rem;color:var(--muted);margin-top:.55rem}
 /* FAQ */
 .faq details{border:1px solid var(--line);border-radius:10px;margin-bottom:.6rem;padding:.2rem .2rem;background:#fff}
 .faq summary{cursor:pointer;padding:.9rem 1rem;font-weight:600;color:var(--navy-deep);list-style:none;display:flex;justify-content:space-between;align-items:center}
@@ -612,7 +617,7 @@ h1,h2,h3{text-wrap:balance}
           </div>
           <div class="trust">
             <span><span class="ico">✓</span> <span data-i18n="trust_reply">Rispondiamo in genere in poche ore</span></span>
-            <span><span class="ico">✓</span> <span data-i18n="trust_noprepay">Nessun anticipo richiesto online</span></span>
+            <span><span class="ico">✓</span> <span data-i18n="trust_noprepay">Nessun anticipo obbligatorio online</span></span>
             <span><span class="ico">✓</span> <span data-i18n="trust_nofee">Prezzo diretto, senza commissioni</span></span>
           </div>
         </form>
@@ -625,6 +630,12 @@ h1,h2,h3{text-wrap:balance}
         <div class="row"><span data-i18n="price_checkout">Check-out</span><b>10:00 – 10:30</b></div>
         <div class="estimate empty" id="estimate" aria-live="polite" aria-atomic="true">Scegli le date per vedere il totale stimato.</div>
         <p class="policy" data-i18n="price_policy"><b>Cancellazione rigida:</b> rimborso del 50% fino a 30 giorni prima dell'arrivo. Pagamento concordato direttamente con l'host. Colazione inclusa.</p>
+        <div class="pay-box">
+          <h3 data-i18n="pay_t">Paga l'acconto</h3>
+          <p class="pay-sub" data-i18n="pay_d">Hai concordato le date con noi? Versa l'acconto in modo sicuro con carta: lo scaliamo dal totale del soggiorno.</p>
+          <a href="https://buy.stripe.com/cNibJ05XO28G0yR90H6Na00" class="btn pay-btn" target="_blank" rel="noopener noreferrer" data-i18n="pay_btn">Paga l'acconto con carta</a>
+          <span class="pay-secure"><span aria-hidden="true">🔒</span> <span data-i18n="pay_secure">Pagamento protetto con Stripe · carta di credito o debito</span></span>
+        </div>
       </div>
     </div>
   </div>
@@ -640,7 +651,7 @@ h1,h2,h3{text-wrap:balance}
     <details><summary data-i18n="faq_q3">Sono ammessi animali?</summary><div class="ans" data-i18n="faq_a3">No, gli animali non sono ammessi.</div></details>
     <details><summary data-i18n="faq_q4">Sono ammessi i bambini?</summary><div class="ans" data-i18n="faq_a4">Sì, i bambini sono benvenuti, nel limite di 2 ospiti totali.</div></details>
     <details><summary data-i18n="faq_q5">C'è l'ascensore?</summary><div class="ans" data-i18n="faq_a5">No. L'appartamento è al 4º piano con 4 rampe di scale.</div></details>
-    <details><summary data-i18n="faq_q6">Come funziona il pagamento?</summary><div class="ans" data-i18n="faq_a6">Invii la richiesta con le date, noi confermiamo la disponibilità e concordiamo direttamente il pagamento (bonifico, PayPal o all'arrivo). La colazione di base è inclusa.</div></details>
+    <details><summary data-i18n="faq_q6">Come funziona il pagamento?</summary><div class="ans" data-i18n="faq_a6">Invii la richiesta con le date, noi confermiamo la disponibilità e concordiamo direttamente il pagamento (bonifico, PayPal, carta con link sicuro o all'arrivo). La colazione di base è inclusa.</div></details>
     <details><summary data-i18n="faq_q7">Qual è la politica di cancellazione?</summary><div class="ans" data-i18n="faq_a7">Cancellazione rigida: rimborso del 50% fino a 30 giorni prima dell'arrivo, nessun rimborso oltre tale termine.</div></details>
   </div>
 </section>
@@ -785,7 +796,7 @@ const I18N={
   faq_q3:"Are pets allowed?",faq_a3:"No, pets are not allowed.",
   faq_q4:"Are children allowed?",faq_a4:"Yes, children are welcome, within the 2-guest total limit.",
   faq_q5:"Is there a lift?",faq_a5:"No. The flat is on the 4th floor with 4 flights of stairs.",
-  faq_q6:"How does payment work?",faq_a6:"Send your request with dates, we confirm availability and arrange payment directly (bank transfer, PayPal or on arrival). Basic breakfast is included.",
+  faq_q6:"How does payment work?",faq_a6:"Send your request with dates, we confirm availability and arrange payment directly (bank transfer, PayPal, secure card link or on arrival). Basic breakfast is included.",
   faq_q7:"What is the cancellation policy?",faq_a7:"Strict cancellation: 50% refund up to 30 days before arrival, no refund afterwards.",
   con_eyebrow:"Contact",con_title:"Talk to us",con_lead:"For info, dates or special requests, write to us: we reply quickly.",con_phone:"Phone",
   foot_about:"One-bedroom short-stay flat in the old town of Nicosia (EN), Sicily. Direct booking, no fees.",
@@ -794,7 +805,8 @@ const I18N={
   cookie_text:"We use necessary technical cookies and, only with your consent, Google Analytics 4 statistics cookies to improve the site. No tracking is active without consent. See the <a href='cookie.html'>Cookie Policy</a>.",
   cookie_accept:"Accept all",cookie_decline:"Necessary only",cal_free:"Available",cal_busy:"Booked",nic_guide:"→ Read the guide: what to see in Nicosia",cta_from:"from",cta_night:"/ night",cta_btn:"Request dates",gal_swipe:"← Swipe to see all photos →",cal_hint:"Tap a check-in date, then a check-out date.",mini_rev:"« Beautiful, clean home with mountain views. We will be back. »",
   skip:"Skip to content",
-  trust_reply:"We usually reply within a few hours",trust_noprepay:"No online prepayment required",trust_nofee:"Direct price, no fees",
+  trust_reply:"We usually reply within a few hours",trust_noprepay:"No mandatory online prepayment",trust_nofee:"Direct price, no fees",
+  pay_t:"Pay your advance",pay_d:"Already agreed your dates with us? Pay an advance on the price securely by card: we deduct it from your stay total.",pay_btn:"Pay advance by card",pay_secure:"Secure payment with Stripe · credit or debit card",
   routes_title:"How to get here",routes_note:"Approximate driving distances, to be confirmed.",
   route_cta:"Catania Airport",route_cta_km:"≈ 110 km by car",route_pmo:"Palermo Airport",route_pmo_km:"≈ 180 km by car",route_enna:"Enna",route_enna_km:"≈ 45 km by car",route_etna:"Etna",route_etna_km:"≈ 90 km by car",
   host_eyebrow:"Your hosts",host_title:"Your hosts: Paolo and Stefano",
@@ -841,7 +853,7 @@ const I18N={
   faq_q3:"Sind Haustiere erlaubt?",faq_a3:"Nein, Haustiere sind nicht erlaubt.",
   faq_q4:"Sind Kinder erlaubt?",faq_a4:"Ja, Kinder sind willkommen, im Rahmen von insgesamt 2 Gästen.",
   faq_q5:"Gibt es einen Aufzug?",faq_a5:"Nein. Die Wohnung liegt im 4. Stock mit 4 Treppen.",
-  faq_q6:"Wie funktioniert die Zahlung?",faq_a6:"Senden Sie Ihre Anfrage mit den Terminen, wir bestätigen die Verfügbarkeit und vereinbaren die Zahlung direkt (Überweisung, PayPal oder bei Ankunft). Ein einfaches Frühstück ist inklusive.",
+  faq_q6:"Wie funktioniert die Zahlung?",faq_a6:"Senden Sie Ihre Anfrage mit den Terminen, wir bestätigen die Verfügbarkeit und vereinbaren die Zahlung direkt (Überweisung, PayPal, Karte per sicherem Link oder bei Ankunft). Ein einfaches Frühstück ist inklusive.",
   faq_q7:"Wie ist die Stornierungsbedingung?",faq_a7:"Strenge Stornierung: 50% Rückerstattung bis 30 Tage vor Anreise, danach keine Rückerstattung.",
   con_eyebrow:"Kontakt",con_title:"Sprechen Sie mit uns",con_lead:"Für Infos, Termine oder besondere Wünsche schreiben Sie uns: Wir antworten schnell.",con_phone:"Telefon",
   foot_about:"Ein-Zimmer-Ferienwohnung in der Altstadt von Nicosia (EN), Sizilien. Direktbuchung, keine Gebühren.",
@@ -850,7 +862,8 @@ const I18N={
   cookie_text:"Wir verwenden technisch notwendige Cookies und, nur mit Ihrer Zustimmung, Statistik-Cookies von Google Analytics 4 zur Verbesserung der Website. Ohne Zustimmung ist kein Tracking aktiv. Siehe die <a href='cookie.html'>Cookie-Richtlinie</a>.",
   cookie_accept:"Alle akzeptieren",cookie_decline:"Nur notwendige",cal_free:"Frei",cal_busy:"Belegt",mini_rev:"« Wunderschönes, sauberes Zuhause mit Bergblick. Wir kommen wieder. »",nic_guide:"→ Reiseführer: Was man in Nicosia sehen kann",cta_from:"ab",cta_night:"/ Nacht",cta_btn:"Termine anfragen",gal_swipe:"← Wischen für alle Fotos →",
   skip:"Zum Inhalt springen",
-  trust_reply:"Wir antworten meist innerhalb weniger Stunden",trust_noprepay:"Keine Online-Vorauszahlung nötig",trust_nofee:"Direktpreis, keine Gebühren",
+  trust_reply:"Wir antworten meist innerhalb weniger Stunden",trust_noprepay:"Keine verpflichtende Online-Vorauszahlung",trust_nofee:"Direktpreis, keine Gebühren",
+  pay_t:"Anzahlung leisten",pay_d:"Reisedaten bereits mit uns abgestimmt? Zahlen Sie die Anzahlung sicher per Karte: Wir ziehen sie vom Gesamtpreis ab.",pay_btn:"Anzahlung per Karte zahlen",pay_secure:"Sichere Zahlung mit Stripe · Kredit- oder Debitkarte",
   routes_title:"Anreise",routes_note:"Ungefähre Fahrstrecken, ohne Gewähr.",
   route_cta:"Flughafen Catania",route_cta_km:"≈ 110 km mit dem Auto",route_pmo:"Flughafen Palermo",route_pmo_km:"≈ 180 km mit dem Auto",route_enna:"Enna",route_enna_km:"≈ 45 km mit dem Auto",route_etna:"Ätna",route_etna_km:"≈ 90 km mit dem Auto",
   host_eyebrow:"Ihre Gastgeber",host_title:"Ihre Gastgeber: Paolo und Stefano",
@@ -897,7 +910,7 @@ const I18N={
   faq_q3:"Les animaux sont-ils admis ?",faq_a3:"Non, les animaux ne sont pas admis.",
   faq_q4:"Les enfants sont-ils admis ?",faq_a4:"Oui, les enfants sont les bienvenus, dans la limite de 2 voyageurs au total.",
   faq_q5:"Y a-t-il un ascenseur ?",faq_a5:"Non. Le logement est au 4e étage avec 4 volées d'escaliers.",
-  faq_q6:"Comment fonctionne le paiement ?",faq_a6:"Envoyez votre demande avec les dates, nous confirmons la disponibilité et convenons du paiement directement (virement, PayPal ou à l'arrivée). Un petit-déjeuner de base est inclus.",
+  faq_q6:"Comment fonctionne le paiement ?",faq_a6:"Envoyez votre demande avec les dates, nous confirmons la disponibilité et convenons du paiement directement (virement, PayPal, carte via lien sécurisé ou à l'arrivée). Un petit-déjeuner de base est inclus.",
   faq_q7:"Quelle est la politique d'annulation ?",faq_a7:"Annulation stricte : remboursement de 50% jusqu'à 30 jours avant l'arrivée, aucun remboursement ensuite.",
   con_eyebrow:"Contact",con_title:"Parlez-nous",con_lead:"Pour toute info, date ou demande spéciale, écrivez-nous : nous répondons vite.",con_phone:"Téléphone",
   foot_about:"Studio en court séjour dans la vieille ville de Nicosia (EN), Sicile. Réservation directe, sans frais.",
@@ -906,7 +919,8 @@ const I18N={
   cookie_text:"Nous utilisons des cookies techniques nécessaires et, uniquement avec votre consentement, des cookies statistiques Google Analytics 4 pour améliorer le site. Aucun suivi n'est actif sans consentement. Voir la <a href='cookie.html'>Politique de cookies</a>.",
   cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",cal_free:"Libre",cal_busy:"Occupé",nic_guide:"→ Lire le guide : que voir à Nicosia",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Demander des dates",gal_swipe:"← Faites défiler les photos →",cal_hint:"Touchez une date d’arrivée, puis de départ.",mini_rev:"« Maison magnifique et propre, vue sur les montagnes. Nous reviendrons. »",
   skip:"Aller au contenu",
-  trust_reply:"Nous répondons généralement en quelques heures",trust_noprepay:"Aucun prépaiement en ligne requis",trust_nofee:"Prix direct, sans frais",
+  trust_reply:"Nous répondons généralement en quelques heures",trust_noprepay:"Aucun prépaiement en ligne obligatoire",trust_nofee:"Prix direct, sans frais",
+  pay_t:"Payer l'acompte",pay_d:"Vous avez déjà convenu des dates avec nous ? Payez l'acompte en toute sécurité par carte : nous le déduisons du total du séjour.",pay_btn:"Payer l'acompte par carte",pay_secure:"Paiement sécurisé avec Stripe · carte de crédit ou de débit",
   routes_title:"Comment venir",routes_note:"Distances routières indicatives, à confirmer.",
   route_cta:"Aéroport de Catane",route_cta_km:"≈ 110 km en voiture",route_pmo:"Aéroport de Palerme",route_pmo_km:"≈ 180 km en voiture",route_enna:"Enna",route_enna_km:"≈ 45 km en voiture",route_etna:"Etna",route_etna_km:"≈ 90 km en voiture",
   host_eyebrow:"Vos hôtes",host_title:"Vos hôtes : Paolo et Stefano",
@@ -953,7 +967,7 @@ const I18N={
   faq_q3:"¿Se admiten mascotas?",faq_a3:"No, no se admiten mascotas.",
   faq_q4:"¿Se admiten niños?",faq_a4:"Sí, los niños son bienvenidos, dentro del límite de 2 huéspedes en total.",
   faq_q5:"¿Hay ascensor?",faq_a5:"No. El apartamento está en el 4º piso con 4 tramos de escaleras.",
-  faq_q6:"¿Cómo funciona el pago?",faq_a6:"Envía tu solicitud con las fechas, confirmamos la disponibilidad y acordamos el pago directamente (transferencia, PayPal o a la llegada). El desayuno básico está incluido.",
+  faq_q6:"¿Cómo funciona el pago?",faq_a6:"Envía tu solicitud con las fechas, confirmamos la disponibilidad y acordamos el pago directamente (transferencia, PayPal, tarjeta con enlace seguro o a la llegada). El desayuno básico está incluido.",
   faq_q7:"¿Cuál es la política de cancelación?",faq_a7:"Cancelación estricta: reembolso del 50% hasta 30 días antes de la llegada, sin reembolso después.",
   con_eyebrow:"Contacto",con_title:"Habla con nosotros",con_lead:"Para información, fechas o peticiones especiales, escríbenos: respondemos rápido.",con_phone:"Teléfono",
   foot_about:"Apartamento de estancia corta en el casco antiguo de Nicosia (EN), Sicilia. Reserva directa, sin comisiones.",
@@ -962,7 +976,8 @@ const I18N={
   cookie_text:"Usamos cookies técnicas necesarias y, solo con tu consentimiento, cookies estadísticas de Google Analytics 4 para mejorar el sitio. Sin consentimiento no hay seguimiento activo. Consulta la <a href='cookie.html'>Política de cookies</a>.",
   cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",cal_free:"Libre",cal_busy:"Ocupado",nic_guide:"→ Lee la guía: qué ver en Nicosia",cta_from:"desde",cta_night:"/ noche",cta_btn:"Solicitar fechas",gal_swipe:"← Desliza para ver todas las fotos →",cal_hint:"Toca una fecha de entrada, luego una de salida.",mini_rev:"« Casa preciosa y limpia, con vistas a la montaña. Volveremos. »",
   skip:"Saltar al contenido",
-  trust_reply:"Solemos responder en pocas horas",trust_noprepay:"Sin pago anticipado online",trust_nofee:"Precio directo, sin comisiones",
+  trust_reply:"Solemos responder en pocas horas",trust_noprepay:"Sin pago anticipado online obligatorio",trust_nofee:"Precio directo, sin comisiones",
+  pay_t:"Paga el anticipo",pay_d:"¿Ya acordaste las fechas con nosotros? Paga el anticipo de forma segura con tarjeta: lo descontamos del total de tu estancia.",pay_btn:"Paga el anticipo con tarjeta",pay_secure:"Pago seguro con Stripe · tarjeta de crédito o débito",
   routes_title:"Cómo llegar",routes_note:"Distancias en coche aproximadas, a confirmar.",
   route_cta:"Aeropuerto de Catania",route_cta_km:"≈ 110 km en coche",route_pmo:"Aeropuerto de Palermo",route_pmo_km:"≈ 180 km en coche",route_enna:"Enna",route_enna_km:"≈ 45 km en coche",route_etna:"Etna",route_etna_km:"≈ 90 km en coche",
   host_eyebrow:"Tus anfitriones",host_title:"Tus anfitriones: Paolo y Stefano",
