@@ -112,6 +112,9 @@ section{padding:72px 0}
 .btn.ghost{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
 .btn.ghost:hover{background:var(--azure-light)}
 .btn.wa{background:#12833c}.btn.wa:hover{background:#0f6e32}
+.rev-cta{text-align:center;margin-top:1.5rem}
+.rev-google{background:#fff;color:var(--ink);border:1.5px solid var(--line);font-weight:600}
+.rev-google:hover{background:#f6f9fc;border-color:var(--azure)}
 /* Header */
 header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.98);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:70px;gap:1rem}
@@ -580,6 +583,9 @@ h1,h2,h3{text-wrap:balance}
     </div>
     <div class="rev-grid" id="revGrid"></div>
     <p style="font-size:.82rem;color:var(--muted);margin-top:1rem" data-i18n="rev_disclaimer">Recensioni reali raccolte dai profili Airbnb e Booking della struttura.</p>
+    <div class="rev-cta">
+      <a href="https://www.google.com/maps?cid=10364661981123230684" class="btn rev-google" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">⭐</span> <span data-i18n="rev_google">Lasciaci una recensione su Google</span></a>
+    </div>
   </div>
 </section>
 
@@ -798,6 +804,7 @@ const I18N={
   poi6_t:"Rock settlements",poi6_d:"Ancient history carved into the rock.",
   rev_eyebrow:"Real reviews",rev_title:"What guests say",rev_reviews:"reviews",rev_reviews2:"reviews",
   rev_disclaimer:"Real reviews collected from the property's Airbnb and Booking profiles.",
+  rev_google:"Leave us a review on Google",
   book_eyebrow:"Book direct",book_title:"Availability & booking",
   book_lead:"Pick your dates and send us the request: we confirm availability and reply quickly. Direct, with no platform fees.",
   req_t:"Request your booking",req_d:"Pick your dates and send the request: we check availability and reply right away. Payment is arranged directly, no fees.",
@@ -855,6 +862,7 @@ const I18N={
   poi6_t:"Felssiedlungen",poi6_d:"Jahrtausendealte Geschichte, in den Fels gehauen.",
   rev_eyebrow:"Echte Bewertungen",rev_title:"Was Gäste sagen",rev_reviews:"Bewertungen",rev_reviews2:"Bewertungen",
   rev_disclaimer:"Echte Bewertungen von den Airbnb- und Booking-Profilen der Unterkunft.",
+  rev_google:"Bewerten Sie uns auf Google",
   book_eyebrow:"Direkt buchen",book_title:"Verfügbarkeit & Buchung",
   book_lead:"Wählen Sie Ihre Termine und senden Sie die Anfrage: Wir prüfen die Verfügbarkeit und antworten schnell. Direkt, ohne Plattformgebühren.",
   req_t:"Buchung anfragen",req_d:"Wählen Sie Ihre Termine und senden Sie die Anfrage: Wir prüfen die Verfügbarkeit und antworten sofort. Die Zahlung wird direkt vereinbart, ohne Gebühren.",
@@ -912,6 +920,7 @@ const I18N={
   poi6_t:"Habitats rupestres",poi6_d:"Une histoire millénaire creusée dans la roche.",
   rev_eyebrow:"Avis réels",rev_title:"Ce que disent les voyageurs",rev_reviews:"avis",rev_reviews2:"avis",
   rev_disclaimer:"Avis réels recueillis sur les profils Airbnb et Booking du logement.",
+  rev_google:"Laissez-nous un avis sur Google",
   book_eyebrow:"Réserver en direct",book_title:"Disponibilités & réservation",
   book_lead:"Choisissez vos dates et envoyez la demande : nous vérifions la disponibilité et répondons rapidement. En direct, sans frais de plateforme.",
   req_t:"Demandez votre réservation",req_d:"Choisissez vos dates et envoyez la demande : nous vérifions la disponibilité et répondons aussitôt. Le paiement se convient directement, sans frais.",
@@ -969,6 +978,7 @@ const I18N={
   poi6_t:"Asentamientos rupestres",poi6_d:"Historia milenaria excavada en la roca.",
   rev_eyebrow:"Opiniones reales",rev_title:"Lo que dicen los huéspedes",rev_reviews:"opiniones",rev_reviews2:"opiniones",
   rev_disclaimer:"Opiniones reales recogidas de los perfiles de Airbnb y Booking del alojamiento.",
+  rev_google:"Déjanos una reseña en Google",
   book_eyebrow:"Reserva directa",book_title:"Disponibilidad y reserva",
   book_lead:"Elige tus fechas y envíanos la solicitud: comprobamos la disponibilidad y respondemos enseguida. Directo, sin comisiones de plataforma.",
   req_t:"Solicita tu reserva",req_d:"Elige tus fechas y envía la solicitud: comprobamos la disponibilidad y respondemos al momento. El pago se acuerda directamente, sin comisiones.",
