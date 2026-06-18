@@ -124,6 +124,7 @@ export default async function handler(req, res) {
   params.set('line_items[0][price_data][unit_amount]', String(rate * 100));
   params.set('line_items[0][price_data][product_data][name]', `Soggiorno La Mansarda Nicosia (${guests} ${guestLabel})`);
   params.set('line_items[0][price_data][product_data][description]', `Check-in ${checkin} · Check-out ${checkout}`);
+  params.set('payment_intent_data[capture_method]', 'manual'); // autorizza ora, l'host cattura dopo aver confermato la disponibilità (entro 7 giorni)
   params.set('phone_number_collection[enabled]', 'true');
   params.set('billing_address_collection', 'auto');
   params.set('metadata[checkin]', checkin);

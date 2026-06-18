@@ -234,8 +234,10 @@ ul.amen{padding:0;margin:0}
 .pay-box h3{margin:0 0 .25rem;font-size:1.05rem}
 .pay-box .pay-sub{font-size:.85rem;color:var(--muted);margin:0 0 .8rem;line-height:1.5}
 .pay-btn{width:100%;justify-content:center}
+.pay-btn,.cta-pay{background:#635bff}
+.pay-btn:hover,.cta-pay:hover{background:#5247e0}
 .pay-btn[disabled]{opacity:.55;cursor:not-allowed}
-.pay-btn[disabled]:hover{background:var(--navy);transform:none}
+.pay-btn[disabled]:hover{background:#635bff;transform:none}
 .pay-err{color:#b3261e;font-size:.82rem;margin:.55rem 0 0;text-align:center}
 .pay-secure{display:block;text-align:center;font-size:.74rem;color:var(--muted);margin-top:.55rem}
 .pay-notice{margin:0 0 18px;padding:.9rem 1.1rem;border-radius:10px;font-size:.92rem;background:var(--azure-light);border:1px solid #d4e8f7;color:var(--ink)}
@@ -638,7 +640,7 @@ h1,h2,h3{text-wrap:balance}
         <p class="policy" data-i18n="price_policy"><b>Cancellazione rigida:</b> rimborso del 50% fino a 30 giorni prima dell'arrivo. Pagamento concordato direttamente con l'host. Colazione inclusa.</p>
         <div class="pay-box">
           <h3 data-i18n="pay_t">Prenota e paga online</h3>
-          <p class="pay-sub" data-i18n="pay_d">Scegli date e ospiti e paga l'intero soggiorno in modo sicuro con carta. Verifichiamo la disponibilità e ti inviamo la conferma via email; se le date non fossero disponibili, rimborso totale.</p>
+          <p class="pay-sub" data-i18n="pay_d">Scegli date e ospiti e autorizza il pagamento in modo sicuro con carta: l'addebito avviene solo dopo la nostra conferma di disponibilità. Se le date non fossero disponibili, nessun addebito.</p>
           <button type="button" id="payBtn" class="btn pay-btn" disabled>Seleziona le date per pagare</button>
           <p class="pay-err hidden" id="payErr" role="alert"></p>
           <span class="pay-secure"><span aria-hidden="true">🔒</span> <span data-i18n="pay_secure">Pagamento protetto con Stripe · carta di credito o debito</span></span>
@@ -715,7 +717,7 @@ h1,h2,h3{text-wrap:balance}
 <!-- STICKY CTA (mobile) -->
 <div class="sticky-cta" id="stickyCta">
   <div class="p"><span data-i18n="cta_from">da</span> <b>49 € <span style="font-size:.75rem;font-family:Inter,sans-serif;color:var(--muted);font-weight:400" data-i18n="cta_night">/ notte</span></b></div>
-  <a href="#prenota" class="btn" data-i18n="cta_btn">Richiedi le date</a>
+  <a href="#prenota" class="btn cta-pay" data-i18n="cta_btn">Prenota e paga</a>
 </div>
 
 <a href="https://wa.me/393477054576?text=Ciao%2C%20vorrei%20informazioni%20su%20La%20Mansarda%20a%20Nicosia" class="wa-float" id="waFloat" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
@@ -810,10 +812,10 @@ const I18N={
   foot_cin:"National Identification Code",foot_nav:"Navigate",foot_legal:"Legal",foot_privacy:"Privacy Policy",foot_cookie:"Cookie Policy",
   foot_owner:"Owner: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Direct booking · No platform fees",foot_credit:"Website by Stefano Compagnone",
   cookie_text:"We use necessary technical cookies and, only with your consent, Google Analytics 4 statistics cookies to improve the site. No tracking is active without consent. See the <a href='cookie.html'>Cookie Policy</a>.",
-  cookie_accept:"Accept all",cookie_decline:"Necessary only",cal_free:"Available",cal_busy:"Booked",nic_guide:"→ Read the guide: what to see in Nicosia",cta_from:"from",cta_night:"/ night",cta_btn:"Request dates",gal_swipe:"← Swipe to see all photos →",cal_hint:"Tap a check-in date, then a check-out date.",mini_rev:"« Beautiful, clean home with mountain views. We will be back. »",
+  cookie_accept:"Accept all",cookie_decline:"Necessary only",cal_free:"Available",cal_busy:"Booked",nic_guide:"→ Read the guide: what to see in Nicosia",cta_from:"from",cta_night:"/ night",cta_btn:"Book and pay",gal_swipe:"← Swipe to see all photos →",cal_hint:"Tap a check-in date, then a check-out date.",mini_rev:"« Beautiful, clean home with mountain views. We will be back. »",
   skip:"Skip to content",
   trust_reply:"We usually reply within a few hours",trust_noprepay:"Two ways to book: pay online or arrange with the host",trust_nofee:"Direct price, no fees",
-  pay_t:"Book and pay online",pay_d:"Choose dates and guests and pay for the whole stay securely by card. We check availability and email your confirmation; if the dates aren't available, you're fully refunded.",pay_secure:"Secure payment with Stripe · credit or debit card",
+  pay_t:"Book and pay online",pay_d:"Choose dates and guests and authorize payment securely by card: you're only charged after we confirm availability. If the dates aren't available, no charge is made.",pay_secure:"Secure payment with Stripe · credit or debit card",
   routes_title:"How to get here",routes_note:"Approximate driving distances, to be confirmed.",
   route_cta:"Catania Airport",route_cta_km:"≈ 110 km by car",route_pmo:"Palermo Airport",route_pmo_km:"≈ 180 km by car",route_enna:"Enna",route_enna_km:"≈ 45 km by car",route_etna:"Etna",route_etna_km:"≈ 90 km by car",
   host_eyebrow:"Your hosts",host_title:"Your hosts: Paolo and Stefano",
@@ -867,10 +869,10 @@ const I18N={
   foot_cin:"Nationaler Identifikationscode",foot_nav:"Navigation",foot_legal:"Rechtliches",foot_privacy:"Datenschutz",foot_cookie:"Cookie-Richtlinie",
   foot_owner:"Inhaber: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Direktbuchung · Keine Plattformgebühren",foot_credit:"Website von Stefano Compagnone",
   cookie_text:"Wir verwenden technisch notwendige Cookies und, nur mit Ihrer Zustimmung, Statistik-Cookies von Google Analytics 4 zur Verbesserung der Website. Ohne Zustimmung ist kein Tracking aktiv. Siehe die <a href='cookie.html'>Cookie-Richtlinie</a>.",
-  cookie_accept:"Alle akzeptieren",cookie_decline:"Nur notwendige",cal_free:"Frei",cal_busy:"Belegt",mini_rev:"« Wunderschönes, sauberes Zuhause mit Bergblick. Wir kommen wieder. »",nic_guide:"→ Reiseführer: Was man in Nicosia sehen kann",cta_from:"ab",cta_night:"/ Nacht",cta_btn:"Termine anfragen",gal_swipe:"← Wischen für alle Fotos →",
+  cookie_accept:"Alle akzeptieren",cookie_decline:"Nur notwendige",cal_free:"Frei",cal_busy:"Belegt",mini_rev:"« Wunderschönes, sauberes Zuhause mit Bergblick. Wir kommen wieder. »",nic_guide:"→ Reiseführer: Was man in Nicosia sehen kann",cta_from:"ab",cta_night:"/ Nacht",cta_btn:"Buchen und zahlen",gal_swipe:"← Wischen für alle Fotos →",
   skip:"Zum Inhalt springen",
   trust_reply:"Wir antworten meist innerhalb weniger Stunden",trust_noprepay:"Zwei Wege zur Buchung: online zahlen oder mit dem Gastgeber abstimmen",trust_nofee:"Direktpreis, keine Gebühren",
-  pay_t:"Online buchen und zahlen",pay_d:"Wählen Sie Daten und Gäste und zahlen Sie den gesamten Aufenthalt sicher per Karte. Wir prüfen die Verfügbarkeit und senden die Bestätigung per E-Mail; falls die Daten nicht verfügbar sind, volle Rückerstattung.",pay_secure:"Sichere Zahlung mit Stripe · Kredit- oder Debitkarte",
+  pay_t:"Online buchen und zahlen",pay_d:"Wählen Sie Daten und Gäste und autorisieren Sie die Zahlung sicher per Karte: Die Abbuchung erfolgt erst nach unserer Verfügbarkeitsbestätigung. Sind die Daten nicht verfügbar, erfolgt keine Abbuchung.",pay_secure:"Sichere Zahlung mit Stripe · Kredit- oder Debitkarte",
   routes_title:"Anreise",routes_note:"Ungefähre Fahrstrecken, ohne Gewähr.",
   route_cta:"Flughafen Catania",route_cta_km:"≈ 110 km mit dem Auto",route_pmo:"Flughafen Palermo",route_pmo_km:"≈ 180 km mit dem Auto",route_enna:"Enna",route_enna_km:"≈ 45 km mit dem Auto",route_etna:"Ätna",route_etna_km:"≈ 90 km mit dem Auto",
   host_eyebrow:"Ihre Gastgeber",host_title:"Ihre Gastgeber: Paolo und Stefano",
@@ -924,10 +926,10 @@ const I18N={
   foot_cin:"Code d'identification national",foot_nav:"Navigation",foot_legal:"Mentions légales",foot_privacy:"Politique de confidentialité",foot_cookie:"Politique de cookies",
   foot_owner:"Titulaire : Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Réservation directe · Sans frais de plateforme",foot_credit:"Site créé par Stefano Compagnone",
   cookie_text:"Nous utilisons des cookies techniques nécessaires et, uniquement avec votre consentement, des cookies statistiques Google Analytics 4 pour améliorer le site. Aucun suivi n'est actif sans consentement. Voir la <a href='cookie.html'>Politique de cookies</a>.",
-  cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",cal_free:"Libre",cal_busy:"Occupé",nic_guide:"→ Lire le guide : que voir à Nicosia",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Demander des dates",gal_swipe:"← Faites défiler les photos →",cal_hint:"Touchez une date d’arrivée, puis de départ.",mini_rev:"« Maison magnifique et propre, vue sur les montagnes. Nous reviendrons. »",
+  cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",cal_free:"Libre",cal_busy:"Occupé",nic_guide:"→ Lire le guide : que voir à Nicosia",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Réserver et payer",gal_swipe:"← Faites défiler les photos →",cal_hint:"Touchez une date d’arrivée, puis de départ.",mini_rev:"« Maison magnifique et propre, vue sur les montagnes. Nous reviendrons. »",
   skip:"Aller au contenu",
   trust_reply:"Nous répondons généralement en quelques heures",trust_noprepay:"Deux façons de réserver : payez en ligne ou convenez avec l'hôte",trust_nofee:"Prix direct, sans frais",
-  pay_t:"Réserver et payer en ligne",pay_d:"Choisissez dates et voyageurs et payez la totalité du séjour en toute sécurité par carte. Nous vérifions la disponibilité et envoyons la confirmation par e-mail ; si les dates ne sont pas disponibles, remboursement intégral.",pay_secure:"Paiement sécurisé avec Stripe · carte de crédit ou de débit",
+  pay_t:"Réserver et payer en ligne",pay_d:"Choisissez dates et voyageurs et autorisez le paiement en toute sécurité par carte : le débit n'a lieu qu'après notre confirmation de disponibilité. Si les dates ne sont pas disponibles, aucun débit.",pay_secure:"Paiement sécurisé avec Stripe · carte de crédit ou de débit",
   routes_title:"Comment venir",routes_note:"Distances routières indicatives, à confirmer.",
   route_cta:"Aéroport de Catane",route_cta_km:"≈ 110 km en voiture",route_pmo:"Aéroport de Palerme",route_pmo_km:"≈ 180 km en voiture",route_enna:"Enna",route_enna_km:"≈ 45 km en voiture",route_etna:"Etna",route_etna_km:"≈ 90 km en voiture",
   host_eyebrow:"Vos hôtes",host_title:"Vos hôtes : Paolo et Stefano",
@@ -981,10 +983,10 @@ const I18N={
   foot_cin:"Código de Identificación Nacional",foot_nav:"Navegar",foot_legal:"Información legal",foot_privacy:"Política de privacidad",foot_cookie:"Política de cookies",
   foot_owner:"Titular: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Reserva directa · Sin comisiones de plataforma",foot_credit:"Sitio creado por Stefano Compagnone",
   cookie_text:"Usamos cookies técnicas necesarias y, solo con tu consentimiento, cookies estadísticas de Google Analytics 4 para mejorar el sitio. Sin consentimiento no hay seguimiento activo. Consulta la <a href='cookie.html'>Política de cookies</a>.",
-  cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",cal_free:"Libre",cal_busy:"Ocupado",nic_guide:"→ Lee la guía: qué ver en Nicosia",cta_from:"desde",cta_night:"/ noche",cta_btn:"Solicitar fechas",gal_swipe:"← Desliza para ver todas las fotos →",cal_hint:"Toca una fecha de entrada, luego una de salida.",mini_rev:"« Casa preciosa y limpia, con vistas a la montaña. Volveremos. »",
+  cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",cal_free:"Libre",cal_busy:"Ocupado",nic_guide:"→ Lee la guía: qué ver en Nicosia",cta_from:"desde",cta_night:"/ noche",cta_btn:"Reserva y paga",gal_swipe:"← Desliza para ver todas las fotos →",cal_hint:"Toca una fecha de entrada, luego una de salida.",mini_rev:"« Casa preciosa y limpia, con vistas a la montaña. Volveremos. »",
   skip:"Saltar al contenido",
   trust_reply:"Solemos responder en pocas horas",trust_noprepay:"Dos formas de reservar: paga online o acuerda con el anfitrión",trust_nofee:"Precio directo, sin comisiones",
-  pay_t:"Reserva y paga online",pay_d:"Elige fechas y huéspedes y paga la estancia completa de forma segura con tarjeta. Verificamos la disponibilidad y te enviamos la confirmación por email; si las fechas no están disponibles, reembolso total.",pay_secure:"Pago seguro con Stripe · tarjeta de crédito o débito",
+  pay_t:"Reserva y paga online",pay_d:"Elige fechas y huéspedes y autoriza el pago de forma segura con tarjeta: el cargo se realiza solo tras confirmar la disponibilidad. Si las fechas no están disponibles, no se hace ningún cargo.",pay_secure:"Pago seguro con Stripe · tarjeta de crédito o débito",
   routes_title:"Cómo llegar",routes_note:"Distancias en coche aproximadas, a confirmar.",
   route_cta:"Aeropuerto de Catania",route_cta_km:"≈ 110 km en coche",route_pmo:"Aeropuerto de Palermo",route_pmo_km:"≈ 180 km en coche",route_enna:"Enna",route_enna_km:"≈ 45 km en coche",route_etna:"Etna",route_etna_km:"≈ 90 km en coche",
   host_eyebrow:"Tus anfitriones",host_title:"Tus anfitriones: Paolo y Stefano",
@@ -1192,7 +1194,7 @@ const PAY_PAY={it:"Prenota e paga",en:"Book and pay",de:"Buchen und zahlen",fr:"
 const PAY_WAIT={it:"Attendere…",en:"Please wait…",de:"Bitte warten…",fr:"Veuillez patienter…",es:"Espera…"};
 const PAY_ERR={it:"Problema col pagamento. Riprova o scrivici su WhatsApp.",en:"Payment problem. Try again or message us on WhatsApp.",de:"Zahlungsproblem. Bitte erneut versuchen oder schreiben Sie uns auf WhatsApp.",fr:"Problème de paiement. Réessayez ou écrivez-nous sur WhatsApp.",es:"Problema con el pago. Inténtalo de nuevo o escríbenos por WhatsApp."};
 const PAY_BUSY={it:"Quelle date includono giorni occupati. Scegli un altro periodo.",en:"Those dates include booked days. Pick another period.",de:"Dieser Zeitraum enthält belegte Tage. Wählen Sie einen anderen.",fr:"Cette période inclut des jours occupés. Choisissez-en une autre.",es:"Esas fechas incluyen días ocupados. Elige otro periodo."};
-const NOTICE_PAID={it:"✓ Pagamento ricevuto! Verifichiamo la disponibilità e ti inviamo la conferma via email a breve. Se le date non fossero disponibili, rimborso totale.",en:"✓ Payment received! We'll verify availability and email your confirmation shortly. If the dates aren't available, you'll be fully refunded.",de:"✓ Zahlung erhalten! Wir prüfen die Verfügbarkeit und senden Ihnen in Kürze die Bestätigung per E-Mail. Falls die Daten nicht verfügbar sind, erhalten Sie eine volle Rückerstattung.",fr:"✓ Paiement reçu ! Nous vérifions la disponibilité et vous envoyons la confirmation par e-mail sous peu. Si les dates ne sont pas disponibles, remboursement intégral.",es:"✓ ¡Pago recibido! Verificamos la disponibilidad y te enviamos la confirmación por email en breve. Si las fechas no están disponibles, reembolso total."};
+const NOTICE_PAID={it:"✓ Pagamento autorizzato! Verifichiamo la disponibilità e ti confermiamo via email a breve. L'addebito avviene solo alla conferma; se le date non fossero disponibili, nessun addebito.",en:"✓ Payment authorized! We'll verify availability and confirm by email shortly. You're only charged on confirmation; if the dates aren't available, no charge is made.",de:"✓ Zahlung autorisiert! Wir prüfen die Verfügbarkeit und bestätigen in Kürze per E-Mail. Die Abbuchung erfolgt erst bei Bestätigung; sind die Daten nicht verfügbar, erfolgt keine Abbuchung.",fr:"✓ Paiement autorisé ! Nous vérifions la disponibilité et confirmons par e-mail sous peu. Le débit n'a lieu qu'à la confirmation ; si les dates ne sont pas disponibles, aucun débit.",es:"✓ ¡Pago autorizado! Verificamos la disponibilidad y te confirmamos por email en breve. El cargo se realiza solo al confirmar; si las fechas no están disponibles, no se hace ningún cargo."};
 const NOTICE_CANCEL={it:"Pagamento annullato. Puoi riprovare quando vuoi o scriverci su WhatsApp.",en:"Payment canceled. You can try again anytime or message us on WhatsApp.",de:"Zahlung abgebrochen. Sie können es jederzeit erneut versuchen oder uns auf WhatsApp schreiben.",fr:"Paiement annulé. Vous pouvez réessayer ou nous écrire sur WhatsApp.",es:"Pago cancelado. Puedes reintentarlo cuando quieras o escribirnos por WhatsApp."};
 function fmtDate(iso){ // YYYY-MM-DD -> DD/MM/YYYY (formato italiano/europeo)
   const p=iso.split('-');
