@@ -224,10 +224,14 @@ ul.amen{padding:0;margin:0}
 .reqform label.full{margin-bottom:12px}
 .reqform input,.reqform select,.reqform textarea{font:inherit;font-size:16px;font-weight:400;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:.6rem .7rem;background:#fff;width:100%;min-height:44px}
 .reqform input:focus,.reqform select:focus,.reqform textarea:focus{outline:none;border-color:var(--azure);box-shadow:0 0 0 3px var(--azure-light)}
+.reqform input[readonly]{background:var(--soft);color:var(--navy-deep);font-weight:600;cursor:default}
+.reqform input[readonly]:focus{box-shadow:none;border-color:var(--line)}
+.fhint{font-size:.74rem;color:var(--muted);margin:-6px 0 12px}
+.reqnote{font-size:.8rem;color:var(--muted);margin:.5rem 0 0}
 .reqform textarea{resize:vertical}
 .reqbtns{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:4px}
 .req-err{color:#c0392b;font-size:.85rem;margin:.2rem 0 .6rem}
-@media(max-width:520px){.reqform .frow{grid-template-columns:1fr}}
+@media(max-width:520px){.reqform .frow{grid-template-columns:1fr}.cal-day{aspect-ratio:auto;min-height:44px}}
 .price-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.4rem;box-shadow:var(--shadow)}
 .price-card .row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--line)}
 .price-card .row:last-child{border:none}
@@ -619,9 +623,10 @@ h1,h2,h3{text-wrap:balance}
         </div>
         <form id="reqForm" class="reqform" novalidate>
           <div class="frow">
-            <label><span data-i18n="req_in">Arrivo</span><input type="date" id="rIn" readonly></label>
-            <label><span data-i18n="req_out">Partenza</span><input type="date" id="rOut" readonly></label>
+            <label><span data-i18n="req_in">Arrivo</span><input type="date" id="rIn" readonly tabindex="-1" aria-readonly="true"></label>
+            <label><span data-i18n="req_out">Partenza</span><input type="date" id="rOut" readonly tabindex="-1" aria-readonly="true"></label>
           </div>
+          <p class="fhint" data-i18n="req_datehint">Le date si impostano dal calendario qui sopra.</p>
           <div class="frow">
             <label><span data-i18n="req_guests">Ospiti</span><select id="rGuests"><option value="1">1</option><option value="2" selected>2</option></select></label>
             <label><span data-i18n="req_name">Nome</span><input type="text" id="rName" autocomplete="name"></label>
@@ -637,9 +642,10 @@ h1,h2,h3{text-wrap:balance}
             <button type="button" id="reqWa" class="btn wa" data-i18n="req_wa">Invia su WhatsApp</button>
             <button type="button" id="reqMail" class="btn ghost" data-i18n="req_mail">Invia per email</button>
           </div>
+          <p class="reqnote" data-i18n="req_noobl">Richiedere le date non ti impegna a nulla — su WhatsApp rispondiamo in poche ore.</p>
           <div class="trust">
             <span><span class="ico">✓</span> <span data-i18n="trust_reply">Rispondiamo in genere in poche ore</span></span>
-            <span><span class="ico">✓</span> <span data-i18n="trust_noprepay">Due modi per prenotare: paga online o concorda con l'host</span></span>
+            <span><span class="ico">✓</span> <span data-i18n="trust_noprepay">Due modi, stessa prenotazione: invia una richiesta o paga con carta (addebito solo a conferma)</span></span>
             <span><span class="ico">✓</span> <span data-i18n="trust_nofee">Prezzo diretto, senza commissioni</span></span>
           </div>
         </form>
@@ -732,7 +738,7 @@ h1,h2,h3{text-wrap:balance}
 <!-- STICKY CTA (mobile) -->
 <div class="sticky-cta" id="stickyCta">
   <div class="p"><span data-i18n="cta_from">da</span> <b>49 € <span style="font-size:.75rem;font-family:Inter,sans-serif;color:var(--muted);font-weight:400" data-i18n="cta_night">/ notte</span></b></div>
-  <a href="#prenota" class="btn cta-pay" data-i18n="cta_btn">Prenota e paga</a>
+  <a href="#prenota" class="btn cta-pay" data-i18n="cta_btn">Prenota</a>
 </div>
 
 <a href="https://wa.me/393477054576?text=Ciao%2C%20vorrei%20informazioni%20su%20La%20Mansarda%20a%20Nicosia" class="wa-float" id="waFloat" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
@@ -829,9 +835,9 @@ const I18N={
   foot_cin:"National Identification Code",foot_nav:"Navigate",foot_legal:"Legal",foot_privacy:"Privacy Policy",foot_cookie:"Cookie Policy",
   foot_owner:"Owner: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Direct booking · No platform fees",foot_credit:"Website by Stefano Compagnone",
   cookie_text:"We use necessary technical cookies and, only with your consent, Google Analytics 4 statistics cookies to improve the site. No tracking is active without consent. See the <a href='cookie.html'>Cookie Policy</a>.",
-  cookie_accept:"Accept all",cookie_decline:"Necessary only",cal_free:"Available",cal_busy:"Booked",nic_guide:"→ Read the guide: what to see in Nicosia",cta_from:"from",cta_night:"/ night",cta_btn:"Book and pay",gal_swipe:"← Swipe to see all photos →",cal_hint:"Tap a check-in date, then a check-out date.",mini_rev:"« Beautiful, clean home with mountain views. We will be back. »",
+  cookie_accept:"Accept all",cookie_decline:"Necessary only",cal_free:"Available",cal_busy:"Booked",nic_guide:"→ Read the guide: what to see in Nicosia",cta_from:"from",cta_night:"/ night",cta_btn:"Book",gal_swipe:"← Swipe to see all photos →",cal_hint:"Tap a check-in date, then a check-out date.",mini_rev:"« Beautiful, clean home with mountain views. We will be back. »",
   skip:"Skip to content",
-  trust_reply:"We usually reply within a few hours",trust_noprepay:"Two ways to book: pay online or arrange with the host",trust_nofee:"Direct price, no fees",
+  trust_reply:"We usually reply within a few hours",trust_noprepay:"Two ways, same booking: send a request or pay by card (charged only on confirmation)",req_datehint:"Set the dates from the calendar above.",req_noobl:"Sending a request commits you to nothing — on WhatsApp we reply within hours.",trust_nofee:"Direct price, no fees",
   pay_t:"Book and pay online",pay_d:"Choose dates and guests and authorize payment securely by card: you're only charged after we confirm availability. If the dates aren't available, no charge is made.",pay_secure:"No charge until we confirm your dates · secure payment with Stripe",
   routes_title:"How to get here",routes_note:"Approximate driving distances, to be confirmed.",
   route_cta:"Catania Airport",route_cta_km:"≈ 110 km by car",route_pmo:"Palermo Airport",route_pmo_km:"≈ 180 km by car",route_enna:"Enna",route_enna_km:"≈ 45 km by car",route_etna:"Etna",route_etna_km:"≈ 90 km by car",
@@ -888,9 +894,9 @@ const I18N={
   foot_cin:"Nationaler Identifikationscode",foot_nav:"Navigation",foot_legal:"Rechtliches",foot_privacy:"Datenschutz",foot_cookie:"Cookie-Richtlinie",
   foot_owner:"Inhaber: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Direktbuchung · Keine Plattformgebühren",foot_credit:"Website von Stefano Compagnone",
   cookie_text:"Wir verwenden technisch notwendige Cookies und, nur mit Ihrer Zustimmung, Statistik-Cookies von Google Analytics 4 zur Verbesserung der Website. Ohne Zustimmung ist kein Tracking aktiv. Siehe die <a href='cookie.html'>Cookie-Richtlinie</a>.",
-  cookie_accept:"Alle akzeptieren",cookie_decline:"Nur notwendige",cal_free:"Frei",cal_busy:"Belegt",mini_rev:"« Wunderschönes, sauberes Zuhause mit Bergblick. Wir kommen wieder. »",nic_guide:"→ Reiseführer: Was man in Nicosia sehen kann",cta_from:"ab",cta_night:"/ Nacht",cta_btn:"Buchen und zahlen",gal_swipe:"← Wischen für alle Fotos →",
+  cookie_accept:"Alle akzeptieren",cookie_decline:"Nur notwendige",cal_free:"Frei",cal_busy:"Belegt",mini_rev:"« Wunderschönes, sauberes Zuhause mit Bergblick. Wir kommen wieder. »",nic_guide:"→ Reiseführer: Was man in Nicosia sehen kann",cta_from:"ab",cta_night:"/ Nacht",cta_btn:"Buchen",gal_swipe:"← Wischen für alle Fotos →",
   skip:"Zum Inhalt springen",
-  trust_reply:"Wir antworten meist innerhalb weniger Stunden",trust_noprepay:"Zwei Wege zur Buchung: online zahlen oder mit dem Gastgeber abstimmen",trust_nofee:"Direktpreis, keine Gebühren",
+  trust_reply:"Wir antworten meist innerhalb weniger Stunden",trust_noprepay:"Zwei Wege, dieselbe Buchung: Anfrage senden oder mit Karte zahlen (Abbuchung erst bei Bestätigung)",req_datehint:"Wählen Sie die Daten im Kalender oben.",req_noobl:"Eine Anfrage verpflichtet zu nichts — auf WhatsApp antworten wir innerhalb von Stunden.",trust_nofee:"Direktpreis, keine Gebühren",
   pay_t:"Online buchen und zahlen",pay_d:"Wählen Sie Daten und Gäste und autorisieren Sie die Zahlung sicher per Karte: Die Abbuchung erfolgt erst nach unserer Verfügbarkeitsbestätigung. Sind die Daten nicht verfügbar, erfolgt keine Abbuchung.",pay_secure:"Keine Abbuchung, bis wir die Daten bestätigen · sichere Zahlung mit Stripe",
   routes_title:"Anreise",routes_note:"Ungefähre Fahrstrecken, ohne Gewähr.",
   route_cta:"Flughafen Catania",route_cta_km:"≈ 110 km mit dem Auto",route_pmo:"Flughafen Palermo",route_pmo_km:"≈ 180 km mit dem Auto",route_enna:"Enna",route_enna_km:"≈ 45 km mit dem Auto",route_etna:"Ätna",route_etna_km:"≈ 90 km mit dem Auto",
@@ -947,9 +953,9 @@ const I18N={
   foot_cin:"Code d'identification national",foot_nav:"Navigation",foot_legal:"Mentions légales",foot_privacy:"Politique de confidentialité",foot_cookie:"Politique de cookies",
   foot_owner:"Titulaire : Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Réservation directe · Sans frais de plateforme",foot_credit:"Site créé par Stefano Compagnone",
   cookie_text:"Nous utilisons des cookies techniques nécessaires et, uniquement avec votre consentement, des cookies statistiques Google Analytics 4 pour améliorer le site. Aucun suivi n'est actif sans consentement. Voir la <a href='cookie.html'>Politique de cookies</a>.",
-  cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",cal_free:"Libre",cal_busy:"Occupé",nic_guide:"→ Lire le guide : que voir à Nicosia",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Réserver et payer",gal_swipe:"← Faites défiler les photos →",cal_hint:"Touchez une date d’arrivée, puis de départ.",mini_rev:"« Maison magnifique et propre, vue sur les montagnes. Nous reviendrons. »",
+  cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",cal_free:"Libre",cal_busy:"Occupé",nic_guide:"→ Lire le guide : que voir à Nicosia",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Réserver",gal_swipe:"← Faites défiler les photos →",cal_hint:"Touchez une date d’arrivée, puis de départ.",mini_rev:"« Maison magnifique et propre, vue sur les montagnes. Nous reviendrons. »",
   skip:"Aller au contenu",
-  trust_reply:"Nous répondons généralement en quelques heures",trust_noprepay:"Deux façons de réserver : payez en ligne ou convenez avec l'hôte",trust_nofee:"Prix direct, sans frais",
+  trust_reply:"Nous répondons généralement en quelques heures",trust_noprepay:"Deux façons, une seule réservation : envoyez une demande ou payez par carte (débit seulement à la confirmation)",req_datehint:"Choisissez les dates dans le calendrier ci-dessus.",req_noobl:"Envoyer une demande n'engage à rien — sur WhatsApp nous répondons en quelques heures.",trust_nofee:"Prix direct, sans frais",
   pay_t:"Réserver et payer en ligne",pay_d:"Choisissez dates et voyageurs et autorisez le paiement en toute sécurité par carte : le débit n'a lieu qu'après notre confirmation de disponibilité. Si les dates ne sont pas disponibles, aucun débit.",pay_secure:"Aucun débit avant notre confirmation des dates · paiement sécurisé avec Stripe",
   routes_title:"Comment venir",routes_note:"Distances routières indicatives, à confirmer.",
   route_cta:"Aéroport de Catane",route_cta_km:"≈ 110 km en voiture",route_pmo:"Aéroport de Palerme",route_pmo_km:"≈ 180 km en voiture",route_enna:"Enna",route_enna_km:"≈ 45 km en voiture",route_etna:"Etna",route_etna_km:"≈ 90 km en voiture",
@@ -1006,9 +1012,9 @@ const I18N={
   foot_cin:"Código de Identificación Nacional",foot_nav:"Navegar",foot_legal:"Información legal",foot_privacy:"Política de privacidad",foot_cookie:"Política de cookies",
   foot_owner:"Titular: Paolo Compagnone — Via Costanza Bruno 1, Nicosia (EN)",foot_made:"Reserva directa · Sin comisiones de plataforma",foot_credit:"Sitio creado por Stefano Compagnone",
   cookie_text:"Usamos cookies técnicas necesarias y, solo con tu consentimiento, cookies estadísticas de Google Analytics 4 para mejorar el sitio. Sin consentimiento no hay seguimiento activo. Consulta la <a href='cookie.html'>Política de cookies</a>.",
-  cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",cal_free:"Libre",cal_busy:"Ocupado",nic_guide:"→ Lee la guía: qué ver en Nicosia",cta_from:"desde",cta_night:"/ noche",cta_btn:"Reserva y paga",gal_swipe:"← Desliza para ver todas las fotos →",cal_hint:"Toca una fecha de entrada, luego una de salida.",mini_rev:"« Casa preciosa y limpia, con vistas a la montaña. Volveremos. »",
+  cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",cal_free:"Libre",cal_busy:"Ocupado",nic_guide:"→ Lee la guía: qué ver en Nicosia",cta_from:"desde",cta_night:"/ noche",cta_btn:"Reserva",gal_swipe:"← Desliza para ver todas las fotos →",cal_hint:"Toca una fecha de entrada, luego una de salida.",mini_rev:"« Casa preciosa y limpia, con vistas a la montaña. Volveremos. »",
   skip:"Saltar al contenido",
-  trust_reply:"Solemos responder en pocas horas",trust_noprepay:"Dos formas de reservar: paga online o acuerda con el anfitrión",trust_nofee:"Precio directo, sin comisiones",
+  trust_reply:"Solemos responder en pocas horas",trust_noprepay:"Dos formas, una sola reserva: envía una solicitud o paga con tarjeta (cargo solo al confirmar)",req_datehint:"Elige las fechas en el calendario de arriba.",req_noobl:"Enviar una solicitud no te compromete a nada — en WhatsApp respondemos en pocas horas.",trust_nofee:"Precio directo, sin comisiones",
   pay_t:"Reserva y paga online",pay_d:"Elige fechas y huéspedes y autoriza el pago de forma segura con tarjeta: el cargo se realiza solo tras confirmar la disponibilidad. Si las fechas no están disponibles, no se hace ningún cargo.",pay_secure:"Sin cargo hasta que confirmemos las fechas · pago seguro con Stripe",
   routes_title:"Cómo llegar",routes_note:"Distancias en coche aproximadas, a confirmar.",
   route_cta:"Aeropuerto de Catania",route_cta_km:"≈ 110 km en coche",route_pmo:"Aeropuerto de Palermo",route_pmo_km:"≈ 180 km en coche",route_enna:"Enna",route_enna_km:"≈ 45 km en coche",route_etna:"Etna",route_etna_km:"≈ 90 km en coche",
@@ -1223,6 +1229,7 @@ const NIGHTS_LBL={it:"notti",en:"nights",de:"Nächte",fr:"nuits",es:"noches"};
 const NIGHT_ONE={it:"notte",en:"night",de:"Nacht",fr:"nuit",es:"noche"};
 const EST_EMPTY={it:"Scegli le date per vedere il totale.",en:"Pick your dates to see the total.",de:"Wählen Sie die Daten, um den Gesamtpreis zu sehen.",fr:"Choisissez vos dates pour voir le total.",es:"Elige las fechas para ver el total."};
 const ALLIN={it:"Tutto incluso · nessuna commissione, nessun costo aggiuntivo",en:"All inclusive · no fees, no extra costs",de:"Alles inklusive · keine Gebühren, keine Zusatzkosten",fr:"Tout compris · aucune commission, aucun coût supplémentaire",es:"Todo incluido · sin comisiones ni costes adicionales"};
+const TUTTOINCL={it:"tutto incluso",en:"all inclusive",de:"alles inklusive",fr:"tout compris",es:"todo incluido"};
 const RANGE_ERR={it:"La data di partenza deve essere successiva all'arrivo.",en:"Check-out must be after check-in.",de:"Das Abreisedatum muss nach der Anreise liegen.",fr:"La date de départ doit suivre l'arrivée.",es:"La salida debe ser posterior a la entrada."};
 const RATES={'1':49,'2':59};
 const PAY_PICK={it:"Seleziona le date per pagare",en:"Select dates to pay",de:"Daten wählen, um zu zahlen",fr:"Sélectionnez les dates pour payer",es:"Selecciona las fechas para pagar"};
@@ -1265,6 +1272,9 @@ function updateEstimate(){
     est.className='estimate';
     est.innerHTML=`<div class="erow"><span>${s.nights} ${nlbl} × ${s.rate} €</span><span>${s.total} €</span></div><div class="erow"><span>${totLbl}</span><span class="etot">${s.total} €</span></div><div class="eallin">${ALLIN[lang]||ALLIN.it}</div>`;
   }
+  // su mobile la price-card è sotto la piega: rispecchia il totale accanto al calendario
+  const ch=document.getElementById('calHint');
+  if(ch&&s){const nl2=s.nights===1?(NIGHT_ONE[lang]||'notte'):(NIGHTS_LBL[lang]||'notti');ch.textContent=`${s.nights} ${nl2} · ${s.total} € · ${TUTTOINCL[lang]||TUTTOINCL.it}`;}
   updatePayBtn(s,lang);
 }
 function tr(key,fallback){const lang=document.documentElement.lang;if(lang==='it')return (IT_ORIG[key]!=null?IT_ORIG[key]:fallback);const d=I18N[lang]||{};return d[key]!=null?d[key]:(IT_ORIG[key]!=null?IT_ORIG[key]:fallback);}
