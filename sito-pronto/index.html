@@ -233,6 +233,8 @@ ul.amen{padding:0;margin:0}
 .price-card .row:last-child{border:none}
 .price-card .big{font-size:1.5rem;color:var(--navy-deep);font-weight:700;font-family:'Playfair Display',serif}
 .policy{font-size:.85rem;color:var(--muted);margin-top:.8rem}
+.incl{font-size:.85rem;color:var(--muted);margin:.7rem 0 0;line-height:1.55}
+.incl b{color:var(--navy-deep)}
 .pay-box{margin-top:1rem;padding-top:1.1rem;border-top:1px solid var(--line)}
 .pay-box h3{margin:0 0 .25rem;font-size:1.05rem}
 .pay-box .pay-sub{font-size:.85rem;color:var(--muted);margin:0 0 .8rem;line-height:1.5}
@@ -393,6 +395,7 @@ h1,h2,h3{text-wrap:balance}
 .estimate .erow{display:flex;justify-content:space-between;align-items:baseline;font-size:.9rem;color:var(--ink);margin-bottom:.3rem}
 .estimate .erow:last-child{margin-bottom:0}
 .estimate .etot{font-size:1.5rem;font-weight:700;color:var(--navy-deep);font-family:'Playfair Display',serif}
+.estimate .eallin{font-size:.78rem;color:var(--muted);margin-top:.5rem;padding-top:.5rem;border-top:1px solid #d4e8f7;text-align:center}
 /* Host section */
 .host{display:grid;grid-template-columns:.8fr 1.2fr;gap:42px;align-items:center}
 .host-emblem{aspect-ratio:4/5;border-radius:var(--radius);background:linear-gradient(160deg,var(--azure-light),#fff);border:1px solid var(--line);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:2rem}
@@ -647,14 +650,15 @@ h1,h2,h3{text-wrap:balance}
         <div class="row"><span data-i18n="price_dep">Deposito cauzionale</span><b data-i18n="price_dep_v">Nessuno</b></div>
         <div class="row"><span data-i18n="price_checkin">Check-in</span><b>14:00 – 00:00</b></div>
         <div class="row"><span data-i18n="price_checkout">Check-out</span><b>10:00 – 10:30</b></div>
-        <div class="estimate empty" id="estimate" aria-live="polite" aria-atomic="true">Scegli le date per vedere il totale stimato.</div>
-        <p class="policy" data-i18n="price_policy"><b>Cancellazione rigida:</b> rimborso del 50% fino a 30 giorni prima dell'arrivo. Pagamento concordato direttamente con l'host. Colazione inclusa.</p>
+        <p class="incl" data-i18n="price_incl"><b>Incluso nel prezzo:</b> colazione · parcheggio privato gratuito · WiFi · vista monti · kit di benvenuto</p>
+        <div class="estimate empty" id="estimate" aria-live="polite" aria-atomic="true">Scegli le date per vedere il totale.</div>
+        <p class="policy" data-i18n="price_policy"><b>Cancellazione:</b> rimborso del 50% se annulli almeno 30 giorni prima dell'arrivo; entro i 30 giorni, nessun rimborso. Colazione inclusa.</p>
         <div class="pay-box">
           <h3 data-i18n="pay_t">Prenota e paga online</h3>
           <p class="pay-sub" data-i18n="pay_d">Scegli date e ospiti e autorizza il pagamento in modo sicuro con carta: l'addebito avviene solo dopo la nostra conferma di disponibilità. Se le date non fossero disponibili, nessun addebito.</p>
           <button type="button" id="payBtn" class="btn pay-btn" disabled>Seleziona le date per pagare</button>
           <p class="pay-err hidden" id="payErr" role="alert"></p>
-          <span class="pay-secure"><span aria-hidden="true">🔒</span> <span data-i18n="pay_secure">Pagamento protetto con Stripe · carta di credito o debito</span></span>
+          <span class="pay-secure"><span aria-hidden="true">🔒</span> <span data-i18n="pay_secure">Nessun addebito finché non confermiamo le date · pagamento protetto con Stripe</span></span>
         </div>
       </div>
     </div>
@@ -810,7 +814,8 @@ const I18N={
   req_t:"Request your booking",req_d:"Pick your dates and send the request: we check availability and reply right away. Payment is arranged directly, no fees.",
   req_in:"Check-in",req_out:"Check-out",req_guests:"Guests",req_name:"Name",req_msg:"Message (optional)",req_err:"Please enter check-in and check-out dates.",req_wa:"Send on WhatsApp",req_mail:"Send by email",
   price_1:"1 guest / night",price_2:"2 guests / night",price_dep:"Security deposit",price_dep_v:"None",price_checkin:"Check-in",price_checkout:"Check-out",
-  price_policy:"<b>Strict cancellation:</b> 50% refund up to 30 days before arrival. Payment arranged directly with the host. Breakfast included.",
+  price_policy:"<b>Cancellation:</b> 50% refund if you cancel at least 30 days before arrival; within 30 days, no refund. Breakfast included.",
+  price_incl:"<b>Included in the price:</b> breakfast · free private parking · WiFi · mountain view · welcome kit",
   faq_eyebrow:"FAQ",faq_title:"Frequently asked questions",
   faq_q1:"What are the check-in and check-out times?",faq_a1:"Check-in from 2:00 PM to 12:00 AM (let us know your arrival time); check-out between 10:00 and 10:30 AM.",
   faq_q2:"Is there parking?",faq_a2:"Yes, free private on-site parking, accessible for motorbikes too.",
@@ -827,7 +832,7 @@ const I18N={
   cookie_accept:"Accept all",cookie_decline:"Necessary only",cal_free:"Available",cal_busy:"Booked",nic_guide:"→ Read the guide: what to see in Nicosia",cta_from:"from",cta_night:"/ night",cta_btn:"Book and pay",gal_swipe:"← Swipe to see all photos →",cal_hint:"Tap a check-in date, then a check-out date.",mini_rev:"« Beautiful, clean home with mountain views. We will be back. »",
   skip:"Skip to content",
   trust_reply:"We usually reply within a few hours",trust_noprepay:"Two ways to book: pay online or arrange with the host",trust_nofee:"Direct price, no fees",
-  pay_t:"Book and pay online",pay_d:"Choose dates and guests and authorize payment securely by card: you're only charged after we confirm availability. If the dates aren't available, no charge is made.",pay_secure:"Secure payment with Stripe · credit or debit card",
+  pay_t:"Book and pay online",pay_d:"Choose dates and guests and authorize payment securely by card: you're only charged after we confirm availability. If the dates aren't available, no charge is made.",pay_secure:"No charge until we confirm your dates · secure payment with Stripe",
   routes_title:"How to get here",routes_note:"Approximate driving distances, to be confirmed.",
   route_cta:"Catania Airport",route_cta_km:"≈ 110 km by car",route_pmo:"Palermo Airport",route_pmo_km:"≈ 180 km by car",route_enna:"Enna",route_enna_km:"≈ 45 km by car",route_etna:"Etna",route_etna_km:"≈ 90 km by car",
   host_eyebrow:"Your hosts",host_title:"Your hosts: Paolo and Stefano",
@@ -868,7 +873,8 @@ const I18N={
   req_t:"Buchung anfragen",req_d:"Wählen Sie Ihre Termine und senden Sie die Anfrage: Wir prüfen die Verfügbarkeit und antworten sofort. Die Zahlung wird direkt vereinbart, ohne Gebühren.",
   req_in:"Anreise",req_out:"Abreise",req_guests:"Gäste",req_name:"Name",req_msg:"Nachricht (optional)",req_err:"Bitte An- und Abreisedatum eingeben.",req_wa:"Per WhatsApp senden",req_mail:"Per E-Mail senden",
   price_1:"1 Gast / Nacht",price_2:"2 Gäste / Nacht",price_dep:"Kaution",price_dep_v:"Keine",price_checkin:"Check-in",price_checkout:"Check-out",
-  price_policy:"<b>Strenge Stornierung:</b> 50% Rückerstattung bis 30 Tage vor Anreise. Zahlung direkt mit dem Gastgeber vereinbart. Frühstück inklusive.",
+  price_policy:"<b>Stornierung:</b> 50% Rückerstattung bei Stornierung mindestens 30 Tage vor Anreise; innerhalb von 30 Tagen keine Rückerstattung. Frühstück inklusive.",
+  price_incl:"<b>Im Preis enthalten:</b> Frühstück · kostenloser Privatparkplatz · WLAN · Bergblick · Willkommenspaket",
   faq_eyebrow:"FAQ",faq_title:"Häufige Fragen",
   faq_q1:"Wann sind Check-in und Check-out?",faq_a1:"Check-in von 14:00 bis 00:00 Uhr (bitte Ankunftszeit mitteilen); Check-out zwischen 10:00 und 10:30 Uhr.",
   faq_q2:"Gibt es Parkplätze?",faq_a2:"Ja, kostenloser privater Parkplatz vor Ort, auch für Motorräder zugänglich.",
@@ -885,7 +891,7 @@ const I18N={
   cookie_accept:"Alle akzeptieren",cookie_decline:"Nur notwendige",cal_free:"Frei",cal_busy:"Belegt",mini_rev:"« Wunderschönes, sauberes Zuhause mit Bergblick. Wir kommen wieder. »",nic_guide:"→ Reiseführer: Was man in Nicosia sehen kann",cta_from:"ab",cta_night:"/ Nacht",cta_btn:"Buchen und zahlen",gal_swipe:"← Wischen für alle Fotos →",
   skip:"Zum Inhalt springen",
   trust_reply:"Wir antworten meist innerhalb weniger Stunden",trust_noprepay:"Zwei Wege zur Buchung: online zahlen oder mit dem Gastgeber abstimmen",trust_nofee:"Direktpreis, keine Gebühren",
-  pay_t:"Online buchen und zahlen",pay_d:"Wählen Sie Daten und Gäste und autorisieren Sie die Zahlung sicher per Karte: Die Abbuchung erfolgt erst nach unserer Verfügbarkeitsbestätigung. Sind die Daten nicht verfügbar, erfolgt keine Abbuchung.",pay_secure:"Sichere Zahlung mit Stripe · Kredit- oder Debitkarte",
+  pay_t:"Online buchen und zahlen",pay_d:"Wählen Sie Daten und Gäste und autorisieren Sie die Zahlung sicher per Karte: Die Abbuchung erfolgt erst nach unserer Verfügbarkeitsbestätigung. Sind die Daten nicht verfügbar, erfolgt keine Abbuchung.",pay_secure:"Keine Abbuchung, bis wir die Daten bestätigen · sichere Zahlung mit Stripe",
   routes_title:"Anreise",routes_note:"Ungefähre Fahrstrecken, ohne Gewähr.",
   route_cta:"Flughafen Catania",route_cta_km:"≈ 110 km mit dem Auto",route_pmo:"Flughafen Palermo",route_pmo_km:"≈ 180 km mit dem Auto",route_enna:"Enna",route_enna_km:"≈ 45 km mit dem Auto",route_etna:"Ätna",route_etna_km:"≈ 90 km mit dem Auto",
   host_eyebrow:"Ihre Gastgeber",host_title:"Ihre Gastgeber: Paolo und Stefano",
@@ -926,7 +932,8 @@ const I18N={
   req_t:"Demandez votre réservation",req_d:"Choisissez vos dates et envoyez la demande : nous vérifions la disponibilité et répondons aussitôt. Le paiement se convient directement, sans frais.",
   req_in:"Arrivée",req_out:"Départ",req_guests:"Voyageurs",req_name:"Nom",req_msg:"Message (facultatif)",req_err:"Veuillez indiquer les dates d'arrivée et de départ.",req_wa:"Envoyer sur WhatsApp",req_mail:"Envoyer par e-mail",
   price_1:"1 voyageur / nuit",price_2:"2 voyageurs / nuit",price_dep:"Caution",price_dep_v:"Aucune",price_checkin:"Arrivée",price_checkout:"Départ",
-  price_policy:"<b>Annulation stricte :</b> remboursement de 50% jusqu'à 30 jours avant l'arrivée. Paiement convenu directement avec l'hôte. Petit-déjeuner inclus.",
+  price_policy:"<b>Annulation :</b> remboursement de 50% si vous annulez au moins 30 jours avant l'arrivée ; dans les 30 jours, aucun remboursement. Petit-déjeuner inclus.",
+  price_incl:"<b>Inclus dans le prix :</b> petit-déjeuner · parking privé gratuit · WiFi · vue sur les montagnes · kit de bienvenue",
   faq_eyebrow:"FAQ",faq_title:"Questions fréquentes",
   faq_q1:"Quels sont les horaires d'arrivée et de départ ?",faq_a1:"Arrivée de 14h00 à 00h00 (indiquez-nous votre heure d'arrivée) ; départ entre 10h00 et 10h30.",
   faq_q2:"Y a-t-il un parking ?",faq_a2:"Oui, parking privé gratuit sur place, accessible aussi aux motos.",
@@ -943,7 +950,7 @@ const I18N={
   cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",cal_free:"Libre",cal_busy:"Occupé",nic_guide:"→ Lire le guide : que voir à Nicosia",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Réserver et payer",gal_swipe:"← Faites défiler les photos →",cal_hint:"Touchez une date d’arrivée, puis de départ.",mini_rev:"« Maison magnifique et propre, vue sur les montagnes. Nous reviendrons. »",
   skip:"Aller au contenu",
   trust_reply:"Nous répondons généralement en quelques heures",trust_noprepay:"Deux façons de réserver : payez en ligne ou convenez avec l'hôte",trust_nofee:"Prix direct, sans frais",
-  pay_t:"Réserver et payer en ligne",pay_d:"Choisissez dates et voyageurs et autorisez le paiement en toute sécurité par carte : le débit n'a lieu qu'après notre confirmation de disponibilité. Si les dates ne sont pas disponibles, aucun débit.",pay_secure:"Paiement sécurisé avec Stripe · carte de crédit ou de débit",
+  pay_t:"Réserver et payer en ligne",pay_d:"Choisissez dates et voyageurs et autorisez le paiement en toute sécurité par carte : le débit n'a lieu qu'après notre confirmation de disponibilité. Si les dates ne sont pas disponibles, aucun débit.",pay_secure:"Aucun débit avant notre confirmation des dates · paiement sécurisé avec Stripe",
   routes_title:"Comment venir",routes_note:"Distances routières indicatives, à confirmer.",
   route_cta:"Aéroport de Catane",route_cta_km:"≈ 110 km en voiture",route_pmo:"Aéroport de Palerme",route_pmo_km:"≈ 180 km en voiture",route_enna:"Enna",route_enna_km:"≈ 45 km en voiture",route_etna:"Etna",route_etna_km:"≈ 90 km en voiture",
   host_eyebrow:"Vos hôtes",host_title:"Vos hôtes : Paolo et Stefano",
@@ -984,7 +991,8 @@ const I18N={
   req_t:"Solicita tu reserva",req_d:"Elige tus fechas y envía la solicitud: comprobamos la disponibilidad y respondemos al momento. El pago se acuerda directamente, sin comisiones.",
   req_in:"Entrada",req_out:"Salida",req_guests:"Huéspedes",req_name:"Nombre",req_msg:"Mensaje (opcional)",req_err:"Indica las fechas de entrada y salida.",req_wa:"Enviar por WhatsApp",req_mail:"Enviar por email",
   price_1:"1 huésped / noche",price_2:"2 huéspedes / noche",price_dep:"Fianza",price_dep_v:"Ninguna",price_checkin:"Entrada",price_checkout:"Salida",
-  price_policy:"<b>Cancelación estricta:</b> reembolso del 50% hasta 30 días antes de la llegada. Pago acordado directamente con el anfitrión. Desayuno incluido.",
+  price_policy:"<b>Cancelación:</b> reembolso del 50% si cancelas al menos 30 días antes de la llegada; dentro de los 30 días, sin reembolso. Desayuno incluido.",
+  price_incl:"<b>Incluido en el precio:</b> desayuno · parking privado gratuito · WiFi · vistas a las montañas · kit de bienvenida",
   faq_eyebrow:"FAQ",faq_title:"Preguntas frecuentes",
   faq_q1:"¿Cuáles son los horarios de entrada y salida?",faq_a1:"Entrada de 14:00 a 00:00 (indícanos tu hora de llegada); salida entre las 10:00 y las 10:30.",
   faq_q2:"¿Hay parking?",faq_a2:"Sí, parking privado gratuito en el lugar, accesible también para motos.",
@@ -1001,7 +1009,7 @@ const I18N={
   cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",cal_free:"Libre",cal_busy:"Ocupado",nic_guide:"→ Lee la guía: qué ver en Nicosia",cta_from:"desde",cta_night:"/ noche",cta_btn:"Reserva y paga",gal_swipe:"← Desliza para ver todas las fotos →",cal_hint:"Toca una fecha de entrada, luego una de salida.",mini_rev:"« Casa preciosa y limpia, con vistas a la montaña. Volveremos. »",
   skip:"Saltar al contenido",
   trust_reply:"Solemos responder en pocas horas",trust_noprepay:"Dos formas de reservar: paga online o acuerda con el anfitrión",trust_nofee:"Precio directo, sin comisiones",
-  pay_t:"Reserva y paga online",pay_d:"Elige fechas y huéspedes y autoriza el pago de forma segura con tarjeta: el cargo se realiza solo tras confirmar la disponibilidad. Si las fechas no están disponibles, no se hace ningún cargo.",pay_secure:"Pago seguro con Stripe · tarjeta de crédito o débito",
+  pay_t:"Reserva y paga online",pay_d:"Elige fechas y huéspedes y autoriza el pago de forma segura con tarjeta: el cargo se realiza solo tras confirmar la disponibilidad. Si las fechas no están disponibles, no se hace ningún cargo.",pay_secure:"Sin cargo hasta que confirmemos las fechas · pago seguro con Stripe",
   routes_title:"Cómo llegar",routes_note:"Distancias en coche aproximadas, a confirmar.",
   route_cta:"Aeropuerto de Catania",route_cta_km:"≈ 110 km en coche",route_pmo:"Aeropuerto de Palermo",route_pmo_km:"≈ 180 km en coche",route_enna:"Enna",route_enna_km:"≈ 45 km en coche",route_etna:"Etna",route_etna_km:"≈ 90 km en coche",
   host_eyebrow:"Tus anfitriones",host_title:"Tus anfitriones: Paolo y Stefano",
@@ -1205,19 +1213,20 @@ const CAL={busy:new Set(), inDate:null, outDate:null};
 /* ---------- Booking request (WhatsApp / email, no backend) ---------- */
 const WA_NUMBER='393477054576', REQ_EMAIL='paolocompagnone63@gmail.com';
 const REQL={
- it:{t:"Richiesta prenotazione – La Mansarda",name:"Nome",cin:"Arrivo",cout:"Partenza",g:"Ospiti",m:"Messaggio",nights:"Notti",total:"Totale stimato"},
- en:{t:"Booking request – La Mansarda",name:"Name",cin:"Check-in",cout:"Check-out",g:"Guests",m:"Message",nights:"Nights",total:"Estimated total"},
- de:{t:"Buchungsanfrage – La Mansarda",name:"Name",cin:"Anreise",cout:"Abreise",g:"Gäste",m:"Nachricht",nights:"Nächte",total:"Geschätzte Summe"},
- fr:{t:"Demande de réservation – La Mansarda",name:"Nom",cin:"Arrivée",cout:"Départ",g:"Voyageurs",m:"Message",nights:"Nuits",total:"Total estimé"},
- es:{t:"Solicitud de reserva – La Mansarda",name:"Nombre",cin:"Entrada",cout:"Salida",g:"Huéspedes",m:"Mensaje",nights:"Noches",total:"Total estimado"}
+ it:{t:"Richiesta prenotazione – La Mansarda",name:"Nome",cin:"Arrivo",cout:"Partenza",g:"Ospiti",m:"Messaggio",nights:"Notti",total:"Totale"},
+ en:{t:"Booking request – La Mansarda",name:"Name",cin:"Check-in",cout:"Check-out",g:"Guests",m:"Message",nights:"Nights",total:"Total"},
+ de:{t:"Buchungsanfrage – La Mansarda",name:"Name",cin:"Anreise",cout:"Abreise",g:"Gäste",m:"Nachricht",nights:"Nächte",total:"Gesamtpreis"},
+ fr:{t:"Demande de réservation – La Mansarda",name:"Nom",cin:"Arrivée",cout:"Départ",g:"Voyageurs",m:"Message",nights:"Nuits",total:"Total"},
+ es:{t:"Solicitud de reserva – La Mansarda",name:"Nombre",cin:"Entrada",cout:"Salida",g:"Huéspedes",m:"Mensaje",nights:"Noches",total:"Total"}
 };
 const NIGHTS_LBL={it:"notti",en:"nights",de:"Nächte",fr:"nuits",es:"noches"};
 const NIGHT_ONE={it:"notte",en:"night",de:"Nacht",fr:"nuit",es:"noche"};
-const EST_EMPTY={it:"Scegli le date per vedere il totale stimato.",en:"Pick your dates to see the estimated total.",de:"Wählen Sie die Daten für die geschätzte Summe.",fr:"Choisissez vos dates pour voir le total estimé.",es:"Elige las fechas para ver el total estimado."};
+const EST_EMPTY={it:"Scegli le date per vedere il totale.",en:"Pick your dates to see the total.",de:"Wählen Sie die Daten, um den Gesamtpreis zu sehen.",fr:"Choisissez vos dates pour voir le total.",es:"Elige las fechas para ver el total."};
+const ALLIN={it:"Tutto incluso · nessuna commissione, nessun costo aggiuntivo",en:"All inclusive · no fees, no extra costs",de:"Alles inklusive · keine Gebühren, keine Zusatzkosten",fr:"Tout compris · aucune commission, aucun coût supplémentaire",es:"Todo incluido · sin comisiones ni costes adicionales"};
 const RANGE_ERR={it:"La data di partenza deve essere successiva all'arrivo.",en:"Check-out must be after check-in.",de:"Das Abreisedatum muss nach der Anreise liegen.",fr:"La date de départ doit suivre l'arrivée.",es:"La salida debe ser posterior a la entrada."};
 const RATES={'1':49,'2':59};
 const PAY_PICK={it:"Seleziona le date per pagare",en:"Select dates to pay",de:"Daten wählen, um zu zahlen",fr:"Sélectionnez les dates pour payer",es:"Selecciona las fechas para pagar"};
-const PAY_PAY={it:"Prenota e paga",en:"Book and pay",de:"Buchen und zahlen",fr:"Réserver et payer",es:"Reserva y paga"};
+const PAY_PAY={it:"Prenota con carta",en:"Book with card",de:"Mit Karte buchen",fr:"Réserver par carte",es:"Reserva con tarjeta"};
 const PAY_WAIT={it:"Attendere…",en:"Please wait…",de:"Bitte warten…",fr:"Veuillez patienter…",es:"Espera…"};
 const PAY_ERR={it:"Problema col pagamento. Riprova o scrivici su WhatsApp.",en:"Payment problem. Try again or message us on WhatsApp.",de:"Zahlungsproblem. Bitte erneut versuchen oder schreiben Sie uns auf WhatsApp.",fr:"Problème de paiement. Réessayez ou écrivez-nous sur WhatsApp.",es:"Problema con el pago. Inténtalo de nuevo o escríbenos por WhatsApp."};
 const PAY_BUSY={it:"Quelle date includono giorni occupati. Scegli un altro periodo.",en:"Those dates include booked days. Pick another period.",de:"Dieser Zeitraum enthält belegte Tage. Wählen Sie einen anderen.",fr:"Cette période inclut des jours occupés. Choisissez-en une autre.",es:"Esas fechas incluyen días ocupados. Elige otro periodo."};
@@ -1254,7 +1263,7 @@ function updateEstimate(){
     const nlbl=s.nights===1?(NIGHT_ONE[lang]||'notte'):(NIGHTS_LBL[lang]||'notti');
     const totLbl=(REQL[lang]||REQL.it).total;
     est.className='estimate';
-    est.innerHTML=`<div class="erow"><span>${s.nights} ${nlbl} × ${s.rate} €</span><span>${s.total} €</span></div><div class="erow"><span>${totLbl}</span><span class="etot">${s.total} €</span></div>`;
+    est.innerHTML=`<div class="erow"><span>${s.nights} ${nlbl} × ${s.rate} €</span><span>${s.total} €</span></div><div class="erow"><span>${totLbl}</span><span class="etot">${s.total} €</span></div><div class="eallin">${ALLIN[lang]||ALLIN.it}</div>`;
   }
   updatePayBtn(s,lang);
 }
