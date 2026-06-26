@@ -228,6 +228,7 @@ ul.amen{padding:0;margin:0}
 .reqform input[readonly]:focus{box-shadow:none;border-color:var(--line)}
 .fhint{font-size:.74rem;color:var(--muted);margin:-6px 0 12px}
 .reqnote{font-size:.8rem;color:var(--muted);margin:.5rem 0 0}
+.reqsent{font-size:.82rem;color:var(--navy-deep);background:var(--azure-light);border:1px solid #d4e8f7;border-radius:8px;padding:.55rem .75rem;margin:.6rem 0 0}
 .reqform textarea{resize:vertical}
 .reqbtns{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:4px}
 .req-err{color:#c0392b;font-size:.85rem;margin:.2rem 0 .6rem}
@@ -619,7 +620,7 @@ h1,h2,h3{text-wrap:balance}
             <span><i class="dot free"></i> <span data-i18n="cal_free">Libero</span></span>
             <span><i class="dot busy"></i> <span data-i18n="cal_busy">Occupato</span></span>
           </div>
-          <p class="cal-hint" id="calHint" data-i18n="cal_hint">Tocca una data di arrivo, poi una di partenza.</p>
+          <p class="cal-hint" id="calHint" role="status" aria-live="polite" data-i18n="cal_hint">Tocca una data di arrivo, poi una di partenza.</p>
         </div>
         <form id="reqForm" class="reqform" novalidate>
           <div class="frow">
@@ -632,7 +633,7 @@ h1,h2,h3{text-wrap:balance}
             <label><span data-i18n="req_name">Nome</span><input type="text" id="rName" autocomplete="name"></label>
           </div>
           <label class="full"><span data-i18n="req_msg">Messaggio (facoltativo)</span><textarea id="rMsg" rows="2"></textarea></label>
-          <p class="req-err hidden" id="reqErr" data-i18n="req_err">Inserisci le date di arrivo e partenza.</p>
+          <p class="req-err hidden" id="reqErr" role="alert" data-i18n="req_err">Scegli arrivo e partenza dal calendario qui sopra.</p>
           <blockquote class="mini-rev">
             <span class="mr-stars">★★★★★</span>
             <span class="mr-text" data-i18n="mini_rev">« Casa bellissima, pulita, vista sulle montagne. Ci ritorneremo. »</span>
@@ -643,6 +644,7 @@ h1,h2,h3{text-wrap:balance}
             <button type="button" id="reqMail" class="btn ghost" data-i18n="req_mail">Invia per email</button>
           </div>
           <p class="reqnote" data-i18n="req_noobl">Richiedere le date non ti impegna a nulla — su WhatsApp rispondiamo in poche ore.</p>
+          <p class="reqsent hidden" id="reqSent" role="status"></p>
           <div class="trust">
             <span><span class="ico">✓</span> <span data-i18n="trust_reply">Rispondiamo in genere in poche ore</span></span>
             <span><span class="ico">✓</span> <span data-i18n="trust_noprepay">Due modi, stessa prenotazione: invia una richiesta o paga con carta (addebito solo a conferma)</span></span>
@@ -656,6 +658,7 @@ h1,h2,h3{text-wrap:balance}
         <div class="row"><span data-i18n="price_dep">Deposito cauzionale</span><b data-i18n="price_dep_v">Nessuno</b></div>
         <div class="row"><span data-i18n="price_checkin">Check-in</span><b>14:00 – 00:00</b></div>
         <div class="row"><span data-i18n="price_checkout">Check-out</span><b>10:00 – 10:30</b></div>
+        <div class="row"><span data-i18n="price_floor">Piano</span><b data-i18n="price_floor_v">4° · senza ascensore</b></div>
         <p class="incl" data-i18n="price_incl"><b>Incluso nel prezzo:</b> colazione · parcheggio privato gratuito · WiFi · vista monti · kit di benvenuto</p>
         <div class="estimate empty" id="estimate" aria-live="polite" aria-atomic="true">Scegli le date per vedere il totale.</div>
         <p class="policy" data-i18n="price_policy"><b>Cancellazione:</b> rimborso del 50% se annulli almeno 30 giorni prima dell'arrivo; entro i 30 giorni, nessun rimborso. Colazione inclusa.</p>
@@ -818,10 +821,11 @@ const I18N={
   book_eyebrow:"Book direct",book_title:"Availability & booking",
   book_lead:"Pick your dates and send us the request: we confirm availability and reply quickly. Direct, with no platform fees.",
   req_t:"Request your booking",req_d:"Pick your dates and send the request: we check availability and reply right away. Payment is arranged directly, no fees.",
-  req_in:"Check-in",req_out:"Check-out",req_guests:"Guests",req_name:"Name",req_msg:"Message (optional)",req_err:"Please enter check-in and check-out dates.",req_wa:"Send on WhatsApp",req_mail:"Send by email",
+  req_in:"Check-in",req_out:"Check-out",req_guests:"Guests",req_name:"Name",req_msg:"Message (optional)",req_err:"Pick check-in and check-out from the calendar above.",req_wa:"Send on WhatsApp",req_mail:"Send by email",
   price_1:"1 guest / night",price_2:"2 guests / night",price_dep:"Security deposit",price_dep_v:"None",price_checkin:"Check-in",price_checkout:"Check-out",
   price_policy:"<b>Cancellation:</b> 50% refund if you cancel at least 30 days before arrival; within 30 days, no refund. Breakfast included.",
   price_incl:"<b>Included in the price:</b> breakfast · free private parking · WiFi · mountain view · welcome kit",
+  price_floor:"Floor",price_floor_v:"4th · no lift",
   faq_eyebrow:"FAQ",faq_title:"Frequently asked questions",
   faq_q1:"What are the check-in and check-out times?",faq_a1:"Check-in from 2:00 PM to 12:00 AM (let us know your arrival time); check-out between 10:00 and 10:30 AM.",
   faq_q2:"Is there parking?",faq_a2:"Yes, free private on-site parking, accessible for motorbikes too.",
@@ -877,10 +881,11 @@ const I18N={
   book_eyebrow:"Direkt buchen",book_title:"Verfügbarkeit & Buchung",
   book_lead:"Wählen Sie Ihre Termine und senden Sie die Anfrage: Wir prüfen die Verfügbarkeit und antworten schnell. Direkt, ohne Plattformgebühren.",
   req_t:"Buchung anfragen",req_d:"Wählen Sie Ihre Termine und senden Sie die Anfrage: Wir prüfen die Verfügbarkeit und antworten sofort. Die Zahlung wird direkt vereinbart, ohne Gebühren.",
-  req_in:"Anreise",req_out:"Abreise",req_guests:"Gäste",req_name:"Name",req_msg:"Nachricht (optional)",req_err:"Bitte An- und Abreisedatum eingeben.",req_wa:"Per WhatsApp senden",req_mail:"Per E-Mail senden",
+  req_in:"Anreise",req_out:"Abreise",req_guests:"Gäste",req_name:"Name",req_msg:"Nachricht (optional)",req_err:"Wählen Sie An- und Abreise im Kalender oben.",req_wa:"Per WhatsApp senden",req_mail:"Per E-Mail senden",
   price_1:"1 Gast / Nacht",price_2:"2 Gäste / Nacht",price_dep:"Kaution",price_dep_v:"Keine",price_checkin:"Check-in",price_checkout:"Check-out",
   price_policy:"<b>Stornierung:</b> 50% Rückerstattung bei Stornierung mindestens 30 Tage vor Anreise; innerhalb von 30 Tagen keine Rückerstattung. Frühstück inklusive.",
   price_incl:"<b>Im Preis enthalten:</b> Frühstück · kostenloser Privatparkplatz · WLAN · Bergblick · Willkommenspaket",
+  price_floor:"Etage",price_floor_v:"4. · ohne Aufzug",
   faq_eyebrow:"FAQ",faq_title:"Häufige Fragen",
   faq_q1:"Wann sind Check-in und Check-out?",faq_a1:"Check-in von 14:00 bis 00:00 Uhr (bitte Ankunftszeit mitteilen); Check-out zwischen 10:00 und 10:30 Uhr.",
   faq_q2:"Gibt es Parkplätze?",faq_a2:"Ja, kostenloser privater Parkplatz vor Ort, auch für Motorräder zugänglich.",
@@ -936,10 +941,11 @@ const I18N={
   book_eyebrow:"Réserver en direct",book_title:"Disponibilités & réservation",
   book_lead:"Choisissez vos dates et envoyez la demande : nous vérifions la disponibilité et répondons rapidement. En direct, sans frais de plateforme.",
   req_t:"Demandez votre réservation",req_d:"Choisissez vos dates et envoyez la demande : nous vérifions la disponibilité et répondons aussitôt. Le paiement se convient directement, sans frais.",
-  req_in:"Arrivée",req_out:"Départ",req_guests:"Voyageurs",req_name:"Nom",req_msg:"Message (facultatif)",req_err:"Veuillez indiquer les dates d'arrivée et de départ.",req_wa:"Envoyer sur WhatsApp",req_mail:"Envoyer par e-mail",
+  req_in:"Arrivée",req_out:"Départ",req_guests:"Voyageurs",req_name:"Nom",req_msg:"Message (facultatif)",req_err:"Choisissez l'arrivée et le départ dans le calendrier ci-dessus.",req_wa:"Envoyer sur WhatsApp",req_mail:"Envoyer par e-mail",
   price_1:"1 voyageur / nuit",price_2:"2 voyageurs / nuit",price_dep:"Caution",price_dep_v:"Aucune",price_checkin:"Arrivée",price_checkout:"Départ",
   price_policy:"<b>Annulation :</b> remboursement de 50% si vous annulez au moins 30 jours avant l'arrivée ; dans les 30 jours, aucun remboursement. Petit-déjeuner inclus.",
   price_incl:"<b>Inclus dans le prix :</b> petit-déjeuner · parking privé gratuit · WiFi · vue sur les montagnes · kit de bienvenue",
+  price_floor:"Étage",price_floor_v:"4e · sans ascenseur",
   faq_eyebrow:"FAQ",faq_title:"Questions fréquentes",
   faq_q1:"Quels sont les horaires d'arrivée et de départ ?",faq_a1:"Arrivée de 14h00 à 00h00 (indiquez-nous votre heure d'arrivée) ; départ entre 10h00 et 10h30.",
   faq_q2:"Y a-t-il un parking ?",faq_a2:"Oui, parking privé gratuit sur place, accessible aussi aux motos.",
@@ -995,10 +1001,11 @@ const I18N={
   book_eyebrow:"Reserva directa",book_title:"Disponibilidad y reserva",
   book_lead:"Elige tus fechas y envíanos la solicitud: comprobamos la disponibilidad y respondemos enseguida. Directo, sin comisiones de plataforma.",
   req_t:"Solicita tu reserva",req_d:"Elige tus fechas y envía la solicitud: comprobamos la disponibilidad y respondemos al momento. El pago se acuerda directamente, sin comisiones.",
-  req_in:"Entrada",req_out:"Salida",req_guests:"Huéspedes",req_name:"Nombre",req_msg:"Mensaje (opcional)",req_err:"Indica las fechas de entrada y salida.",req_wa:"Enviar por WhatsApp",req_mail:"Enviar por email",
+  req_in:"Entrada",req_out:"Salida",req_guests:"Huéspedes",req_name:"Nombre",req_msg:"Mensaje (opcional)",req_err:"Elige la entrada y la salida en el calendario de arriba.",req_wa:"Enviar por WhatsApp",req_mail:"Enviar por email",
   price_1:"1 huésped / noche",price_2:"2 huéspedes / noche",price_dep:"Fianza",price_dep_v:"Ninguna",price_checkin:"Entrada",price_checkout:"Salida",
   price_policy:"<b>Cancelación:</b> reembolso del 50% si cancelas al menos 30 días antes de la llegada; dentro de los 30 días, sin reembolso. Desayuno incluido.",
   price_incl:"<b>Incluido en el precio:</b> desayuno · parking privado gratuito · WiFi · vistas a las montañas · kit de bienvenida",
+  price_floor:"Planta",price_floor_v:"4ª · sin ascensor",
   faq_eyebrow:"FAQ",faq_title:"Preguntas frecuentes",
   faq_q1:"¿Cuáles son los horarios de entrada y salida?",faq_a1:"Entrada de 14:00 a 00:00 (indícanos tu hora de llegada); salida entre las 10:00 y las 10:30.",
   faq_q2:"¿Hay parking?",faq_a2:"Sí, parking privado gratuito en el lugar, accesible también para motos.",
@@ -1146,6 +1153,9 @@ const CAL={busy:new Set(), inDate:null, outDate:null};
   const cal=document.getElementById('cal'); if(!cal) return;
   const titleEl=document.getElementById('calTitle'), dowEl=document.getElementById('calDow'), daysEl=document.getElementById('calDays');
   const DOW={it:['L','M','M','G','V','S','D'],en:['M','T','W','T','F','S','S'],de:['M','D','M','D','F','S','S'],fr:['L','M','M','J','V','S','D'],es:['L','M','X','J','V','S','D']};
+  const FREEW={it:'libero',en:'available',de:'frei',fr:'libre',es:'libre'};
+  const BUSYW={it:'occupato',en:'booked',de:'belegt',fr:'occupé',es:'ocupado'};
+  const AVAILNOTE={it:'Disponibilità confermata da noi alla richiesta — scegli pure le date.',en:'Availability confirmed by us on request — go ahead and pick your dates.',de:'Verfügbarkeit von uns auf Anfrage bestätigt — wählen Sie ruhig die Daten.',fr:'Disponibilité confirmée par nous sur demande — choisissez vos dates.',es:'Disponibilidad confirmada por nosotros al solicitar — elige tus fechas.'};
   const MON={it:['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'],
     en:['January','February','March','April','May','June','July','August','September','October','November','December'],
     de:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
@@ -1173,6 +1183,7 @@ const CAL={busy:new Set(), inDate:null, outDate:null};
       else { CAL.outDate=dayIso; hint(SELHINT[L]||SELHINT.it); if(typeof track==='function')track('select_dates',{}); }
     }
     syncFields(); render();
+    const _f=daysEl.querySelector('[data-iso="'+dayIso+'"]'); if(_f&&_f.focus){try{_f.focus({preventScroll:true});}catch(e){_f.focus();}}
   }
   function syncFields(){
     const i=document.getElementById('rIn'), o=document.getElementById('rOut');
@@ -1199,8 +1210,9 @@ const CAL={busy:new Set(), inDate:null, outDate:null};
         else if(dayIso===CAL.outDate){cls+=' sel selend';}
         else if(CAL.inDate&&CAL.outDate&&dayIso>CAL.inDate&&dayIso<CAL.outDate){cls+=' inrange';}
       }
-      const isFree=cls.indexOf(' free')>=0;
-      const extra=isFree?` role="button" tabindex="0" aria-label="${dayIso}"`:'';
+      const isFree=cls.indexOf(' free')>=0; const isBusy=cls.indexOf(' busy')>=0;
+      const human=`${d} ${(MON[L]||MON.it)[m]}`;
+      const extra=isFree?` role="button" tabindex="0" aria-label="${human} — ${FREEW[L]||FREEW.it}"`:(isBusy?` aria-disabled="true" aria-label="${human} — ${BUSYW[L]||BUSYW.it}"`:'');
       html+=`<div class="${cls}" data-iso="${dayIso}"${extra}>${d}</div>`;
     }
     daysEl.innerHTML=html;
@@ -1212,7 +1224,7 @@ const CAL={busy:new Set(), inDate:null, outDate:null};
   document.getElementById('calPrev').onclick=()=>{view.setMonth(view.getMonth()-1);render();};
   document.getElementById('calNext').onclick=()=>{view.setMonth(view.getMonth()+1);render();};
   render();
-  fetch('/api/availability').then(r=>r.json()).then(d=>{ if(d&&d.busy){CAL.busy=new Set(d.busy);render();} }).catch(()=>{});
+  fetch('/api/availability').then(r=>r.json()).then(d=>{ if(d&&d.busy){CAL.busy=new Set(d.busy);render();} }).catch(()=>{ const L=lang(); hint(AVAILNOTE[L]||AVAILNOTE.it); });
   window.addEventListener('lamansarda:lang',()=>{const L=lang();hint(SELHINT[L]||SELHINT.it);render();});
 })();
 
@@ -1283,7 +1295,7 @@ function buildReq(){
   const L=REQL[document.documentElement.lang]||REQL.it;
   const i=rIn.value,o=rOut.value;
   const err=document.getElementById('reqErr');
-  if(!i||!o){err.textContent=tr('req_err','Inserisci le date di arrivo e partenza.');err.classList.remove('hidden');return null;}
+  if(!i||!o){err.textContent=tr('req_err','Scegli arrivo e partenza dal calendario qui sopra.');err.classList.remove('hidden');try{document.getElementById('cal').scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}return null;}
   if(o<=i){err.textContent=RANGE_ERR[document.documentElement.lang]||RANGE_ERR.it;err.classList.remove('hidden');return null;}
   err.classList.add('hidden');
   const g=rGuests.value,n=document.getElementById('rName').value.trim(),m=document.getElementById('rMsg').value.trim();
@@ -1294,8 +1306,10 @@ function buildReq(){
   if(m)t+=`\n${L.m}: ${m}`;
   return t;
 }
-document.getElementById('reqWa').onclick=()=>{const t=buildReq();if(t){if(typeof track==='function')track('booking_request',{method:'whatsapp'});window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(t),'_blank');}};
-document.getElementById('reqMail').onclick=()=>{const t=buildReq();if(t){if(typeof track==='function')track('booking_request',{method:'email'});const L=REQL[document.documentElement.lang]||REQL.it;location.href='mailto:'+REQ_EMAIL+'?subject='+encodeURIComponent(L.t)+'&body='+encodeURIComponent(t);}};
+const REQSENT={it:"Richiesta pronta. Se WhatsApp o l'email non si aprono, scrivici al +39 347 7054576 o a paolocompagnone63@gmail.com.",en:"Your request is ready. If WhatsApp or your email app doesn't open, message us at +39 347 7054576 or paolocompagnone63@gmail.com.",de:"Ihre Anfrage ist bereit. Falls WhatsApp oder Ihre E-Mail-App nicht öffnet, schreiben Sie uns an +39 347 7054576 oder paolocompagnone63@gmail.com.",fr:"Votre demande est prête. Si WhatsApp ou votre messagerie ne s'ouvre pas, écrivez-nous au +39 347 7054576 ou à paolocompagnone63@gmail.com.",es:"Tu solicitud está lista. Si WhatsApp o tu correo no se abre, escríbenos al +39 347 7054576 o a paolocompagnone63@gmail.com."};
+function showReqSent(){const el=document.getElementById('reqSent');if(!el)return;el.textContent=REQSENT[document.documentElement.lang]||REQSENT.it;el.classList.remove('hidden');}
+document.getElementById('reqWa').onclick=()=>{const t=buildReq();if(t){if(typeof track==='function')track('booking_request',{method:'whatsapp'});window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(t),'_blank');showReqSent();}};
+document.getElementById('reqMail').onclick=()=>{const t=buildReq();if(t){if(typeof track==='function')track('booking_request',{method:'email'});const L=REQL[document.documentElement.lang]||REQL.it;location.href='mailto:'+REQ_EMAIL+'?subject='+encodeURIComponent(L.t)+'&body='+encodeURIComponent(t);showReqSent();}};
 
 /* ---------- Pagamento online Stripe (importo = totale calcolato dalle date) ---------- */
 function updatePayBtn(s,lang){
@@ -1320,15 +1334,16 @@ function updatePayBtn(s,lang){
     if(rangeBusy(rIn.value,rOut.value)){ if(err){err.textContent=PAY_BUSY[L]||PAY_BUSY.it;err.classList.remove('hidden');} return; }
     if(typeof track==='function')track('begin_checkout',{currency:'EUR',value:s.total,nights:s.nights,guests:Number(rGuests.value)});
     b.dataset.loading='1'; b.disabled=true; b.innerHTML='<span class="spin" aria-hidden="true"></span>'+(PAY_WAIT[L]||PAY_WAIT.it);
+    const _ac=new AbortController(); const _to=setTimeout(()=>_ac.abort(),15000);
     try{
-      const r=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({checkin:rIn.value,checkout:rOut.value,guests:rGuests.value,lang:L})});
+      const r=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({checkin:rIn.value,checkout:rOut.value,guests:rGuests.value,lang:L}),signal:_ac.signal});
       const data=await r.json().catch(()=>({}));
       if(r.ok&&data.url){ window.location.href=data.url; return; }
       if(err){ err.textContent=(r.status===409?(PAY_BUSY[L]||PAY_BUSY.it):(PAY_ERR[L]||PAY_ERR.it)); err.classList.remove('hidden'); }
     }catch(e){
       if(err){ err.textContent=PAY_ERR[L]||PAY_ERR.it; err.classList.remove('hidden'); }
     }
-    delete b.dataset.loading; updatePayBtn(calcStay(),L);
+    clearTimeout(_to); delete b.dataset.loading; updatePayBtn(calcStay(),L);
   });
 })();
 (function payNotice(){
