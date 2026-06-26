@@ -16,16 +16,49 @@
     <loc>https://www.lamansardanicosia.it/cosa-vedere-a-nicosia.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.lamansardanicosia.it/cosa-vedere-a-nicosia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.lamansardanicosia.it/cosa-vedere-a-nicosia-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.lamansardanicosia.it/cosa-vedere-a-nicosia.html"/>
+  </url>
+  <url>
+    <loc>https://www.lamansardanicosia.it/cosa-vedere-a-nicosia-en.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.lamansardanicosia.it/cosa-vedere-a-nicosia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.lamansardanicosia.it/cosa-vedere-a-nicosia-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.lamansardanicosia.it/cosa-vedere-a-nicosia.html"/>
   </url>
   <url>
     <loc>https://www.lamansardanicosia.it/chi-siamo.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.lamansardanicosia.it/chi-siamo.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.lamansardanicosia.it/chi-siamo-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.lamansardanicosia.it/chi-siamo.html"/>
+  </url>
+  <url>
+    <loc>https://www.lamansardanicosia.it/chi-siamo-en.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.lamansardanicosia.it/chi-siamo.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.lamansardanicosia.it/chi-siamo-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.lamansardanicosia.it/chi-siamo.html"/>
   </url>
   <url>
     <loc>https://www.lamansardanicosia.it/contatti.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.lamansardanicosia.it/contatti.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.lamansardanicosia.it/contatti-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.lamansardanicosia.it/contatti.html"/>
+  </url>
+  <url>
+    <loc>https://www.lamansardanicosia.it/contatti-en.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.lamansardanicosia.it/contatti.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.lamansardanicosia.it/contatti-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.lamansardanicosia.it/contatti.html"/>
   </url>
   <url>
     <loc>https://www.lamansardanicosia.it/privacy.html</loc>
