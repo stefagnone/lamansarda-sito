@@ -13,6 +13,7 @@
 // In Stripe crea l'endpoint su  https://www.lamansardanicosia.it/api/webhook  e iscrivilo a:
 //   - checkout.session.completed  (notifica host + conferma ospite — già presente)
 //   - payment_intent.succeeded    (email pre-arrivo all'ospite quando catturi il pagamento)
+//   - checkout.session.expired    (email di recupero del checkout abbandonato, con link "riprendi")
 // NB: "payment_intent.captured" NON esiste in Stripe; con la cattura manuale l'evento che
 //     scatta alla cattura è payment_intent.succeeded (il suo oggetto porta i metadata del PI).
 
@@ -126,6 +127,23 @@ function prearrivalHtml(m) {
 </div>`;
 }
 
+function recoveryHtml(m, url) {
+  const ci = (m && m.checkin) || '', co = (m && m.checkout) || '';
+  const range = ci ? `${ci} → ${co}` : '';
+  const btn = `<a href="${url}" style="display:inline-block;background:#1f3a8a;color:#ffffff;text-decoration:none;padding:12px 22px;border-radius:999px;font-weight:600">Riprendi la prenotazione · Resume booking</a>`;
+  return `<div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;margin:auto;color:#1b2230;line-height:1.55">
+  <h2 style="color:#14306e;margin:0 0 .4rem">La tua prenotazione ti aspetta</h2>
+  <p>${range ? `Le date <b>${range}</b> che guardavi sono ancora disponibili.` : 'Le date che guardavi sono ancora disponibili.'} Puoi completare la prenotazione a La Mansarda da qui:</p>
+  <p style="text-align:center;margin:24px 0">${btn}</p>
+  <p>Per qualsiasi cosa scrivici su WhatsApp ${PHONE}. A presto,<br>Paolo e Stefano — La Mansarda Nicosia</p>
+  <hr style="border:none;border-top:1px solid #e6e9ef;margin:1.2rem 0">
+  <h3 style="color:#14306e;margin:0 0 .4rem">Your booking is waiting</h3>
+  <p>${range ? `The dates <b>${range}</b> you were looking at are still available.` : 'The dates you were looking at are still available.'} You can complete your booking at La Mansarda here:</p>
+  <p style="text-align:center;margin:24px 0">${btn}</p>
+  <p>Any questions, message us on WhatsApp ${PHONE}. See you soon,<br>Paolo and Stefano — La Mansarda Nicosia</p>
+</div>`;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).json({ error: 'method_not_allowed' }); }
 
@@ -192,6 +210,21 @@ export default async function handler(req, res) {
       await updatePIMetadata(pi.id, { prearrival_sent: '1' });
     }
     return res.status(200).json({ received: true, prearrival: to ? 'sent' : 'no_email' });
+  }
+
+  // --- Recupero checkout abbandonato: alla scadenza invia il link "riprendi" (1 sola email per event.id) ---
+  if (event.type === 'checkout.session.expired') {
+    if (alreadyProcessed(event.id)) return res.status(200).json({ received: true, duplicate: true });
+    markProcessed(event.id);
+    const s = event.data.object || {};
+    const rec = s.after_expiration && s.after_expiration.recovery;
+    const url = rec && rec.url;                                  // link per riprendere (esiste solo se recovery abilitato)
+    const to = (s.customer_details && s.customer_details.email) || s.customer_email || '';
+    if (url && to) {
+      await sendEmail(to, 'La Mansarda Nicosia — la tua prenotazione ti aspetta / your booking is waiting', recoveryHtml(s.metadata || {}, url));
+      return res.status(200).json({ received: true, recovery: 'sent' });
+    }
+    return res.status(200).json({ received: true, recovery: 'skipped' });
   }
 
   return res.status(200).json({ received: true });

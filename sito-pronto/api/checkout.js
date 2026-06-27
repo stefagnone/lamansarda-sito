@@ -225,6 +225,11 @@ export default async function handler(req, res) {
   params.set('metadata[nights]', String(nights));
   params.set('metadata[total_eur]', String(total));
   if (lang !== 'auto') params.set('locale', lang);
+  // recupero checkout abbandonato: alla scadenza la sessione resta "recuperabile" (genera un link
+  // per riprendere) e Stripe può inviare il recupero nativo; customer_creation:'always' assicura
+  // un'email associata. Il link recovery è usato anche dall'email Resend su checkout.session.expired.
+  params.set('after_expiration[recovery][enabled]', 'true');
+  params.set('customer_creation', 'always');
 
   try {
     const r = await fetchT('https://api.stripe.com/v1/checkout/sessions', {
