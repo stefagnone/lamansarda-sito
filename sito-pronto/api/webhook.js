@@ -5,12 +5,16 @@
 //
 // CONFIGURAZIONE (Vercel → Settings → Environment Variables):
 //   STRIPE_WEBHOOK_SECRET = "Signing secret" dell'endpoint webhook (Stripe → Sviluppatori → Webhook)
+//   STRIPE_SECRET_KEY = per leggere/scrivere i metadata del PaymentIntent (dedup + email pre-arrivo)
 //   RESEND_API_KEY (opzionale) = chiave Resend per inviare le email
 //   MAIL_FROM (opzionale)      = mittente verificato, es. "La Mansarda <prenotazioni@tuodominio.it>"
 //   HOST_EMAIL (opzionale)     = destinatario notifiche host (default: paolocompagnone63@gmail.com)
 //
-// In Stripe crea l'endpoint su  https://www.lamansardanicosia.it/api/webhook
-// e iscrivilo all'evento  checkout.session.completed.
+// In Stripe crea l'endpoint su  https://www.lamansardanicosia.it/api/webhook  e iscrivilo a:
+//   - checkout.session.completed  (notifica host + conferma ospite — già presente)
+//   - payment_intent.succeeded    (email pre-arrivo all'ospite quando catturi il pagamento)
+// NB: "payment_intent.captured" NON esiste in Stripe; con la cattura manuale l'evento che
+//     scatta alla cattura è payment_intent.succeeded (il suo oggetto porta i metadata del PI).
 
 import crypto from 'crypto';
 
@@ -62,6 +66,66 @@ function markProcessed(id) {
   if (seenEvents.size > SEEN_MAX) seenEvents.delete(seenEvents.values().next().value);
 }
 
+// --- Email pre-arrivo (ospite) + helper metadata PaymentIntent ---
+const ADDRESS = 'Via Costanza Bruno 1, 94014 Nicosia (EN), Sicilia';
+const MAPS = 'https://www.google.com/maps?q=Via+Costanza+Bruno+1,+94014+Nicosia+EN,+Italia';
+const PHONE = '+39 347 7054576';
+const WA = 'https://wa.me/393477054576';
+const HOST_MAIL_PUBLIC = 'paolocompagnone63@gmail.com';
+
+async function stripeGet(path) {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) return null;
+  try {
+    const r = await fetch(`https://api.stripe.com/v1${path}`, { headers: { Authorization: `Bearer ${key}` } });
+    return r.ok ? await r.json() : null;
+  } catch { return null; }
+}
+async function updatePIMetadata(piId, kv) {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key || !piId) return;
+  const params = new URLSearchParams();
+  for (const [k, v] of Object.entries(kv)) params.set(`metadata[${k}]`, String(v));
+  try {
+    await fetch(`https://api.stripe.com/v1/payment_intents/${piId}`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString(),
+    });
+  } catch { /* best-effort */ }
+}
+function prearrivalHtml(m) {
+  const ci = m.checkin || '', co = m.checkout || '';
+  const range = ci ? ` (${ci} → ${co})` : '';
+  return `<div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;margin:auto;color:#1b2230;line-height:1.55">
+  <h2 style="color:#14306e;margin:0 0 .4rem">La tua prenotazione è confermata 🎉</h2>
+  <p>Ciao! Ecco le informazioni utili per il tuo arrivo a La Mansarda${range}.</p>
+  <ul style="padding-left:1.1rem">
+    <li><b>Indirizzo:</b> ${ADDRESS} — <a href="${MAPS}">apri in Google Maps</a></li>
+    <li><b>Parcheggio:</b> privato e gratuito in loco (anche per moto); all'arrivo ti spieghiamo come raggiungerlo.</li>
+    <li><b>⚠️ Importante:</b> l'appartamento è al <b>4° piano senza ascensore</b> (4 rampe di scale).</li>
+    <li><b>Check-in:</b> 14:00–00:00 (scrivici l'orario di arrivo) · <b>Check-out:</b> 10:00–10:30</li>
+    <li><b>Accesso:</b> ti accogliamo di persona e ti consegniamo le chiavi — scrivici su <a href="${WA}">WhatsApp</a> quando sei in arrivo.</li>
+    <li><b>Colazione di base inclusa.</b></li>
+  </ul>
+  <p>Per qualsiasi cosa: WhatsApp/tel ${PHONE} · <a href="mailto:${HOST_MAIL_PUBLIC}">${HOST_MAIL_PUBLIC}</a></p>
+  <p>A presto,<br>Paolo e Stefano — La Mansarda Nicosia</p>
+  <hr style="border:none;border-top:1px solid #e6e9ef;margin:1.2rem 0">
+  <h3 style="color:#14306e;margin:0 0 .4rem">Your booking is confirmed 🎉</h3>
+  <p>Hi! Here's the useful info for your arrival at La Mansarda${range}.</p>
+  <ul style="padding-left:1.1rem">
+    <li><b>Address:</b> ${ADDRESS} — <a href="${MAPS}">open in Google Maps</a></li>
+    <li><b>Parking:</b> free private parking on site (motorbikes too); we'll show you how to reach it on arrival.</li>
+    <li><b>⚠️ Please note:</b> the flat is on the <b>4th floor with no lift</b> (4 flights of stairs).</li>
+    <li><b>Check-in:</b> 2:00 PM–12:00 AM (tell us your arrival time) · <b>Check-out:</b> 10:00–10:30 AM</li>
+    <li><b>Access:</b> we welcome you in person and hand over the keys — message us on <a href="${WA}">WhatsApp</a> when you're on your way.</li>
+    <li><b>Basic breakfast included.</b></li>
+  </ul>
+  <p>Anything you need: WhatsApp/phone ${PHONE} · <a href="mailto:${HOST_MAIL_PUBLIC}">${HOST_MAIL_PUBLIC}</a></p>
+  <p>See you soon,<br>Paolo and Stefano — La Mansarda Nicosia</p>
+</div>`;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).json({ error: 'method_not_allowed' }); }
 
@@ -106,6 +170,28 @@ export default async function handler(req, res) {
          <p>Verifichiamo la disponibilità e ti confermiamo a breve via email. L'addebito avviene solo alla conferma; se le date non fossero disponibili non verrà addebitato nulla.</p>
          <p>A presto,<br>Paolo e Stefano — La Mansarda Nicosia</p>`);
     }
+
+    // salva l'email ospite sul PaymentIntent: serve a pre-arrivo (payment_intent.succeeded) e al cron recensione
+    if (s.payment_intent && cd.email) {
+      await updatePIMetadata(s.payment_intent, { guest_email: cd.email });
+    }
+  }
+
+  // --- Pre-arrivo: alla cattura (payment_intent.succeeded) invia all'ospite le info per l'arrivo ---
+  if (event.type === 'payment_intent.succeeded') {
+    if (alreadyProcessed(event.id)) return res.status(200).json({ received: true, duplicate: true });
+    markProcessed(event.id);
+    const pi = event.data.object || {};
+    // dedup persistente: l'evento è una snapshot congelata, rileggi i metadata aggiornati del PI
+    const fresh = await stripeGet(`/payment_intents/${pi.id}`);
+    const meta = Object.assign({}, pi.metadata, fresh && fresh.metadata);
+    if (meta.prearrival_sent === '1') return res.status(200).json({ received: true, duplicate: true });
+    const to = meta.guest_email || pi.receipt_email || '';
+    if (to) {
+      await sendEmail(to, 'La Mansarda Nicosia — informazioni per il tuo arrivo / arrival info', prearrivalHtml(meta));
+      await updatePIMetadata(pi.id, { prearrival_sent: '1' });
+    }
+    return res.status(200).json({ received: true, prearrival: to ? 'sent' : 'no_email' });
   }
 
   return res.status(200).json({ received: true });
