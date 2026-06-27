@@ -51,17 +51,28 @@ function expandDays(ranges) {
   }
   return days;
 }
-async function icalBusy() {
-  const urls = [process.env.ICAL_AIRBNB, process.env.ICAL_BOOKING].filter(Boolean);
-  if (urls.length === 0) return new Set();
-  try {
-    const texts = await Promise.all(urls.map(u =>
-      fetchT(u, { headers: { 'User-Agent': 'LaMansarda/1.0' } }, 4000).then(r => (r.ok ? r.text() : '')).catch(() => '')
-    ));
-    let ranges = [];
-    for (const t of texts) ranges = ranges.concat(parseICS(t));
-    return expandDays(ranges);
-  } catch { return new Set(); }
+// Sorgenti iCal con identità: distingue fetch riuscito-con-0-eventi da fetch fallito.
+const ICAL_SOURCES = [
+  { key: 'airbnb', url: process.env.ICAL_AIRBNB },
+  { key: 'booking', url: process.env.ICAL_BOOKING },
+];
+// { days:Set, sources:{airbnb:'ok'|'fail',...}, degraded:bool }
+// Una sorgente fallita => degraded; i suoi giorni NON sono assunti liberi.
+async function icalSources() {
+  const active = ICAL_SOURCES.filter(s => s.url);
+  const results = await Promise.all(active.map(async (s) => {
+    try {
+      const r = await fetchT(s.url, { headers: { 'User-Agent': 'LaMansarda/1.0' } }, 4000);
+      if (!r.ok) return { key: s.key, ok: false, ranges: [] };
+      return { key: s.key, ok: true, ranges: parseICS(await r.text()) };
+    } catch { return { key: s.key, ok: false, ranges: [] }; }
+  }));
+  const sources = {}; let ranges = []; let degraded = false;
+  for (const r of results) {
+    sources[r.key] = r.ok ? 'ok' : 'fail';
+    if (r.ok) ranges = ranges.concat(r.ranges); else degraded = true;
+  }
+  return { days: expandDays(ranges), sources, degraded };
 }
 
 // --- Disponibilità dalle prenotazioni pagate sul sito (Stripe è lo store: PI autorizzati o catturati) ---
@@ -85,6 +96,33 @@ async function stripeBusy(key) {
 }
 function rangeOverlaps(checkin, checkout, busy) {
   return rangeDays(checkin, checkout).some(d => busy.has(d));
+}
+
+// --- Alert host via Resend quando un pagamento è bloccato per sync degradato (stesso meccanismo di webhook.js) ---
+let _lastAlert = 0;
+const ALERT_THROTTLE_MS = 30 * 60 * 1000;
+async function sendEmail(to, subject, html) {
+  const apiKey = process.env.RESEND_API_KEY, from = process.env.MAIL_FROM;
+  if (!apiKey || !from || !to) return;
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from, to, subject, html }),
+    });
+  } catch { /* best-effort */ }
+}
+async function alertBlocked(sources, info) {
+  const now = Date.now();
+  if (now - _lastAlert < ALERT_THROTTLE_MS) return;
+  _lastAlert = now;
+  const host = process.env.HOST_EMAIL || 'paolocompagnone63@gmail.com';
+  const failed = Object.entries(sources).filter(([, v]) => v === 'fail').map(([k]) => k).join(', ') || 'n/d';
+  await sendEmail(host, '⚠️ Prenotazione bloccata: sync calendari non verificabile — La Mansarda',
+    `<h2>Pagamento bloccato per sicurezza (anti-overbooking)</h2>
+     <p>Un ospite ha provato a prenotare ma una sorgente iCal non è verificabile: <b>${failed}</b>.</p>
+     <p>Date richieste: <b>${info}</b>.</p>
+     <p>Verifica subito la disponibilità su Airbnb/Booking e, se libera, contatta l'ospite o sblocca le sorgenti iCal.</p>`);
 }
 
 async function readBody(req) {
@@ -126,8 +164,14 @@ export default async function handler(req, res) {
   if (dayDiff(today, checkin) > MAX_AHEAD_DAYS) return res.status(400).json({ error: 'too_far' });
 
   // --- Disponibilità: iCal (Airbnb/Booking) + prenotazioni pagate sul sito (Stripe) ---
-  const [ical, paid] = await Promise.all([icalBusy(), stripeBusy(key)]);
-  const busy = new Set([...ical, ...paid]);
+  const [ical, paid] = await Promise.all([icalSources(), stripeBusy(key)]);
+  // Se una sorgente iCal richiesta è fallita non possiamo escludere un overbooking:
+  // NON creare la sessione come se fosse libero — blocca e segnala all'host.
+  if (ical.degraded) {
+    await alertBlocked(ical.sources, `${checkin} → ${checkout} (${guests} ospiti)`);
+    return res.status(409).json({ error: 'sync_unverified', message: 'Verifica disponibilità in corso. Ti confermiamo a breve.' });
+  }
+  const busy = new Set([...ical.days, ...paid]);
   if (rangeOverlaps(checkin, checkout, busy)) {
     return res.status(409).json({ error: 'unavailable', message: 'Le date selezionate non sono più disponibili.' });
   }

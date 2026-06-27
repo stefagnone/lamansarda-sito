@@ -229,6 +229,7 @@ ul.amen{padding:0;margin:0}
 .fhint{font-size:.74rem;color:var(--muted);margin:-6px 0 12px}
 .reqnote{font-size:.8rem;color:var(--muted);margin:.5rem 0 0}
 .reqsent{font-size:.82rem;color:var(--navy-deep);background:var(--azure-light);border:1px solid #d4e8f7;border-radius:8px;padding:.55rem .75rem;margin:.6rem 0 0}
+.avail-warn{font-size:.85rem;line-height:1.5;color:#7a5d00;background:#fff8e6;border:1px solid #f0e0a8;border-radius:10px;padding:.6rem .8rem;margin:0 0 14px}
 .reqform textarea{resize:vertical}
 .reqbtns{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:4px}
 .req-err{color:#c0392b;font-size:.85rem;margin:.2rem 0 .6rem}
@@ -608,6 +609,7 @@ h1,h2,h3{text-wrap:balance}
       <div class="widget-box">
         <h3 data-i18n="req_t">Richiedi la tua prenotazione</h3>
         <p class="reqsub" data-i18n="req_d">Scegli le date e inviaci la richiesta: verifichiamo la disponibilità e ti rispondiamo subito, senza commissioni. Preferisci pagare subito? Qui sotto puoi prenotare e pagare con carta in modo sicuro.</p>
+        <div id="availWarn" class="avail-warn hidden" role="status"><span data-i18n="avail_degraded">Disponibilità da confermare con noi: al momento non possiamo verificare tutte le date in tempo reale. Inviaci la richiesta e ti confermiamo a breve.</span></div>
         <div class="cal" id="cal">
           <div class="cal-head">
             <button type="button" id="calPrev" aria-label="Mese precedente"><span aria-hidden="true">‹</span></button>
@@ -826,6 +828,7 @@ const I18N={
   price_policy:"<b>Cancellation:</b> 50% refund if you cancel at least 30 days before arrival; within 30 days, no refund. Breakfast included.",
   price_incl:"<b>Included in the price:</b> breakfast · free private parking · WiFi · mountain view · welcome kit",
   price_floor:"Floor",price_floor_v:"4th · no lift",
+  avail_degraded:"Availability to be confirmed with us: right now we can't verify all dates in real time. Send us your request and we'll confirm shortly.",
   faq_eyebrow:"FAQ",faq_title:"Frequently asked questions",
   faq_q1:"What are the check-in and check-out times?",faq_a1:"Check-in from 2:00 PM to 12:00 AM (let us know your arrival time); check-out between 10:00 and 10:30 AM.",
   faq_q2:"Is there parking?",faq_a2:"Yes, free private on-site parking, accessible for motorbikes too.",
@@ -886,6 +889,7 @@ const I18N={
   price_policy:"<b>Stornierung:</b> 50% Rückerstattung bei Stornierung mindestens 30 Tage vor Anreise; innerhalb von 30 Tagen keine Rückerstattung. Frühstück inklusive.",
   price_incl:"<b>Im Preis enthalten:</b> Frühstück · kostenloser Privatparkplatz · WLAN · Bergblick · Willkommenspaket",
   price_floor:"Etage",price_floor_v:"4. · ohne Aufzug",
+  avail_degraded:"Verfügbarkeit mit uns zu bestätigen: Im Moment können wir nicht alle Daten in Echtzeit prüfen. Senden Sie uns Ihre Anfrage, wir bestätigen in Kürze.",
   faq_eyebrow:"FAQ",faq_title:"Häufige Fragen",
   faq_q1:"Wann sind Check-in und Check-out?",faq_a1:"Check-in von 14:00 bis 00:00 Uhr (bitte Ankunftszeit mitteilen); Check-out zwischen 10:00 und 10:30 Uhr.",
   faq_q2:"Gibt es Parkplätze?",faq_a2:"Ja, kostenloser privater Parkplatz vor Ort, auch für Motorräder zugänglich.",
@@ -946,6 +950,7 @@ const I18N={
   price_policy:"<b>Annulation :</b> remboursement de 50% si vous annulez au moins 30 jours avant l'arrivée ; dans les 30 jours, aucun remboursement. Petit-déjeuner inclus.",
   price_incl:"<b>Inclus dans le prix :</b> petit-déjeuner · parking privé gratuit · WiFi · vue sur les montagnes · kit de bienvenue",
   price_floor:"Étage",price_floor_v:"4e · sans ascenseur",
+  avail_degraded:"Disponibilité à confirmer avec nous : pour l'instant nous ne pouvons pas vérifier toutes les dates en temps réel. Envoyez-nous votre demande, nous confirmons sous peu.",
   faq_eyebrow:"FAQ",faq_title:"Questions fréquentes",
   faq_q1:"Quels sont les horaires d'arrivée et de départ ?",faq_a1:"Arrivée de 14h00 à 00h00 (indiquez-nous votre heure d'arrivée) ; départ entre 10h00 et 10h30.",
   faq_q2:"Y a-t-il un parking ?",faq_a2:"Oui, parking privé gratuit sur place, accessible aussi aux motos.",
@@ -1006,6 +1011,7 @@ const I18N={
   price_policy:"<b>Cancelación:</b> reembolso del 50% si cancelas al menos 30 días antes de la llegada; dentro de los 30 días, sin reembolso. Desayuno incluido.",
   price_incl:"<b>Incluido en el precio:</b> desayuno · parking privado gratuito · WiFi · vistas a las montañas · kit de bienvenida",
   price_floor:"Planta",price_floor_v:"4ª · sin ascensor",
+  avail_degraded:"Disponibilidad por confirmar con nosotros: ahora mismo no podemos verificar todas las fechas en tiempo real. Envíanos tu solicitud y te confirmamos en breve.",
   faq_eyebrow:"FAQ",faq_title:"Preguntas frecuentes",
   faq_q1:"¿Cuáles son los horarios de entrada y salida?",faq_a1:"Entrada de 14:00 a 00:00 (indícanos tu hora de llegada); salida entre las 10:00 y las 10:30.",
   faq_q2:"¿Hay parking?",faq_a2:"Sí, parking privado gratuito en el lugar, accesible también para motos.",
@@ -1224,7 +1230,7 @@ const CAL={busy:new Set(), inDate:null, outDate:null};
   document.getElementById('calPrev').onclick=()=>{view.setMonth(view.getMonth()-1);render();};
   document.getElementById('calNext').onclick=()=>{view.setMonth(view.getMonth()+1);render();};
   render();
-  fetch('/api/availability').then(r=>r.json()).then(d=>{ if(d&&d.busy){CAL.busy=new Set(d.busy);render();} }).catch(()=>{ const L=lang(); hint(AVAILNOTE[L]||AVAILNOTE.it); });
+  fetch('/api/availability').then(r=>r.json()).then(d=>{ if(d&&d.busy){CAL.busy=new Set(d.busy);render();} if(d&&d.degraded){const w=document.getElementById('availWarn');if(w)w.classList.remove('hidden');} }).catch(()=>{ const L=lang(); hint(AVAILNOTE[L]||AVAILNOTE.it); const w=document.getElementById('availWarn');if(w)w.classList.remove('hidden'); });
   window.addEventListener('lamansarda:lang',()=>{const L=lang();hint(SELHINT[L]||SELHINT.it);render();});
 })();
 
@@ -1249,6 +1255,7 @@ const PAY_PAY={it:"Prenota con carta",en:"Book with card",de:"Mit Karte buchen",
 const PAY_WAIT={it:"Attendere…",en:"Please wait…",de:"Bitte warten…",fr:"Veuillez patienter…",es:"Espera…"};
 const PAY_ERR={it:"Problema col pagamento. Riprova o scrivici su WhatsApp.",en:"Payment problem. Try again or message us on WhatsApp.",de:"Zahlungsproblem. Bitte erneut versuchen oder schreiben Sie uns auf WhatsApp.",fr:"Problème de paiement. Réessayez ou écrivez-nous sur WhatsApp.",es:"Problema con el pago. Inténtalo de nuevo o escríbenos por WhatsApp."};
 const PAY_BUSY={it:"Quelle date includono giorni occupati. Scegli un altro periodo.",en:"Those dates include booked days. Pick another period.",de:"Dieser Zeitraum enthält belegte Tage. Wählen Sie einen anderen.",fr:"Cette période inclut des jours occupés. Choisissez-en une autre.",es:"Esas fechas incluyen días ocupados. Elige otro periodo."};
+const PAY_UNVERIFIED={it:"Verifica della disponibilità in corso: ti confermiamo a breve. Intanto puoi inviarci la richiesta su WhatsApp.",en:"Availability check in progress: we'll confirm shortly. Meanwhile you can send us your request on WhatsApp.",de:"Verfügbarkeitsprüfung läuft: Wir bestätigen in Kürze. Schreiben Sie uns in der Zwischenzeit gern auf WhatsApp.",fr:"Vérification de la disponibilité en cours : nous confirmons sous peu. Vous pouvez nous écrire sur WhatsApp entre-temps.",es:"Comprobación de disponibilidad en curso: te confirmamos en breve. Mientras tanto, puedes escribirnos por WhatsApp."};
 const NOTICE_PAID={it:"✓ Pagamento autorizzato! Verifichiamo la disponibilità e ti confermiamo via email a breve. L'addebito avviene solo alla conferma; se le date non fossero disponibili, nessun addebito.",en:"✓ Payment authorized! We'll verify availability and confirm by email shortly. You're only charged on confirmation; if the dates aren't available, no charge is made.",de:"✓ Zahlung autorisiert! Wir prüfen die Verfügbarkeit und bestätigen in Kürze per E-Mail. Die Abbuchung erfolgt erst bei Bestätigung; sind die Daten nicht verfügbar, erfolgt keine Abbuchung.",fr:"✓ Paiement autorisé ! Nous vérifions la disponibilité et confirmons par e-mail sous peu. Le débit n'a lieu qu'à la confirmation ; si les dates ne sont pas disponibles, aucun débit.",es:"✓ ¡Pago autorizado! Verificamos la disponibilidad y te confirmamos por email en breve. El cargo se realiza solo al confirmar; si las fechas no están disponibles, no se hace ningún cargo."};
 const NOTICE_CANCEL={it:"Pagamento annullato. Puoi riprovare quando vuoi o scriverci su WhatsApp.",en:"Payment canceled. You can try again anytime or message us on WhatsApp.",de:"Zahlung abgebrochen. Sie können es jederzeit erneut versuchen oder uns auf WhatsApp schreiben.",fr:"Paiement annulé. Vous pouvez réessayer ou nous écrire sur WhatsApp.",es:"Pago cancelado. Puedes reintentarlo cuando quieras o escribirnos por WhatsApp."};
 function fmtDate(iso){ // YYYY-MM-DD -> DD/MM/YYYY (formato italiano/europeo)
@@ -1339,7 +1346,13 @@ function updatePayBtn(s,lang){
       const r=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({checkin:rIn.value,checkout:rOut.value,guests:rGuests.value,lang:L}),signal:_ac.signal});
       const data=await r.json().catch(()=>({}));
       if(r.ok&&data.url){ window.location.href=data.url; return; }
-      if(err){ err.textContent=(r.status===409?(PAY_BUSY[L]||PAY_BUSY.it):(PAY_ERR[L]||PAY_ERR.it)); err.classList.remove('hidden'); }
+      if(err){
+        let _m;
+        if(r.status===409&&data&&data.error==='sync_unverified'){ _m=PAY_UNVERIFIED[L]||PAY_UNVERIFIED.it; const w=document.getElementById('availWarn'); if(w)w.classList.remove('hidden'); }
+        else if(r.status===409){ _m=PAY_BUSY[L]||PAY_BUSY.it; }
+        else { _m=PAY_ERR[L]||PAY_ERR.it; }
+        err.textContent=_m; err.classList.remove('hidden');
+      }
     }catch(e){
       if(err){ err.textContent=PAY_ERR[L]||PAY_ERR.it; err.classList.remove('hidden'); }
     }
