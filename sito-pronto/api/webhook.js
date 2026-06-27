@@ -48,6 +48,20 @@ async function sendEmail(to, subject, html) {
   } catch { /* best-effort */ }
 }
 
+// --- Idempotenza per event.id ---
+// Stripe ritenta la consegna su timeout/5xx con lo STESSO event.id (firma e timestamp
+// rigenerati a ogni tentativo, quindi l'anti-replay non li scarta). A basso volume basta
+// un Set in memoria del modulo che ricorda gli ultimi N event.id (best-effort, per-container).
+const SEEN_MAX = 500;
+const seenEvents = new Set();
+function alreadyProcessed(id) { return !!id && seenEvents.has(id); }
+function markProcessed(id) {
+  if (!id) return;
+  seenEvents.add(id);
+  // evita crescita illimitata: scarta il più vecchio (il Set conserva l'ordine d'inserimento)
+  if (seenEvents.size > SEEN_MAX) seenEvents.delete(seenEvents.values().next().value);
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).json({ error: 'method_not_allowed' }); }
 
@@ -66,6 +80,13 @@ export default async function handler(req, res) {
   try { event = JSON.parse(payload); } catch { return res.status(400).json({ error: 'bad_json' }); }
 
   if (event.type === 'checkout.session.completed') {
+    // idempotenza: scarta un event.id già processato (retry Stripe) PRIMA di inviare email
+    if (alreadyProcessed(event.id)) {
+      return res.status(200).json({ received: true, duplicate: true });
+    }
+    // claim prima dell'invio: dedup anche di retry concorrenti nello stesso container
+    markProcessed(event.id);
+
     const s = event.data.object || {};
     const m = s.metadata || {};
     const cd = s.customer_details || {};
