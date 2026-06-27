@@ -10,10 +10,14 @@
 // CONFIGURAZIONE (Vercel → Settings → Environment Variables):
 //   STRIPE_SECRET_KEY = per elencare i PaymentIntent e scrivere i metadata
 //   RESEND_API_KEY / MAIL_FROM = invio email (come webhook.js)
-//   CRON_SECRET (consigliato) = se impostato, l'endpoint richiede Authorization: Bearer <CRON_SECRET>
-//                               (Vercel lo invia automaticamente alle esecuzioni cron)
+//   CRON_SECRET (OBBLIGATORIO) = l'endpoint richiede Authorization: Bearer <CRON_SECRET>; se non
+//                                impostato risponde 401 (Vercel lo invia automaticamente ai cron)
 
 const REVIEW_URL = 'https://www.google.com/maps?cid=10364661981123230684'; // stesso cid del sito
+// Finestra di ricerca: un PI con check-out=ieri è stato CREATO (prenotato) al massimo
+// MAX_AHEAD_DAYS(400) + MAX_NIGHTS(60) prima → ~460 giorni. 470 con buffer copre tutto
+// senza scartare prenotazioni anticipate. created[gte] limita la query lato Stripe.
+const LOOKBACK_DAYS = 470;
 
 async function sendEmail(to, subject, html) {
   const apiKey = process.env.RESEND_API_KEY, from = process.env.MAIL_FROM;
@@ -52,12 +56,13 @@ export function yesterdayRome(now = new Date()) {
   return dt.toISOString().slice(0, 10);
 }
 
-async function listSucceededPIs(key, maxPages = 5) {
+async function listSucceededPIs(key, createdGte, maxPages = 5) {
   const out = [];
   let startingAfter = null;
   for (let p = 0; p < maxPages; p++) {
     const url = new URL('https://api.stripe.com/v1/payment_intents');
     url.searchParams.set('limit', '100');
+    if (createdGte) url.searchParams.set('created[gte]', String(createdGte)); // bound lato Stripe
     if (startingAfter) url.searchParams.set('starting_after', startingAfter);
     let data;
     try {
@@ -88,9 +93,9 @@ function reviewHtml() {
 }
 
 export default async function handler(req, res) {
-  // sicurezza: se CRON_SECRET è impostato, richiedi l'header (Vercel lo invia ai cron)
+  // sicurezza: CRON_SECRET OBBLIGATORIO. Se non impostato (o header errato) → 401, non eseguire.
   const cronSecret = process.env.CRON_SECRET;
-  if (cronSecret && (req.headers['authorization'] || '') !== `Bearer ${cronSecret}`) {
+  if (!cronSecret || (req.headers['authorization'] || '') !== `Bearer ${cronSecret}`) {
     return res.status(401).json({ error: 'unauthorized' });
   }
 
@@ -98,7 +103,8 @@ export default async function handler(req, res) {
   if (!key) return res.status(503).json({ error: 'not_configured' });
 
   const target = yesterdayRome();
-  const pis = await listSucceededPIs(key);
+  const createdGte = Math.floor(Date.now() / 1000) - LOOKBACK_DAYS * 86400;
+  const pis = await listSucceededPIs(key, createdGte);
 
   let candidates = 0, sent = 0, skipped = 0;
   for (const pi of pis) {

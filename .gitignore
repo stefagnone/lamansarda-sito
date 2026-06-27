@@ -4,3 +4,6 @@
 # Local env files (never commit secrets)
 .env
 .env.*
+
+# macOS
+.DS_Store

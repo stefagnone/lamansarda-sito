@@ -206,8 +206,8 @@ export default async function handler(req, res) {
     if (meta.prearrival_sent === '1') return res.status(200).json({ received: true, duplicate: true });
     const to = meta.guest_email || pi.receipt_email || '';
     if (to) {
+      await updatePIMetadata(pi.id, { prearrival_sent: '1' });   // claim PRIMA dell'invio: chiude la race di doppio invio cross-container
       await sendEmail(to, 'La Mansarda Nicosia — informazioni per il tuo arrivo / arrival info', prearrivalHtml(meta));
-      await updatePIMetadata(pi.id, { prearrival_sent: '1' });
     }
     return res.status(200).json({ received: true, prearrival: to ? 'sent' : 'no_email' });
   }
