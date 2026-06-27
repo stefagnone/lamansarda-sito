@@ -78,7 +78,7 @@
     {"@type":"Question","name":"Sono ammessi animali?","acceptedAnswer":{"@type":"Answer","text":"No, gli animali non sono ammessi."}},
     {"@type":"Question","name":"Sono ammessi i bambini?","acceptedAnswer":{"@type":"Answer","text":"Sì, i bambini sono benvenuti, nel limite di 2 ospiti totali."}},
     {"@type":"Question","name":"C'è l'ascensore?","acceptedAnswer":{"@type":"Answer","text":"No. L'appartamento è al 4º piano con 4 rampe di scale."}},
-    {"@type":"Question","name":"Come funziona il pagamento?","acceptedAnswer":{"@type":"Answer","text":"Invii la richiesta con le date, noi confermiamo la disponibilità e concordiamo direttamente il pagamento (bonifico, PayPal, carta con link sicuro o all'arrivo). La colazione di base è inclusa."}},
+    {"@type":"Question","name":"Come funziona il pagamento?","acceptedAnswer":{"@type":"Answer","text":"Hai due modi, entrambi senza commissioni: (1) invii la richiesta con le date e, dopo la nostra conferma di disponibilità, concordiamo il pagamento (bonifico, PayPal o all'arrivo); (2) prenoti e paghi subito con carta in modo sicuro tramite Stripe, con addebito solo dopo la conferma. La colazione di base è inclusa."}},
     {"@type":"Question","name":"Qual è la politica di cancellazione?","acceptedAnswer":{"@type":"Answer","text":"Cancellazione rigida: rimborso del 50% fino a 30 giorni prima dell'arrivo, nessun rimborso oltre tale termine."}}
   ]
 }
@@ -607,7 +607,7 @@ h1,h2,h3{text-wrap:balance}
     <div class="book-grid" style="margin-top:24px">
       <div class="widget-box">
         <h3 data-i18n="req_t">Richiedi la tua prenotazione</h3>
-        <p class="reqsub" data-i18n="req_d">Scegli le date e inviaci la richiesta: verifichiamo la disponibilità e ti rispondiamo subito. Il pagamento si concorda direttamente, senza commissioni.</p>
+        <p class="reqsub" data-i18n="req_d">Scegli le date e inviaci la richiesta: verifichiamo la disponibilità e ti rispondiamo subito, senza commissioni. Preferisci pagare subito? Qui sotto puoi prenotare e pagare con carta in modo sicuro.</p>
         <div class="cal" id="cal">
           <div class="cal-head">
             <button type="button" id="calPrev" aria-label="Mese precedente"><span aria-hidden="true">‹</span></button>
@@ -684,7 +684,7 @@ h1,h2,h3{text-wrap:balance}
     <details><summary data-i18n="faq_q3">Sono ammessi animali?</summary><div class="ans" data-i18n="faq_a3">No, gli animali non sono ammessi.</div></details>
     <details><summary data-i18n="faq_q4">Sono ammessi i bambini?</summary><div class="ans" data-i18n="faq_a4">Sì, i bambini sono benvenuti, nel limite di 2 ospiti totali.</div></details>
     <details><summary data-i18n="faq_q5">C'è l'ascensore?</summary><div class="ans" data-i18n="faq_a5">No. L'appartamento è al 4º piano con 4 rampe di scale.</div></details>
-    <details><summary data-i18n="faq_q6">Come funziona il pagamento?</summary><div class="ans" data-i18n="faq_a6">Invii la richiesta con le date, noi confermiamo la disponibilità e concordiamo direttamente il pagamento (bonifico, PayPal, carta con link sicuro o all'arrivo). La colazione di base è inclusa.</div></details>
+    <details><summary data-i18n="faq_q6">Come funziona il pagamento?</summary><div class="ans" data-i18n="faq_a6">Hai due modi, entrambi senza commissioni: (1) invii la richiesta con le date e, dopo la nostra conferma di disponibilità, concordiamo il pagamento (bonifico, PayPal o all'arrivo); (2) prenoti e paghi subito con carta in modo sicuro tramite Stripe, con addebito solo dopo la conferma. La colazione di base è inclusa.</div></details>
     <details><summary data-i18n="faq_q7">Qual è la politica di cancellazione?</summary><div class="ans" data-i18n="faq_a7">Cancellazione rigida: rimborso del 50% fino a 30 giorni prima dell'arrivo, nessun rimborso oltre tale termine.</div></details>
   </div>
 </section>
@@ -820,7 +820,7 @@ const I18N={
   rev_google:"Leave us a review on Google",
   book_eyebrow:"Book direct",book_title:"Availability & booking",
   book_lead:"Pick your dates and send us the request: we confirm availability and reply quickly. Direct, with no platform fees.",
-  req_t:"Request your booking",req_d:"Pick your dates and send the request: we check availability and reply right away. Payment is arranged directly, no fees.",
+  req_t:"Request your booking",req_d:"Pick your dates and send your request: we check availability and reply right away, with no fees. Prefer to pay now? You can book and pay securely by card below.",
   req_in:"Check-in",req_out:"Check-out",req_guests:"Guests",req_name:"Name",req_msg:"Message (optional)",req_err:"Pick check-in and check-out from the calendar above.",req_wa:"Send on WhatsApp",req_mail:"Send by email",
   price_1:"1 guest / night",price_2:"2 guests / night",price_dep:"Security deposit",price_dep_v:"None",price_checkin:"Check-in",price_checkout:"Check-out",
   price_policy:"<b>Cancellation:</b> 50% refund if you cancel at least 30 days before arrival; within 30 days, no refund. Breakfast included.",
@@ -832,7 +832,7 @@ const I18N={
   faq_q3:"Are pets allowed?",faq_a3:"No, pets are not allowed.",
   faq_q4:"Are children allowed?",faq_a4:"Yes, children are welcome, within the 2-guest total limit.",
   faq_q5:"Is there a lift?",faq_a5:"No. The flat is on the 4th floor with 4 flights of stairs.",
-  faq_q6:"How does payment work?",faq_a6:"Send your request with dates, we confirm availability and arrange payment directly (bank transfer, PayPal, secure card link or on arrival). Basic breakfast is included.",
+  faq_q6:"How does payment work?",faq_a6:"Two ways, both with no fees: (1) send your request with dates and, after we confirm availability, we arrange payment (bank transfer, PayPal or on arrival); (2) book and pay now securely by card via Stripe, charged only after confirmation. Basic breakfast is included.",
   faq_q7:"What is the cancellation policy?",faq_a7:"Strict cancellation: 50% refund up to 30 days before arrival, no refund afterwards.",
   con_eyebrow:"Contact",con_title:"Talk to us",con_lead:"For info, dates or special requests, write to us: we reply quickly.",con_phone:"Phone",
   foot_about:"One-bedroom short-stay flat in the old town of Nicosia (EN), Sicily. Direct booking, no fees.",
@@ -880,7 +880,7 @@ const I18N={
   rev_google:"Bewerten Sie uns auf Google",
   book_eyebrow:"Direkt buchen",book_title:"Verfügbarkeit & Buchung",
   book_lead:"Wählen Sie Ihre Termine und senden Sie die Anfrage: Wir prüfen die Verfügbarkeit und antworten schnell. Direkt, ohne Plattformgebühren.",
-  req_t:"Buchung anfragen",req_d:"Wählen Sie Ihre Termine und senden Sie die Anfrage: Wir prüfen die Verfügbarkeit und antworten sofort. Die Zahlung wird direkt vereinbart, ohne Gebühren.",
+  req_t:"Buchung anfragen",req_d:"Wählen Sie Ihre Termine und senden Sie die Anfrage: Wir prüfen die Verfügbarkeit und antworten sofort, ohne Gebühren. Möchten Sie sofort zahlen? Unten können Sie sicher mit Karte buchen und bezahlen.",
   req_in:"Anreise",req_out:"Abreise",req_guests:"Gäste",req_name:"Name",req_msg:"Nachricht (optional)",req_err:"Wählen Sie An- und Abreise im Kalender oben.",req_wa:"Per WhatsApp senden",req_mail:"Per E-Mail senden",
   price_1:"1 Gast / Nacht",price_2:"2 Gäste / Nacht",price_dep:"Kaution",price_dep_v:"Keine",price_checkin:"Check-in",price_checkout:"Check-out",
   price_policy:"<b>Stornierung:</b> 50% Rückerstattung bei Stornierung mindestens 30 Tage vor Anreise; innerhalb von 30 Tagen keine Rückerstattung. Frühstück inklusive.",
@@ -892,7 +892,7 @@ const I18N={
   faq_q3:"Sind Haustiere erlaubt?",faq_a3:"Nein, Haustiere sind nicht erlaubt.",
   faq_q4:"Sind Kinder erlaubt?",faq_a4:"Ja, Kinder sind willkommen, im Rahmen von insgesamt 2 Gästen.",
   faq_q5:"Gibt es einen Aufzug?",faq_a5:"Nein. Die Wohnung liegt im 4. Stock mit 4 Treppen.",
-  faq_q6:"Wie funktioniert die Zahlung?",faq_a6:"Senden Sie Ihre Anfrage mit den Terminen, wir bestätigen die Verfügbarkeit und vereinbaren die Zahlung direkt (Überweisung, PayPal, Karte per sicherem Link oder bei Ankunft). Ein einfaches Frühstück ist inklusive.",
+  faq_q6:"Wie funktioniert die Zahlung?",faq_a6:"Zwei Wege, beide ohne Gebühren: (1) Sie senden Ihre Anfrage mit den Terminen und nach unserer Bestätigung der Verfügbarkeit vereinbaren wir die Zahlung (Überweisung, PayPal oder bei Ankunft); (2) Sie buchen und zahlen sofort sicher mit Karte über Stripe, mit Belastung erst nach der Bestätigung. Ein einfaches Frühstück ist inklusive.",
   faq_q7:"Wie ist die Stornierungsbedingung?",faq_a7:"Strenge Stornierung: 50% Rückerstattung bis 30 Tage vor Anreise, danach keine Rückerstattung.",
   con_eyebrow:"Kontakt",con_title:"Sprechen Sie mit uns",con_lead:"Für Infos, Termine oder besondere Wünsche schreiben Sie uns: Wir antworten schnell.",con_phone:"Telefon",
   foot_about:"Ein-Zimmer-Ferienwohnung in der Altstadt von Nicosia (EN), Sizilien. Direktbuchung, keine Gebühren.",
@@ -940,7 +940,7 @@ const I18N={
   rev_google:"Laissez-nous un avis sur Google",
   book_eyebrow:"Réserver en direct",book_title:"Disponibilités & réservation",
   book_lead:"Choisissez vos dates et envoyez la demande : nous vérifions la disponibilité et répondons rapidement. En direct, sans frais de plateforme.",
-  req_t:"Demandez votre réservation",req_d:"Choisissez vos dates et envoyez la demande : nous vérifions la disponibilité et répondons aussitôt. Le paiement se convient directement, sans frais.",
+  req_t:"Demandez votre réservation",req_d:"Choisissez vos dates et envoyez votre demande : nous vérifions la disponibilité et répondons aussitôt, sans frais. Vous préférez payer tout de suite ? Vous pouvez réserver et payer par carte en toute sécurité ci-dessous.",
   req_in:"Arrivée",req_out:"Départ",req_guests:"Voyageurs",req_name:"Nom",req_msg:"Message (facultatif)",req_err:"Choisissez l'arrivée et le départ dans le calendrier ci-dessus.",req_wa:"Envoyer sur WhatsApp",req_mail:"Envoyer par e-mail",
   price_1:"1 voyageur / nuit",price_2:"2 voyageurs / nuit",price_dep:"Caution",price_dep_v:"Aucune",price_checkin:"Arrivée",price_checkout:"Départ",
   price_policy:"<b>Annulation :</b> remboursement de 50% si vous annulez au moins 30 jours avant l'arrivée ; dans les 30 jours, aucun remboursement. Petit-déjeuner inclus.",
@@ -952,7 +952,7 @@ const I18N={
   faq_q3:"Les animaux sont-ils admis ?",faq_a3:"Non, les animaux ne sont pas admis.",
   faq_q4:"Les enfants sont-ils admis ?",faq_a4:"Oui, les enfants sont les bienvenus, dans la limite de 2 voyageurs au total.",
   faq_q5:"Y a-t-il un ascenseur ?",faq_a5:"Non. Le logement est au 4e étage avec 4 volées d'escaliers.",
-  faq_q6:"Comment fonctionne le paiement ?",faq_a6:"Envoyez votre demande avec les dates, nous confirmons la disponibilité et convenons du paiement directement (virement, PayPal, carte via lien sécurisé ou à l'arrivée). Un petit-déjeuner de base est inclus.",
+  faq_q6:"Comment fonctionne le paiement ?",faq_a6:"Deux façons, toutes les deux sans frais : (1) vous envoyez votre demande avec les dates et, après notre confirmation de disponibilité, nous convenons du paiement (virement, PayPal ou à l'arrivée) ; (2) vous réservez et payez tout de suite par carte en toute sécurité via Stripe, le débit n'ayant lieu qu'après la confirmation. Un petit-déjeuner de base est inclus.",
   faq_q7:"Quelle est la politique d'annulation ?",faq_a7:"Annulation stricte : remboursement de 50% jusqu'à 30 jours avant l'arrivée, aucun remboursement ensuite.",
   con_eyebrow:"Contact",con_title:"Parlez-nous",con_lead:"Pour toute info, date ou demande spéciale, écrivez-nous : nous répondons vite.",con_phone:"Téléphone",
   foot_about:"Studio en court séjour dans la vieille ville de Nicosia (EN), Sicile. Réservation directe, sans frais.",
@@ -1000,7 +1000,7 @@ const I18N={
   rev_google:"Déjanos una reseña en Google",
   book_eyebrow:"Reserva directa",book_title:"Disponibilidad y reserva",
   book_lead:"Elige tus fechas y envíanos la solicitud: comprobamos la disponibilidad y respondemos enseguida. Directo, sin comisiones de plataforma.",
-  req_t:"Solicita tu reserva",req_d:"Elige tus fechas y envía la solicitud: comprobamos la disponibilidad y respondemos al momento. El pago se acuerda directamente, sin comisiones.",
+  req_t:"Solicita tu reserva",req_d:"Elige tus fechas y envía tu solicitud: comprobamos la disponibilidad y respondemos al momento, sin comisiones. ¿Prefieres pagar ya? Más abajo puedes reservar y pagar con tarjeta de forma segura.",
   req_in:"Entrada",req_out:"Salida",req_guests:"Huéspedes",req_name:"Nombre",req_msg:"Mensaje (opcional)",req_err:"Elige la entrada y la salida en el calendario de arriba.",req_wa:"Enviar por WhatsApp",req_mail:"Enviar por email",
   price_1:"1 huésped / noche",price_2:"2 huéspedes / noche",price_dep:"Fianza",price_dep_v:"Ninguna",price_checkin:"Entrada",price_checkout:"Salida",
   price_policy:"<b>Cancelación:</b> reembolso del 50% si cancelas al menos 30 días antes de la llegada; dentro de los 30 días, sin reembolso. Desayuno incluido.",
@@ -1012,7 +1012,7 @@ const I18N={
   faq_q3:"¿Se admiten mascotas?",faq_a3:"No, no se admiten mascotas.",
   faq_q4:"¿Se admiten niños?",faq_a4:"Sí, los niños son bienvenidos, dentro del límite de 2 huéspedes en total.",
   faq_q5:"¿Hay ascensor?",faq_a5:"No. El apartamento está en el 4º piso con 4 tramos de escaleras.",
-  faq_q6:"¿Cómo funciona el pago?",faq_a6:"Envía tu solicitud con las fechas, confirmamos la disponibilidad y acordamos el pago directamente (transferencia, PayPal, tarjeta con enlace seguro o a la llegada). El desayuno básico está incluido.",
+  faq_q6:"¿Cómo funciona el pago?",faq_a6:"Dos formas, ambas sin comisiones: (1) envías tu solicitud con las fechas y, tras nuestra confirmación de disponibilidad, acordamos el pago (transferencia, PayPal o a la llegada); (2) reservas y pagas al momento con tarjeta de forma segura mediante Stripe, con cargo solo tras la confirmación. El desayuno básico está incluido.",
   faq_q7:"¿Cuál es la política de cancelación?",faq_a7:"Cancelación estricta: reembolso del 50% hasta 30 días antes de la llegada, sin reembolso después.",
   con_eyebrow:"Contacto",con_title:"Habla con nosotros",con_lead:"Para información, fechas o peticiones especiales, escríbenos: respondemos rápido.",con_phone:"Teléfono",
   foot_about:"Apartamento de estancia corta en el casco antiguo de Nicosia (EN), Sicilia. Reserva directa, sin comisiones.",
