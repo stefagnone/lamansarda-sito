@@ -5,9 +5,22 @@
 //   STRIPE_SECRET_KEY = chiave segreta Stripe. In test usa sk_test_..., poi passa a sk_live_...
 //   SITE_URL (opzionale) = origine per success/cancel URL (default: dominio della richiesta)
 //
-// Tariffe: TENERE ALLINEATE con RATES in index.html ({1:49, 2:59} €/notte).
-
+// ===== PRICING — tenere sincronizzato con l'altro file (index.html <-> api/checkout.js) =====
+// Sconti soggiorno lungo. NESSUN minimo notti per prenotare. Arrotondamento a euro interi.
 const RATES = { '1': 49, '2': 59 };
+const DISCOUNTS = [                      // soglie in ordine DECRESCENTE
+  { minNights: 28, pct: 0.25, label: 'monthly' },
+  { minNights: 7,  pct: 0.10, label: 'weekly'  },
+];
+function pricing(nights, guests) {
+  const rate = RATES[String(guests)] || 59;
+  const gross = nights * rate;
+  let pct = 0, label = '';
+  for (const d of DISCOUNTS) { if (nights >= d.minNights) { pct = d.pct; label = d.label; break; } }
+  const discount = Math.round(gross * pct);   // euro interi: identico su client e server
+  return { nights, rate, gross, pct, label, discount, total: gross - discount };
+}
+// ===== /PRICING =====
 const MAX_NIGHTS = 60;
 const MAX_AHEAD_DAYS = 400;
 
@@ -176,24 +189,27 @@ export default async function handler(req, res) {
     return res.status(409).json({ error: 'unavailable', message: 'Le date selezionate non sono più disponibili.' });
   }
 
-  const rate = RATES[guests];
-  const total = nights * rate;
+  const p = pricing(nights, guests);
+  const total = p.total;
 
   const origin = process.env.SITE_URL
     || req.headers.origin
     || (req.headers.host ? `https://${req.headers.host}` : 'https://www.lamansardanicosia.it');
 
   const guestLabel = guests === '1' ? 'ospite' : 'ospiti';
+  let lineDesc = `Check-in ${checkin} · Check-out ${checkout} · ${nights} × ${p.rate}€`;
+  if (p.discount > 0) lineDesc += ` · sconto ${Math.round(p.pct * 100)}% (−${p.discount}€)`;
 
   const params = new URLSearchParams();
   params.set('mode', 'payment');
   params.set('success_url', `${origin}/?paid=1&amount=${total}&session_id={CHECKOUT_SESSION_ID}`);
   params.set('cancel_url', `${origin}/?canceled=1#prenota`);
-  params.set('line_items[0][quantity]', String(nights));
+  // riga unica con il totale GIÀ SCONTATO (l'importo addebitato è autorità del server)
+  params.set('line_items[0][quantity]', '1');
   params.set('line_items[0][price_data][currency]', 'eur');
-  params.set('line_items[0][price_data][unit_amount]', String(rate * 100));
-  params.set('line_items[0][price_data][product_data][name]', `Soggiorno La Mansarda Nicosia (${guests} ${guestLabel})`);
-  params.set('line_items[0][price_data][product_data][description]', `Check-in ${checkin} · Check-out ${checkout}`);
+  params.set('line_items[0][price_data][unit_amount]', String(total * 100));
+  params.set('line_items[0][price_data][product_data][name]', `Soggiorno La Mansarda Nicosia (${nights} notti, ${guests} ${guestLabel})`);
+  params.set('line_items[0][price_data][product_data][description]', lineDesc);
   // autorizza ora, l'host cattura dopo aver confermato la disponibilità (entro 7 giorni)
   params.set('payment_intent_data[capture_method]', 'manual');
   // metadati anche sul PaymentIntent: servono per ricostruire le date occupate (vedi stripeBusy)

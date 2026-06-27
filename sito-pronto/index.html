@@ -402,6 +402,8 @@ h1,h2,h3{text-wrap:balance}
 .estimate .erow:last-child{margin-bottom:0}
 .estimate .etot{font-size:1.5rem;font-weight:700;color:var(--navy-deep);font-family:'Playfair Display',serif}
 .estimate .eallin{font-size:.78rem;color:var(--muted);margin-top:.5rem;padding-top:.5rem;border-top:1px solid #d4e8f7;text-align:center}
+.estimate .erow.disc{color:#1c7a44}
+.estimate .ediscmsg{font-size:.8rem;color:#1c7a44;font-weight:600;margin-top:.5rem;text-align:center}
 /* Host section */
 .host{display:grid;grid-template-columns:.8fr 1.2fr;gap:42px;align-items:center}
 .host-emblem{aspect-ratio:4/5;border-radius:var(--radius);background:linear-gradient(160deg,var(--azure-light),#fff);border:1px solid var(--line);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:2rem}
@@ -1249,7 +1251,28 @@ const EST_EMPTY={it:"Scegli le date per vedere il totale.",en:"Pick your dates t
 const ALLIN={it:"Tutto incluso · nessuna commissione, nessun costo aggiuntivo",en:"All inclusive · no fees, no extra costs",de:"Alles inklusive · keine Gebühren, keine Zusatzkosten",fr:"Tout compris · aucune commission, aucun coût supplémentaire",es:"Todo incluido · sin comisiones ni costes adicionales"};
 const TUTTOINCL={it:"tutto incluso",en:"all inclusive",de:"alles inklusive",fr:"tout compris",es:"todo incluido"};
 const RANGE_ERR={it:"La data di partenza deve essere successiva all'arrivo.",en:"Check-out must be after check-in.",de:"Das Abreisedatum muss nach der Anreise liegen.",fr:"La date de départ doit suivre l'arrivée.",es:"La salida debe ser posterior a la entrada."};
-const RATES={'1':49,'2':59};
+// ===== PRICING — tenere sincronizzato con l'altro file (index.html <-> api/checkout.js) =====
+// Sconti soggiorno lungo. NESSUN minimo notti per prenotare. Arrotondamento a euro interi.
+const RATES = { '1': 49, '2': 59 };
+const DISCOUNTS = [                      // soglie in ordine DECRESCENTE
+  { minNights: 28, pct: 0.25, label: 'monthly' },
+  { minNights: 7,  pct: 0.10, label: 'weekly'  },
+];
+function pricing(nights, guests) {
+  const rate = RATES[String(guests)] || 59;
+  const gross = nights * rate;
+  let pct = 0, label = '';
+  for (const d of DISCOUNTS) { if (nights >= d.minNights) { pct = d.pct; label = d.label; break; } }
+  const discount = Math.round(gross * pct);   // euro interi: identico su client e server
+  return { nights, rate, gross, pct, label, discount, total: gross - discount };
+}
+// ===== /PRICING =====
+// messaggi sconto (solo display lato client; {p} = percentuale)
+const DISC_LABEL={it:"Sconto",en:"Discount",de:"Rabatt",fr:"Remise",es:"Descuento"};
+const DISC_MSG={
+  weekly:{it:"Resti una settimana? −{p}% applicato",en:"Staying a week? −{p}% applied",de:"Eine Woche? −{p}% angewendet",fr:"Une semaine ? −{p}% appliqué",es:"¿Una semana? −{p}% aplicado"},
+  monthly:{it:"Resti un mese? −{p}% applicato",en:"Staying a month? −{p}% applied",de:"Einen Monat? −{p}% angewendet",fr:"Un mois ? −{p}% appliqué",es:"¿Un mes? −{p}% aplicado"}
+};
 const PAY_PICK={it:"Seleziona le date per pagare",en:"Select dates to pay",de:"Daten wählen, um zu zahlen",fr:"Sélectionnez les dates pour payer",es:"Selecciona las fechas para pagar"};
 const PAY_PAY={it:"Prenota con carta",en:"Book with card",de:"Mit Karte buchen",fr:"Réserver par carte",es:"Reserva con tarjeta"};
 const PAY_WAIT={it:"Attendere…",en:"Please wait…",de:"Bitte warten…",fr:"Veuillez patienter…",es:"Espera…"};
@@ -1278,8 +1301,7 @@ function calcStay(){
   const i=rIn.value,o=rOut.value;if(!i||!o)return null;
   const nights=Math.round((new Date(o)-new Date(i))/86400000);
   if(nights<1)return null;
-  const rate=RATES[rGuests.value]||59;
-  return {nights,rate,total:nights*rate};
+  return pricing(nights, rGuests.value);
 }
 function updateEstimate(){
   const est=document.getElementById('estimate');const s=calcStay();
@@ -1289,7 +1311,10 @@ function updateEstimate(){
     const nlbl=s.nights===1?(NIGHT_ONE[lang]||'notte'):(NIGHTS_LBL[lang]||'notti');
     const totLbl=(REQL[lang]||REQL.it).total;
     est.className='estimate';
-    est.innerHTML=`<div class="erow"><span>${s.nights} ${nlbl} × ${s.rate} €</span><span>${s.total} €</span></div><div class="erow"><span>${totLbl}</span><span class="etot">${s.total} €</span></div><div class="eallin">${ALLIN[lang]||ALLIN.it}</div>`;
+    const pctInt=Math.round(s.pct*100);
+    const discRow=s.discount>0?`<div class="erow disc"><span>${DISC_LABEL[lang]||DISC_LABEL.it} −${pctInt}%</span><span>−${s.discount} €</span></div>`:'';
+    const discMsg=(s.discount>0&&s.label&&DISC_MSG[s.label])?`<div class="ediscmsg">${(DISC_MSG[s.label][lang]||DISC_MSG[s.label].it).replace('{p}',pctInt)}</div>`:'';
+    est.innerHTML=`<div class="erow"><span>${s.nights} ${nlbl} × ${s.rate} €</span><span>${s.gross} €</span></div>${discRow}<div class="erow"><span>${totLbl}</span><span class="etot">${s.total} €</span></div><div class="eallin">${ALLIN[lang]||ALLIN.it}</div>${discMsg}`;
   }
   // su mobile la price-card è sotto la piega: rispecchia il totale accanto al calendario
   const ch=document.getElementById('calHint');
