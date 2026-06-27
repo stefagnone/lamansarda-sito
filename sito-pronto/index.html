@@ -181,6 +181,7 @@ ul.amen{padding:0;margin:0}
 .score{display:flex;align-items:center;gap:.6rem;background:var(--azure-light);border-radius:12px;padding:.6rem 1rem}
 .score b{font-size:1.5rem;color:var(--navy-deep)}
 .score span{font-size:.82rem;color:var(--muted)}
+a.badge,a.score{text-decoration:none;color:inherit;cursor:pointer}
 .rev-grid{columns:3;column-gap:18px}
 .rev{break-inside:avoid;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.1rem 1.2rem;margin-bottom:18px;box-shadow:var(--shadow)}
 .rev .stars{color:#f5a623;letter-spacing:1px;font-size:.95rem}
@@ -406,8 +407,8 @@ h1,h2,h3{text-wrap:balance}
 .estimate .ediscmsg{font-size:.8rem;color:#1c7a44;font-weight:600;margin-top:.5rem;text-align:center}
 /* Host section */
 .host{display:grid;grid-template-columns:.8fr 1.2fr;gap:42px;align-items:center}
-.host-emblem{aspect-ratio:4/5;border-radius:var(--radius);background:linear-gradient(160deg,var(--azure-light),#fff);border:1px solid var(--line);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:2rem}
-.host-emblem img{width:80%;max-width:300px;height:auto;aspect-ratio:auto;object-fit:contain}
+.host-emblem{aspect-ratio:4/5;border-radius:var(--radius);background:linear-gradient(160deg,var(--azure-light),#fff);border:1px solid var(--line);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0;overflow:hidden}
+.host-emblem img{width:100%;height:100%;object-fit:cover;object-position:center}
 .host .sig{margin-top:1rem;font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy-deep)}
 .host .placeholder-note{font-size:.72rem;color:var(--azure-ink);background:var(--azure-light);border:1px dashed var(--azure);border-radius:6px;padding:.2rem .5rem;display:inline-block;margin-top:.6rem}
 /* Getting here */
@@ -463,8 +464,8 @@ h1,h2,h3{text-wrap:balance}
       <a href="#galleria" class="btn ghost" style="color:#fff;border-color:#fff" data-i18n="hero_cta2">Guarda le foto</a>
     </div>
     <div class="badges">
-      <div class="badge">★ <b>4,83</b>&nbsp;<span data-i18n="badge_airbnb">Airbnb · 6 recensioni</span></div>
-      <div class="badge"><b>9,1</b>&nbsp;<span data-i18n="badge_booking">Booking · 42 recensioni</span></div>
+      <a class="badge" href="https://www.airbnb.it/rooms/1387637901876576827" target="_blank" rel="noopener noreferrer">★ <b>4,83</b>&nbsp;<span data-i18n="badge_airbnb">Airbnb · 6 recensioni</span></a>
+      <a class="badge" href="https://www.booking.com/hotel/it/bilocale-a-nicosia-nicosia.it.html" target="_blank" rel="noopener noreferrer"><b>9,1</b>&nbsp;<span data-i18n="badge_booking">Booking · 42 recensioni</span></a>
       <div class="badge">🅿️ <span data-i18n="badge_parking">Parcheggio gratuito</span></div>
     </div>
   </div>
@@ -570,7 +571,7 @@ h1,h2,h3{text-wrap:balance}
   <div class="wrap host">
     <div class="reveal">
       <div class="host-emblem">
-        <img src="logo-mansarda.png" alt="La Mansarda" width="1174" height="590" loading="lazy">
+        <img src="assets/img/host.webp" alt="Paolo e Stefano Compagnone, gli host di La Mansarda Nicosia" width="800" height="1000" loading="lazy" decoding="async">
       </div>
     </div>
     <div class="reveal">
@@ -589,8 +590,8 @@ h1,h2,h3{text-wrap:balance}
     <div class="eyebrow" data-i18n="rev_eyebrow">Recensioni reali</div>
     <h2 data-i18n="rev_title">Cosa dicono gli ospiti</h2>
     <div class="rev-head">
-      <div class="score"><b>4,83</b><span>★ Airbnb<br>6 <span data-i18n="rev_reviews">recensioni</span></span></div>
-      <div class="score"><b>9,1</b><span>Booking<br>42 <span data-i18n="rev_reviews2">recensioni</span></span></div>
+      <a class="score" href="https://www.airbnb.it/rooms/1387637901876576827" target="_blank" rel="noopener noreferrer"><b>4,83</b><span>★ Airbnb<br>6 <span data-i18n="rev_reviews">recensioni</span></span></a>
+      <a class="score" href="https://www.booking.com/hotel/it/bilocale-a-nicosia-nicosia.it.html" target="_blank" rel="noopener noreferrer"><b>9,1</b><span>Booking<br>42 <span data-i18n="rev_reviews2">recensioni</span></span></a>
     </div>
     <div class="rev-grid" id="revGrid"></div>
     <p style="font-size:.82rem;color:var(--muted);margin-top:1rem" data-i18n="rev_disclaimer">Recensioni reali raccolte dai profili Airbnb e Booking della struttura.</p>
