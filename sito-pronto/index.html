@@ -47,7 +47,8 @@
     {"@type":"LocationFeatureSpecification","name":"Free parking","value":true},
     {"@type":"LocationFeatureSpecification","name":"Air conditioning","value":true},
     {"@type":"LocationFeatureSpecification","name":"Kitchen","value":true},
-    {"@type":"LocationFeatureSpecification","name":"Breakfast","value":true}
+    {"@type":"LocationFeatureSpecification","name":"Breakfast","value":true},
+    {"@type":"LocationFeatureSpecification","name":"Workspace with PC and printer","value":true}
   ],
   "telephone": "+39 347 7054576",
   "petsAllowed": false,
@@ -77,8 +78,8 @@
     {"@type":"Question","name":"C'è il parcheggio?","acceptedAnswer":{"@type":"Answer","text":"Sì, parcheggio privato gratuito in loco, accessibile anche per moto."}},
     {"@type":"Question","name":"Sono ammessi animali?","acceptedAnswer":{"@type":"Answer","text":"No, gli animali non sono ammessi."}},
     {"@type":"Question","name":"Sono ammessi i bambini?","acceptedAnswer":{"@type":"Answer","text":"Sì, i bambini sono benvenuti, nel limite di 2 ospiti totali."}},
-    {"@type":"Question","name":"C'è l'ascensore?","acceptedAnswer":{"@type":"Answer","text":"No. L'appartamento è al 4º piano con 4 rampe di scale."}},
-    {"@type":"Question","name":"Come funziona il pagamento?","acceptedAnswer":{"@type":"Answer","text":"Hai due modi, entrambi senza commissioni: (1) invii la richiesta con le date e, dopo la nostra conferma di disponibilità, concordiamo il pagamento (bonifico, PayPal o all'arrivo); (2) prenoti e paghi subito con carta in modo sicuro tramite Stripe, con addebito solo dopo la conferma. La colazione di base è inclusa."}},
+    {"@type":"Question","name":"C'è l'ascensore?","acceptedAnswer":{"@type":"Answer","text":"No. L'appartamento è al 3° piano e mezzo, senza ascensore."}},
+    {"@type":"Question","name":"Come funziona il pagamento?","acceptedAnswer":{"@type":"Answer","text":"Invii la richiesta con le date; dopo la nostra conferma di disponibilità concordiamo insieme il pagamento (bonifico, PayPal o all'arrivo), senza commissioni. La colazione di base è inclusa."}},
     {"@type":"Question","name":"Qual è la politica di cancellazione?","acceptedAnswer":{"@type":"Answer","text":"Cancellazione rigida: rimborso del 50% fino a 30 giorni prima dell'arrivo, nessun rimborso oltre tale termine."}}
   ]
 }
@@ -242,23 +243,6 @@ a.badge,a.score{text-decoration:none;color:inherit;cursor:pointer}
 .policy{font-size:.85rem;color:var(--muted);margin-top:.8rem}
 .incl{font-size:.85rem;color:var(--muted);margin:.7rem 0 0;line-height:1.55}
 .incl b{color:var(--navy-deep)}
-.pay-box{margin-top:1rem;padding-top:1.1rem;border-top:1px solid var(--line)}
-.pay-box h3{margin:0 0 .25rem;font-size:1.05rem}
-.pay-box .pay-sub{font-size:.85rem;color:var(--muted);margin:0 0 .8rem;line-height:1.5}
-.pay-btn{width:100%;justify-content:center}
-.pay-btn,.cta-pay{background:#635bff}
-.pay-btn:hover,.cta-pay:hover{background:#5247e0}
-.pay-btn[disabled]{opacity:.55;cursor:not-allowed}
-.pay-btn[disabled]:hover{background:#635bff;transform:none}
-.pay-err{color:#b3261e;font-size:.82rem;margin:.55rem 0 0;text-align:center}
-.pay-secure{display:block;text-align:center;font-size:.74rem;color:var(--muted);margin-top:.55rem}
-.pay-notice{margin:0 0 18px;padding:.9rem 1.1rem;border-radius:10px;font-size:.92rem;background:var(--azure-light);border:1px solid #d4e8f7;color:var(--ink)}
-.pay-notice.ok{background:#e7f6ec;border-color:#bce3c9;color:#176a35;font-weight:500}
-.pay-notice{animation:noticeIn .3s ease}
-@keyframes noticeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.45);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;margin-right:.45rem;vertical-align:-2px}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion: reduce){.spin{animation:none}.pay-notice{animation:none}}
 /* FAQ */
 .faq details{border:1px solid var(--line);border-radius:10px;margin-bottom:.6rem;padding:.2rem .2rem;background:#fff}
 .faq summary{cursor:pointer;padding:.9rem 1rem;font-weight:600;color:var(--navy-deep);list-style:none;display:flex;justify-content:space-between;align-items:center}
@@ -489,9 +473,9 @@ h1,h2,h3{text-wrap:balance}
     <div>
       <div class="eyebrow" data-i18n="apt_eyebrow">L'appartamento</div>
       <h2 data-i18n="apt_title">Una tipica casa siciliana, calda e tranquilla</h2>
-      <p data-i18n="apt_p1">La Mansarda è un bilocale nel cuore del centro storico di Nicosia, con soffitti in legno a vista, arredi dal sapore vintage e un'atmosfera rilassata. Pensato per coppie, viaggiatori singoli o famiglie con un bambino in cerca di un soggiorno autentico.</p>
-      <p data-i18n="apt_p2">Dispone di una camera con due letti singoli, cucina completa, bagno privato, aria condizionata e riscaldamento, TV con Fire Stick e una scrivania ideale per chi lavora da remoto. All'arrivo trovi un piccolo kit di benvenuto e la colazione di base inclusa.</p>
-      <p style="font-size:.9rem;color:var(--muted)" data-i18n="apt_note">Nota: l'appartamento si trova al 4º piano senza ascensore (4 rampe di scale).</p>
+      <p data-i18n="apt_p1">La Mansarda è un bilocale nel cuore del centro storico di Nicosia, con soffitti in legno a vista, arredi dal sapore vintage e un'atmosfera rilassata. Pensato per coppie e viaggiatori singoli in cerca di un soggiorno autentico.</p>
+      <p data-i18n="apt_p2">Dispone di una camera con due letti singoli, cucina completa, bagno privato, aria condizionata e riscaldamento, TV con Fire Stick e una scrivania con PC e stampante, ideale per chi lavora da remoto. All'arrivo trovi la colazione di base inclusa.</p>
+      <p style="font-size:.9rem;color:var(--muted)" data-i18n="apt_note">Nota: l'appartamento si trova al 3° piano e mezzo, senza ascensore.</p>
       <a href="#prenota" class="btn" data-i18n="apt_cta">Prenota il tuo soggiorno</a>
     </div>
     <div class="media-stack">
@@ -524,7 +508,7 @@ h1,h2,h3{text-wrap:balance}
       <li><span class="ico">✓</span> <span data-i18n="am_ac">Aria condizionata</span></li>
       <li><span class="ico">✓</span> <span data-i18n="am_heat">Riscaldamento</span></li>
       <li><span class="ico">✓</span> <span data-i18n="am_tv">TV con Fire Stick</span></li>
-      <li><span class="ico">✓</span> <span data-i18n="am_desk">Spazio di lavoro dedicato</span></li>
+      <li><span class="ico">✓</span> <span data-i18n="am_desk">Spazio di lavoro con PC e stampante</span></li>
       <li><span class="ico">✓</span> <span data-i18n="am_park">Parcheggio privato gratuito</span></li>
       <li><span class="ico">✓</span> <span data-i18n="am_break">Colazione inclusa</span></li>
       <li><span class="ico">✓</span> <span data-i18n="am_bath">Bagno privato con set di cortesia</span></li>
@@ -577,7 +561,7 @@ h1,h2,h3{text-wrap:balance}
     <div class="reveal">
       <div class="eyebrow" data-i18n="host_eyebrow">Gli host</div>
       <h2 data-i18n="host_title">I tuoi host: Paolo e Stefano</h2>
-      <p data-i18n="host_p1">La Mansarda è una casa di famiglia, non un albergo. Quando arrivi ti accogliamo di persona, ti consegniamo le chiavi e ti raccontiamo i posti giusti dove mangiare e cosa vedere a Nicosia. Troverai un piccolo kit di benvenuto e la colazione di base pronta per te.</p>
+      <p data-i18n="host_p1">La Mansarda è una casa di famiglia, non un albergo. Quando arrivi ti accogliamo di persona, ti consegniamo le chiavi e ti raccontiamo i posti giusti dove mangiare e cosa vedere a Nicosia. Troverai la colazione di base pronta per te.</p>
       <p data-i18n="host_p2">Rispondiamo in fretta a ogni messaggio: per noi conta che ti senta a casa, dal primo contatto fino alla partenza.</p>
       <div class="sig">Paolo &amp; Stefano</div>
     </div>
@@ -607,11 +591,10 @@ h1,h2,h3{text-wrap:balance}
     <div class="eyebrow" data-i18n="book_eyebrow">Prenota diretto</div>
     <h2 data-i18n="book_title">Disponibilità e prenotazione</h2>
     <p class="lead" data-i18n="book_lead">Scegli le date e inviaci la richiesta: verifichiamo la disponibilità e ti rispondiamo subito. Diretto, senza commissioni di piattaforma.</p>
-    <div id="payNotice" class="pay-notice hidden" role="status"></div>
     <div class="book-grid" style="margin-top:24px">
       <div class="widget-box">
         <h3 data-i18n="req_t">Richiedi la tua prenotazione</h3>
-        <p class="reqsub" data-i18n="req_d">Scegli le date e inviaci la richiesta: verifichiamo la disponibilità e ti rispondiamo subito, senza commissioni. Preferisci pagare subito? Qui sotto puoi prenotare e pagare con carta in modo sicuro.</p>
+        <p class="reqsub" data-i18n="req_d">Scegli le date e inviaci la richiesta: verifichiamo la disponibilità e ti rispondiamo subito, senza commissioni.</p>
         <div id="availWarn" class="avail-warn hidden" role="status"><span data-i18n="avail_degraded">Disponibilità da confermare con noi: al momento non possiamo verificare tutte le date in tempo reale. Inviaci la richiesta e ti confermiamo a breve.</span></div>
         <div class="cal" id="cal">
           <div class="cal-head">
@@ -652,7 +635,7 @@ h1,h2,h3{text-wrap:balance}
           <p class="reqsent hidden" id="reqSent" role="status"></p>
           <div class="trust">
             <span><span class="ico">✓</span> <span data-i18n="trust_reply">Rispondiamo in genere in poche ore</span></span>
-            <span><span class="ico">✓</span> <span data-i18n="trust_noprepay">Due modi, stessa prenotazione: invia una richiesta o paga con carta (addebito solo a conferma)</span></span>
+            <span><span class="ico">✓</span> <span data-i18n="trust_noprepay">Paghi solo dopo la nostra conferma delle date</span></span>
             <span><span class="ico">✓</span> <span data-i18n="trust_nofee">Prezzo diretto, senza commissioni</span></span>
           </div>
         </form>
@@ -663,17 +646,10 @@ h1,h2,h3{text-wrap:balance}
         <div class="row"><span data-i18n="price_dep">Deposito cauzionale</span><b data-i18n="price_dep_v">Nessuno</b></div>
         <div class="row"><span data-i18n="price_checkin">Check-in</span><b>14:00 – 00:00</b></div>
         <div class="row"><span data-i18n="price_checkout">Check-out</span><b>10:00 – 10:30</b></div>
-        <div class="row"><span data-i18n="price_floor">Piano</span><b data-i18n="price_floor_v">4° · senza ascensore</b></div>
-        <p class="incl" data-i18n="price_incl"><b>Incluso nel prezzo:</b> colazione · parcheggio privato gratuito · WiFi · vista monti · kit di benvenuto</p>
+        <div class="row"><span data-i18n="price_floor">Piano</span><b data-i18n="price_floor_v">3° e mezzo · senza ascensore</b></div>
+        <p class="incl" data-i18n="price_incl"><b>Incluso nel prezzo:</b> colazione · parcheggio privato gratuito · WiFi · vista monti</p>
         <div class="estimate empty" id="estimate" aria-live="polite" aria-atomic="true">Scegli le date per vedere il totale.</div>
         <p class="policy" data-i18n="price_policy"><b>Cancellazione:</b> rimborso del 50% se annulli almeno 30 giorni prima dell'arrivo; entro i 30 giorni, nessun rimborso. Colazione inclusa.</p>
-        <div class="pay-box">
-          <h3 data-i18n="pay_t">Prenota e paga online</h3>
-          <p class="pay-sub" data-i18n="pay_d">Scegli date e ospiti e autorizza il pagamento in modo sicuro con carta: l'addebito avviene solo dopo la nostra conferma di disponibilità. Se le date non fossero disponibili, nessun addebito.</p>
-          <button type="button" id="payBtn" class="btn pay-btn" disabled>Seleziona le date per pagare</button>
-          <p class="pay-err hidden" id="payErr" role="alert"></p>
-          <span class="pay-secure"><span aria-hidden="true">🔒</span> <span data-i18n="pay_secure">Nessun addebito finché non confermiamo le date · pagamento protetto con Stripe</span></span>
-        </div>
       </div>
     </div>
   </div>
@@ -688,8 +664,8 @@ h1,h2,h3{text-wrap:balance}
     <details><summary data-i18n="faq_q2">C'è il parcheggio?</summary><div class="ans" data-i18n="faq_a2">Sì, parcheggio privato gratuito in loco, accessibile anche per moto.</div></details>
     <details><summary data-i18n="faq_q3">Sono ammessi animali?</summary><div class="ans" data-i18n="faq_a3">No, gli animali non sono ammessi.</div></details>
     <details><summary data-i18n="faq_q4">Sono ammessi i bambini?</summary><div class="ans" data-i18n="faq_a4">Sì, i bambini sono benvenuti, nel limite di 2 ospiti totali.</div></details>
-    <details><summary data-i18n="faq_q5">C'è l'ascensore?</summary><div class="ans" data-i18n="faq_a5">No. L'appartamento è al 4º piano con 4 rampe di scale.</div></details>
-    <details><summary data-i18n="faq_q6">Come funziona il pagamento?</summary><div class="ans" data-i18n="faq_a6">Hai due modi, entrambi senza commissioni: (1) invii la richiesta con le date e, dopo la nostra conferma di disponibilità, concordiamo il pagamento (bonifico, PayPal o all'arrivo); (2) prenoti e paghi subito con carta in modo sicuro tramite Stripe, con addebito solo dopo la conferma. La colazione di base è inclusa.</div></details>
+    <details><summary data-i18n="faq_q5">C'è l'ascensore?</summary><div class="ans" data-i18n="faq_a5">No. L'appartamento è al 3° piano e mezzo, senza ascensore.</div></details>
+    <details><summary data-i18n="faq_q6">Come funziona il pagamento?</summary><div class="ans" data-i18n="faq_a6">Invii la richiesta con le date; dopo la nostra conferma di disponibilità concordiamo insieme il pagamento (bonifico, PayPal o all'arrivo), senza commissioni. La colazione di base è inclusa.</div></details>
     <details><summary data-i18n="faq_q7">Qual è la politica di cancellazione?</summary><div class="ans" data-i18n="faq_a7">Cancellazione rigida: rimborso del 50% fino a 30 giorni prima dell'arrivo, nessun rimborso oltre tale termine.</div></details>
   </div>
 </section>
@@ -746,7 +722,7 @@ h1,h2,h3{text-wrap:balance}
 <!-- STICKY CTA (mobile) -->
 <div class="sticky-cta" id="stickyCta">
   <div class="p"><span data-i18n="cta_from">da</span> <b>49 € <span style="font-size:.75rem;font-family:Inter,sans-serif;color:var(--muted);font-weight:400" data-i18n="cta_night">/ notte</span></b></div>
-  <a href="#prenota" class="btn cta-pay" data-i18n="cta_btn">Prenota</a>
+  <a href="#prenota" class="btn" data-i18n="cta_btn">Prenota</a>
 </div>
 
 <a href="https://wa.me/393477054576?text=Ciao%2C%20vorrei%20informazioni%20su%20La%20Mansarda%20a%20Nicosia" class="wa-float" id="waFloat" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
@@ -805,13 +781,13 @@ const I18N={
   badge_airbnb:"Airbnb · 6 reviews",badge_booking:"Booking · 42 reviews",badge_parking:"Free parking",
   hl_guests:"guests · 1 bedroom",hl_size:"2 single beds",hl_wifi:"fast, included",hl_park_b:"Free",hl_park:"private parking",hl_break_b:"Breakfast",hl_break:"included",hl_view_b:"Mountain view",hl_view:"and old town",
   apt_eyebrow:"The flat",apt_title:"A typical Sicilian home, warm and quiet",
-  apt_p1:"La Mansarda is a one-bedroom flat in the heart of Nicosia's old town, with exposed wood ceilings, vintage furnishings and a relaxed atmosphere. Ideal for couples, solo travellers or families with one child looking for an authentic stay.",
-  apt_p2:"It has a bedroom with two single beds, a full kitchen, private bathroom, air conditioning and heating, a TV with Fire Stick and a desk perfect for remote work. On arrival you'll find a small welcome kit and a basic breakfast included.",
-  apt_note:"Note: the flat is on the 4th floor with no lift (4 flights of stairs).",
+  apt_p1:"La Mansarda is a one-bedroom flat in the heart of Nicosia's old town, with exposed wood ceilings, vintage furnishings and a relaxed atmosphere. Ideal for couples and solo travellers looking for an authentic stay.",
+  apt_p2:"It has a bedroom with two single beds, a full kitchen, private bathroom, air conditioning and heating, a TV with Fire Stick and a desk with a PC and printer, perfect for remote work. On arrival you'll find a basic breakfast included.",
+  apt_note:"Note: the flat is three and a half floors up, with no lift.",
   apt_cta:"Book your stay",
   gal_eyebrow:"Gallery",gal_title:"Take a look at every corner",
   amen_eyebrow:"Amenities",amen_title:"All the comfort, included",
-  am_wifi:"Free WiFi",am_kitchen:"Full kitchen (fridge, oven, microwave)",am_coffee:"Coffee machine & kettle",am_ac:"Air conditioning",am_heat:"Heating",am_tv:"TV with Fire Stick",am_desk:"Dedicated workspace",am_park:"Free private parking",am_break:"Breakfast included",am_bath:"Private bathroom with toiletries",am_hair:"Hair dryer",am_view:"Mountain & garden view",am_clean:"Thorough cleaning",am_safe:"Smoke & CO detectors",am_extra:"Guitar, chess & relax armchair",
+  am_wifi:"Free WiFi",am_kitchen:"Full kitchen (fridge, oven, microwave)",am_coffee:"Coffee machine & kettle",am_ac:"Air conditioning",am_heat:"Heating",am_tv:"TV with Fire Stick",am_desk:"Workspace with PC and printer",am_park:"Free private parking",am_break:"Breakfast included",am_bath:"Private bathroom with toiletries",am_hair:"Hair dryer",am_view:"Mountain & garden view",am_clean:"Thorough cleaning",am_safe:"Smoke & CO detectors",am_extra:"Guitar, chess & relax armchair",
   nic_eyebrow:"The location",nic_title:"Discover Nicosia, authentic Sicily",
   nic_lead:"A medieval town in the heart of the Nebrodi mountains, away from mass tourism: alleys, churches, mountain views and nature just steps from the flat.",
   poi1_t:"Old town",poi1_d:"Medieval alleys, views and squares a few minutes on foot.",
@@ -825,20 +801,20 @@ const I18N={
   rev_google:"Leave us a review on Google",
   book_eyebrow:"Book direct",book_title:"Availability & booking",
   book_lead:"Pick your dates and send us the request: we confirm availability and reply quickly. Direct, with no platform fees.",
-  req_t:"Request your booking",req_d:"Pick your dates and send your request: we check availability and reply right away, with no fees. Prefer to pay now? You can book and pay securely by card below.",
+  req_t:"Request your booking",req_d:"Pick your dates and send your request: we check availability and reply right away, with no fees.",
   req_in:"Check-in",req_out:"Check-out",req_guests:"Guests",req_name:"Name",req_msg:"Message (optional)",req_err:"Pick check-in and check-out from the calendar above.",req_wa:"Send on WhatsApp",req_mail:"Send by email",
   price_1:"1 guest / night",price_2:"2 guests / night",price_dep:"Security deposit",price_dep_v:"None",price_checkin:"Check-in",price_checkout:"Check-out",
   price_policy:"<b>Cancellation:</b> 50% refund if you cancel at least 30 days before arrival; within 30 days, no refund. Breakfast included.",
-  price_incl:"<b>Included in the price:</b> breakfast · free private parking · WiFi · mountain view · welcome kit",
-  price_floor:"Floor",price_floor_v:"4th · no lift",
+  price_incl:"<b>Included in the price:</b> breakfast · free private parking · WiFi · mountain view",
+  price_floor:"Floor",price_floor_v:"3½ · no lift",
   avail_degraded:"Availability to be confirmed with us: right now we can't verify all dates in real time. Send us your request and we'll confirm shortly.",
   faq_eyebrow:"FAQ",faq_title:"Frequently asked questions",
   faq_q1:"What are the check-in and check-out times?",faq_a1:"Check-in from 2:00 PM to 12:00 AM (let us know your arrival time); check-out between 10:00 and 10:30 AM.",
   faq_q2:"Is there parking?",faq_a2:"Yes, free private on-site parking, accessible for motorbikes too.",
   faq_q3:"Are pets allowed?",faq_a3:"No, pets are not allowed.",
   faq_q4:"Are children allowed?",faq_a4:"Yes, children are welcome, within the 2-guest total limit.",
-  faq_q5:"Is there a lift?",faq_a5:"No. The flat is on the 4th floor with 4 flights of stairs.",
-  faq_q6:"How does payment work?",faq_a6:"Two ways, both with no fees: (1) send your request with dates and, after we confirm availability, we arrange payment (bank transfer, PayPal or on arrival); (2) book and pay now securely by card via Stripe, charged only after confirmation. Basic breakfast is included.",
+  faq_q5:"Is there a lift?",faq_a5:"No. The flat is three and a half floors up, with no lift.",
+  faq_q6:"How does payment work?",faq_a6:"Send your request with your dates; once we confirm availability, we agree on the payment together (bank transfer, PayPal or on arrival), with no fees. Basic breakfast is included.",
   faq_q7:"What is the cancellation policy?",faq_a7:"Strict cancellation: 50% refund up to 30 days before arrival, no refund afterwards.",
   con_eyebrow:"Contact",con_title:"Talk to us",con_lead:"For info, dates or special requests, write to us: we reply quickly.",con_phone:"Phone",
   foot_about:"One-bedroom short-stay flat in the old town of Nicosia (EN), Sicily. Direct booking, no fees.",
@@ -847,12 +823,11 @@ const I18N={
   cookie_text:"We use necessary technical cookies and, only with your consent, Google Analytics 4 statistics cookies to improve the site. No tracking is active without consent. See the <a href='cookie.html'>Cookie Policy</a>.",
   cookie_accept:"Accept all",cookie_decline:"Necessary only",cal_free:"Available",cal_busy:"Booked",nic_guide:"→ Read the guide: what to see in Nicosia",cta_from:"from",cta_night:"/ night",cta_btn:"Book",gal_swipe:"← Swipe to see all photos →",cal_hint:"Tap a check-in date, then a check-out date.",mini_rev:"« Beautiful, clean home with mountain views. We will be back. »",
   skip:"Skip to content",
-  trust_reply:"We usually reply within a few hours",trust_noprepay:"Two ways, same booking: send a request or pay by card (charged only on confirmation)",req_datehint:"Set the dates from the calendar above.",req_noobl:"Sending a request commits you to nothing — on WhatsApp we reply within hours.",trust_nofee:"Direct price, no fees",
-  pay_t:"Book and pay online",pay_d:"Choose dates and guests and authorize payment securely by card: you're only charged after we confirm availability. If the dates aren't available, no charge is made.",pay_secure:"No charge until we confirm your dates · secure payment with Stripe",
+  trust_reply:"We usually reply within a few hours",trust_noprepay:"You pay only after we confirm your dates",req_datehint:"Set the dates from the calendar above.",req_noobl:"Sending a request commits you to nothing — on WhatsApp we reply within hours.",trust_nofee:"Direct price, no fees",
   routes_title:"How to get here",routes_note:"Approximate driving distances, to be confirmed.",
   route_cta:"Catania Airport",route_cta_km:"≈ 110 km by car",route_pmo:"Palermo Airport",route_pmo_km:"≈ 180 km by car",route_enna:"Enna",route_enna_km:"≈ 45 km by car",route_etna:"Etna",route_etna_km:"≈ 90 km by car",
   host_eyebrow:"Your hosts",host_title:"Your hosts: Paolo and Stefano",
-  host_p1:"La Mansarda is a family home, not a hotel. When you arrive we welcome you in person, hand over the keys and share the best places to eat and see in Nicosia. You'll find a small welcome kit and a basic breakfast ready for you.",
+  host_p1:"La Mansarda is a family home, not a hotel. When you arrive we welcome you in person, hand over the keys and share the best places to eat and see in Nicosia. You'll find a basic breakfast ready for you.",
   host_p2:"We reply quickly to every message: what matters to us is that you feel at home, from the first contact to check-out."
  },
  de:{
@@ -866,13 +841,13 @@ const I18N={
   badge_airbnb:"Airbnb · 6 Bewertungen",badge_booking:"Booking · 42 Bewertungen",badge_parking:"Kostenlose Parkplätze",
   hl_guests:"Gäste · 1 Schlafzimmer",hl_size:"2 Einzelbetten",hl_wifi:"schnell, inklusive",hl_park_b:"Gratis",hl_park:"privater Parkplatz",hl_break_b:"Frühstück",hl_break:"inklusive",hl_view_b:"Bergblick",hl_view:"und Altstadt",
   apt_eyebrow:"Die Wohnung",apt_title:"Ein typisch sizilianisches Zuhause, warm und ruhig",
-  apt_p1:"La Mansarda ist eine Ein-Zimmer-Wohnung im Herzen der Altstadt von Nicosia, mit sichtbaren Holzdecken, Vintage-Einrichtung und entspannter Atmosphäre. Ideal für Paare, Alleinreisende oder Familien mit einem Kind, die einen authentischen Aufenthalt suchen.",
-  apt_p2:"Sie verfügt über ein Schlafzimmer mit zwei Einzelbetten, eine voll ausgestattete Küche, ein eigenes Bad, Klimaanlage und Heizung, einen TV mit Fire Stick und einen Schreibtisch, ideal für Remote-Arbeit. Bei der Ankunft erwartet Sie ein kleines Willkommensset und ein einfaches Frühstück inklusive.",
-  apt_note:"Hinweis: Die Wohnung befindet sich im 4. Stock ohne Aufzug (4 Treppen).",
+  apt_p1:"La Mansarda ist eine Ein-Zimmer-Wohnung im Herzen der Altstadt von Nicosia, mit sichtbaren Holzdecken, Vintage-Einrichtung und entspannter Atmosphäre. Ideal für Paare und Alleinreisende, die einen authentischen Aufenthalt suchen.",
+  apt_p2:"Sie verfügt über ein Schlafzimmer mit zwei Einzelbetten, eine voll ausgestattete Küche, ein eigenes Bad, Klimaanlage und Heizung, einen TV mit Fire Stick und einen Schreibtisch mit PC und Drucker, ideal für Remote-Arbeit. Bei der Ankunft erwartet Sie ein einfaches Frühstück inklusive.",
+  apt_note:"Hinweis: Die Wohnung liegt dreieinhalb Stockwerke hoch, ohne Aufzug.",
   apt_cta:"Aufenthalt buchen",
   gal_eyebrow:"Galerie",gal_title:"Werfen Sie einen Blick in jede Ecke",
   amen_eyebrow:"Ausstattung",amen_title:"Aller Komfort, inklusive",
-  am_wifi:"Kostenloses WLAN",am_kitchen:"Voll ausgestattete Küche (Kühlschrank, Ofen, Mikrowelle)",am_coffee:"Kaffeemaschine & Wasserkocher",am_ac:"Klimaanlage",am_heat:"Heizung",am_tv:"TV mit Fire Stick",am_desk:"Eigener Arbeitsplatz",am_park:"Kostenloser privater Parkplatz",am_break:"Frühstück inklusive",am_bath:"Eigenes Bad mit Pflegeset",am_hair:"Haartrockner",am_view:"Berg- & Gartenblick",am_clean:"Gründliche Reinigung",am_safe:"Rauch- & CO-Melder",am_extra:"Gitarre, Schach & Relax-Sessel",
+  am_wifi:"Kostenloses WLAN",am_kitchen:"Voll ausgestattete Küche (Kühlschrank, Ofen, Mikrowelle)",am_coffee:"Kaffeemaschine & Wasserkocher",am_ac:"Klimaanlage",am_heat:"Heizung",am_tv:"TV mit Fire Stick",am_desk:"Arbeitsplatz mit PC und Drucker",am_park:"Kostenloser privater Parkplatz",am_break:"Frühstück inklusive",am_bath:"Eigenes Bad mit Pflegeset",am_hair:"Haartrockner",am_view:"Berg- & Gartenblick",am_clean:"Gründliche Reinigung",am_safe:"Rauch- & CO-Melder",am_extra:"Gitarre, Schach & Relax-Sessel",
   nic_eyebrow:"Die Lage",nic_title:"Entdecken Sie Nicosia, das authentische Sizilien",
   nic_lead:"Ein mittelalterliches Städtchen im Herzen der Nebrodi-Berge, abseits des Massentourismus: Gassen, Kirchen, Bergblicke und Natur nur wenige Schritte von der Wohnung entfernt.",
   poi1_t:"Altstadt",poi1_d:"Mittelalterliche Gassen, Ausblicke und Plätze wenige Gehminuten entfernt.",
@@ -886,20 +861,20 @@ const I18N={
   rev_google:"Bewerten Sie uns auf Google",
   book_eyebrow:"Direkt buchen",book_title:"Verfügbarkeit & Buchung",
   book_lead:"Wählen Sie Ihre Termine und senden Sie die Anfrage: Wir prüfen die Verfügbarkeit und antworten schnell. Direkt, ohne Plattformgebühren.",
-  req_t:"Buchung anfragen",req_d:"Wählen Sie Ihre Termine und senden Sie die Anfrage: Wir prüfen die Verfügbarkeit und antworten sofort, ohne Gebühren. Möchten Sie sofort zahlen? Unten können Sie sicher mit Karte buchen und bezahlen.",
+  req_t:"Buchung anfragen",req_d:"Wählen Sie Ihre Termine und senden Sie die Anfrage: Wir prüfen die Verfügbarkeit und antworten sofort, ohne Gebühren.",
   req_in:"Anreise",req_out:"Abreise",req_guests:"Gäste",req_name:"Name",req_msg:"Nachricht (optional)",req_err:"Wählen Sie An- und Abreise im Kalender oben.",req_wa:"Per WhatsApp senden",req_mail:"Per E-Mail senden",
   price_1:"1 Gast / Nacht",price_2:"2 Gäste / Nacht",price_dep:"Kaution",price_dep_v:"Keine",price_checkin:"Check-in",price_checkout:"Check-out",
   price_policy:"<b>Stornierung:</b> 50% Rückerstattung bei Stornierung mindestens 30 Tage vor Anreise; innerhalb von 30 Tagen keine Rückerstattung. Frühstück inklusive.",
-  price_incl:"<b>Im Preis enthalten:</b> Frühstück · kostenloser Privatparkplatz · WLAN · Bergblick · Willkommenspaket",
-  price_floor:"Etage",price_floor_v:"4. · ohne Aufzug",
+  price_incl:"<b>Im Preis enthalten:</b> Frühstück · kostenloser Privatparkplatz · WLAN · Bergblick",
+  price_floor:"Etage",price_floor_v:"3½ · ohne Aufzug",
   avail_degraded:"Verfügbarkeit mit uns zu bestätigen: Im Moment können wir nicht alle Daten in Echtzeit prüfen. Senden Sie uns Ihre Anfrage, wir bestätigen in Kürze.",
   faq_eyebrow:"FAQ",faq_title:"Häufige Fragen",
   faq_q1:"Wann sind Check-in und Check-out?",faq_a1:"Check-in von 14:00 bis 00:00 Uhr (bitte Ankunftszeit mitteilen); Check-out zwischen 10:00 und 10:30 Uhr.",
   faq_q2:"Gibt es Parkplätze?",faq_a2:"Ja, kostenloser privater Parkplatz vor Ort, auch für Motorräder zugänglich.",
   faq_q3:"Sind Haustiere erlaubt?",faq_a3:"Nein, Haustiere sind nicht erlaubt.",
   faq_q4:"Sind Kinder erlaubt?",faq_a4:"Ja, Kinder sind willkommen, im Rahmen von insgesamt 2 Gästen.",
-  faq_q5:"Gibt es einen Aufzug?",faq_a5:"Nein. Die Wohnung liegt im 4. Stock mit 4 Treppen.",
-  faq_q6:"Wie funktioniert die Zahlung?",faq_a6:"Zwei Wege, beide ohne Gebühren: (1) Sie senden Ihre Anfrage mit den Terminen und nach unserer Bestätigung der Verfügbarkeit vereinbaren wir die Zahlung (Überweisung, PayPal oder bei Ankunft); (2) Sie buchen und zahlen sofort sicher mit Karte über Stripe, mit Belastung erst nach der Bestätigung. Ein einfaches Frühstück ist inklusive.",
+  faq_q5:"Gibt es einen Aufzug?",faq_a5:"Nein. Die Wohnung liegt dreieinhalb Stockwerke hoch, ohne Aufzug.",
+  faq_q6:"Wie funktioniert die Zahlung?",faq_a6:"Sie senden Ihre Anfrage mit den Terminen; nach unserer Bestätigung der Verfügbarkeit vereinbaren wir gemeinsam die Zahlung (Überweisung, PayPal oder bei Ankunft), ohne Gebühren. Ein einfaches Frühstück ist inklusive.",
   faq_q7:"Wie ist die Stornierungsbedingung?",faq_a7:"Strenge Stornierung: 50% Rückerstattung bis 30 Tage vor Anreise, danach keine Rückerstattung.",
   con_eyebrow:"Kontakt",con_title:"Sprechen Sie mit uns",con_lead:"Für Infos, Termine oder besondere Wünsche schreiben Sie uns: Wir antworten schnell.",con_phone:"Telefon",
   foot_about:"Ein-Zimmer-Ferienwohnung in der Altstadt von Nicosia (EN), Sizilien. Direktbuchung, keine Gebühren.",
@@ -908,12 +883,11 @@ const I18N={
   cookie_text:"Wir verwenden technisch notwendige Cookies und, nur mit Ihrer Zustimmung, Statistik-Cookies von Google Analytics 4 zur Verbesserung der Website. Ohne Zustimmung ist kein Tracking aktiv. Siehe die <a href='cookie.html'>Cookie-Richtlinie</a>.",
   cookie_accept:"Alle akzeptieren",cookie_decline:"Nur notwendige",cal_free:"Frei",cal_busy:"Belegt",mini_rev:"« Wunderschönes, sauberes Zuhause mit Bergblick. Wir kommen wieder. »",nic_guide:"→ Reiseführer: Was man in Nicosia sehen kann",cta_from:"ab",cta_night:"/ Nacht",cta_btn:"Buchen",gal_swipe:"← Wischen für alle Fotos →",cal_hint:"Tippen Sie ein Anreisedatum, dann ein Abreisedatum.",
   skip:"Zum Inhalt springen",
-  trust_reply:"Wir antworten meist innerhalb weniger Stunden",trust_noprepay:"Zwei Wege, dieselbe Buchung: Anfrage senden oder mit Karte zahlen (Abbuchung erst bei Bestätigung)",req_datehint:"Wählen Sie die Daten im Kalender oben.",req_noobl:"Eine Anfrage verpflichtet zu nichts — auf WhatsApp antworten wir innerhalb von Stunden.",trust_nofee:"Direktpreis, keine Gebühren",
-  pay_t:"Online buchen und zahlen",pay_d:"Wählen Sie Daten und Gäste und autorisieren Sie die Zahlung sicher per Karte: Die Abbuchung erfolgt erst nach unserer Verfügbarkeitsbestätigung. Sind die Daten nicht verfügbar, erfolgt keine Abbuchung.",pay_secure:"Keine Abbuchung, bis wir die Daten bestätigen · sichere Zahlung mit Stripe",
+  trust_reply:"Wir antworten meist innerhalb weniger Stunden",trust_noprepay:"Sie zahlen erst nach unserer Bestätigung der Termine",req_datehint:"Wählen Sie die Daten im Kalender oben.",req_noobl:"Eine Anfrage verpflichtet zu nichts — auf WhatsApp antworten wir innerhalb von Stunden.",trust_nofee:"Direktpreis, keine Gebühren",
   routes_title:"Anreise",routes_note:"Ungefähre Fahrstrecken, ohne Gewähr.",
   route_cta:"Flughafen Catania",route_cta_km:"≈ 110 km mit dem Auto",route_pmo:"Flughafen Palermo",route_pmo_km:"≈ 180 km mit dem Auto",route_enna:"Enna",route_enna_km:"≈ 45 km mit dem Auto",route_etna:"Ätna",route_etna_km:"≈ 90 km mit dem Auto",
   host_eyebrow:"Ihre Gastgeber",host_title:"Ihre Gastgeber: Paolo und Stefano",
-  host_p1:"La Mansarda ist ein Familienhaus, kein Hotel. Bei der Ankunft begrüßen wir Sie persönlich, übergeben die Schlüssel und verraten Ihnen die besten Orte zum Essen und Sehen in Nicosia. Ein kleines Willkommensset und ein einfaches Frühstück warten auf Sie.",
+  host_p1:"La Mansarda ist ein Familienhaus, kein Hotel. Bei der Ankunft begrüßen wir Sie persönlich, übergeben die Schlüssel und verraten Ihnen die besten Orte zum Essen und Sehen in Nicosia. Ein einfaches Frühstück wartet auf Sie.",
   host_p2:"Wir antworten schnell auf jede Nachricht: Uns ist wichtig, dass Sie sich wie zu Hause fühlen – vom ersten Kontakt bis zur Abreise."
  },
  fr:{
@@ -927,13 +901,13 @@ const I18N={
   badge_airbnb:"Airbnb · 6 avis",badge_booking:"Booking · 42 avis",badge_parking:"Parking gratuit",
   hl_guests:"voyageurs · 1 chambre",hl_size:"2 lits simples",hl_wifi:"rapide, inclus",hl_park_b:"Gratuit",hl_park:"parking privé",hl_break_b:"Petit-déj",hl_break:"inclus",hl_view_b:"Vue montagnes",hl_view:"et vieille ville",
   apt_eyebrow:"Le logement",apt_title:"Une maison sicilienne typique, chaleureuse et calme",
-  apt_p1:"La Mansarda est un studio au cœur de la vieille ville de Nicosia, avec plafonds en bois apparents, mobilier vintage et une atmosphère détendue. Idéal pour les couples, voyageurs solo ou familles avec un enfant en quête d'un séjour authentique.",
-  apt_p2:"Il dispose d'une chambre avec deux lits simples, d'une cuisine complète, d'une salle de bains privée, de la climatisation et du chauffage, d'une TV avec Fire Stick et d'un bureau idéal pour le télétravail. À l'arrivée, un petit kit de bienvenue et un petit-déjeuner de base sont inclus.",
-  apt_note:"Note : le logement est au 4e étage sans ascenseur (4 volées d'escaliers).",
+  apt_p1:"La Mansarda est un studio au cœur de la vieille ville de Nicosia, avec plafonds en bois apparents, mobilier vintage et une atmosphère détendue. Idéal pour les couples et les voyageurs solo en quête d'un séjour authentique.",
+  apt_p2:"Il dispose d'une chambre avec deux lits simples, d'une cuisine complète, d'une salle de bains privée, de la climatisation et du chauffage, d'une TV avec Fire Stick et d'un bureau avec PC et imprimante, idéal pour le télétravail. À l'arrivée, un petit-déjeuner de base est inclus.",
+  apt_note:"Note : le logement est au 3e étage et demi, sans ascenseur.",
   apt_cta:"Réserver votre séjour",
   gal_eyebrow:"Galerie",gal_title:"Découvrez chaque recoin",
   amen_eyebrow:"Équipements",amen_title:"Tout le confort, inclus",
-  am_wifi:"WiFi gratuit",am_kitchen:"Cuisine complète (frigo, four, micro-ondes)",am_coffee:"Machine à café et bouilloire",am_ac:"Climatisation",am_heat:"Chauffage",am_tv:"TV avec Fire Stick",am_desk:"Espace de travail dédié",am_park:"Parking privé gratuit",am_break:"Petit-déjeuner inclus",am_bath:"Salle de bains privée avec nécessaire de toilette",am_hair:"Sèche-cheveux",am_view:"Vue montagnes et jardin",am_clean:"Ménage soigné",am_safe:"Détecteurs de fumée et CO",am_extra:"Guitare, échecs et fauteuil relax",
+  am_wifi:"WiFi gratuit",am_kitchen:"Cuisine complète (frigo, four, micro-ondes)",am_coffee:"Machine à café et bouilloire",am_ac:"Climatisation",am_heat:"Chauffage",am_tv:"TV avec Fire Stick",am_desk:"Espace de travail avec PC et imprimante",am_park:"Parking privé gratuit",am_break:"Petit-déjeuner inclus",am_bath:"Salle de bains privée avec nécessaire de toilette",am_hair:"Sèche-cheveux",am_view:"Vue montagnes et jardin",am_clean:"Ménage soigné",am_safe:"Détecteurs de fumée et CO",am_extra:"Guitare, échecs et fauteuil relax",
   nic_eyebrow:"L'emplacement",nic_title:"Découvrez Nicosia, la Sicile authentique",
   nic_lead:"Un bourg médiéval au cœur des monts Nebrodi, loin du tourisme de masse : ruelles, églises, panoramas sur les montagnes et nature à deux pas du logement.",
   poi1_t:"Vieille ville",poi1_d:"Ruelles médiévales, points de vue et places à quelques minutes à pied.",
@@ -947,20 +921,20 @@ const I18N={
   rev_google:"Laissez-nous un avis sur Google",
   book_eyebrow:"Réserver en direct",book_title:"Disponibilités & réservation",
   book_lead:"Choisissez vos dates et envoyez la demande : nous vérifions la disponibilité et répondons rapidement. En direct, sans frais de plateforme.",
-  req_t:"Demandez votre réservation",req_d:"Choisissez vos dates et envoyez votre demande : nous vérifions la disponibilité et répondons aussitôt, sans frais. Vous préférez payer tout de suite ? Vous pouvez réserver et payer par carte en toute sécurité ci-dessous.",
+  req_t:"Demandez votre réservation",req_d:"Choisissez vos dates et envoyez votre demande : nous vérifions la disponibilité et répondons aussitôt, sans frais.",
   req_in:"Arrivée",req_out:"Départ",req_guests:"Voyageurs",req_name:"Nom",req_msg:"Message (facultatif)",req_err:"Choisissez l'arrivée et le départ dans le calendrier ci-dessus.",req_wa:"Envoyer sur WhatsApp",req_mail:"Envoyer par e-mail",
   price_1:"1 voyageur / nuit",price_2:"2 voyageurs / nuit",price_dep:"Caution",price_dep_v:"Aucune",price_checkin:"Arrivée",price_checkout:"Départ",
   price_policy:"<b>Annulation :</b> remboursement de 50% si vous annulez au moins 30 jours avant l'arrivée ; dans les 30 jours, aucun remboursement. Petit-déjeuner inclus.",
-  price_incl:"<b>Inclus dans le prix :</b> petit-déjeuner · parking privé gratuit · WiFi · vue sur les montagnes · kit de bienvenue",
-  price_floor:"Étage",price_floor_v:"4e · sans ascenseur",
+  price_incl:"<b>Inclus dans le prix :</b> petit-déjeuner · parking privé gratuit · WiFi · vue sur les montagnes",
+  price_floor:"Étage",price_floor_v:"3e et demi · sans ascenseur",
   avail_degraded:"Disponibilité à confirmer avec nous : pour l'instant nous ne pouvons pas vérifier toutes les dates en temps réel. Envoyez-nous votre demande, nous confirmons sous peu.",
   faq_eyebrow:"FAQ",faq_title:"Questions fréquentes",
   faq_q1:"Quels sont les horaires d'arrivée et de départ ?",faq_a1:"Arrivée de 14h00 à 00h00 (indiquez-nous votre heure d'arrivée) ; départ entre 10h00 et 10h30.",
   faq_q2:"Y a-t-il un parking ?",faq_a2:"Oui, parking privé gratuit sur place, accessible aussi aux motos.",
   faq_q3:"Les animaux sont-ils admis ?",faq_a3:"Non, les animaux ne sont pas admis.",
   faq_q4:"Les enfants sont-ils admis ?",faq_a4:"Oui, les enfants sont les bienvenus, dans la limite de 2 voyageurs au total.",
-  faq_q5:"Y a-t-il un ascenseur ?",faq_a5:"Non. Le logement est au 4e étage avec 4 volées d'escaliers.",
-  faq_q6:"Comment fonctionne le paiement ?",faq_a6:"Deux façons, toutes les deux sans frais : (1) vous envoyez votre demande avec les dates et, après notre confirmation de disponibilité, nous convenons du paiement (virement, PayPal ou à l'arrivée) ; (2) vous réservez et payez tout de suite par carte en toute sécurité via Stripe, le débit n'ayant lieu qu'après la confirmation. Un petit-déjeuner de base est inclus.",
+  faq_q5:"Y a-t-il un ascenseur ?",faq_a5:"Non. Le logement est au 3e étage et demi, sans ascenseur.",
+  faq_q6:"Comment fonctionne le paiement ?",faq_a6:"Vous envoyez votre demande avec les dates ; après notre confirmation de disponibilité, nous convenons ensemble du paiement (virement, PayPal ou à l'arrivée), sans frais. Un petit-déjeuner de base est inclus.",
   faq_q7:"Quelle est la politique d'annulation ?",faq_a7:"Annulation stricte : remboursement de 50% jusqu'à 30 jours avant l'arrivée, aucun remboursement ensuite.",
   con_eyebrow:"Contact",con_title:"Parlez-nous",con_lead:"Pour toute info, date ou demande spéciale, écrivez-nous : nous répondons vite.",con_phone:"Téléphone",
   foot_about:"Studio en court séjour dans la vieille ville de Nicosia (EN), Sicile. Réservation directe, sans frais.",
@@ -969,12 +943,11 @@ const I18N={
   cookie_text:"Nous utilisons des cookies techniques nécessaires et, uniquement avec votre consentement, des cookies statistiques Google Analytics 4 pour améliorer le site. Aucun suivi n'est actif sans consentement. Voir la <a href='cookie.html'>Politique de cookies</a>.",
   cookie_accept:"Tout accepter",cookie_decline:"Nécessaires uniquement",cal_free:"Libre",cal_busy:"Occupé",nic_guide:"→ Lire le guide : que voir à Nicosia",cta_from:"dès",cta_night:"/ nuit",cta_btn:"Réserver",gal_swipe:"← Faites défiler les photos →",cal_hint:"Touchez une date d’arrivée, puis de départ.",mini_rev:"« Maison magnifique et propre, vue sur les montagnes. Nous reviendrons. »",
   skip:"Aller au contenu",
-  trust_reply:"Nous répondons généralement en quelques heures",trust_noprepay:"Deux façons, une seule réservation : envoyez une demande ou payez par carte (débit seulement à la confirmation)",req_datehint:"Choisissez les dates dans le calendrier ci-dessus.",req_noobl:"Envoyer une demande n'engage à rien — sur WhatsApp nous répondons en quelques heures.",trust_nofee:"Prix direct, sans frais",
-  pay_t:"Réserver et payer en ligne",pay_d:"Choisissez dates et voyageurs et autorisez le paiement en toute sécurité par carte : le débit n'a lieu qu'après notre confirmation de disponibilité. Si les dates ne sont pas disponibles, aucun débit.",pay_secure:"Aucun débit avant notre confirmation des dates · paiement sécurisé avec Stripe",
+  trust_reply:"Nous répondons généralement en quelques heures",trust_noprepay:"Vous payez seulement après notre confirmation des dates",req_datehint:"Choisissez les dates dans le calendrier ci-dessus.",req_noobl:"Envoyer une demande n'engage à rien — sur WhatsApp nous répondons en quelques heures.",trust_nofee:"Prix direct, sans frais",
   routes_title:"Comment venir",routes_note:"Distances routières indicatives, à confirmer.",
   route_cta:"Aéroport de Catane",route_cta_km:"≈ 110 km en voiture",route_pmo:"Aéroport de Palerme",route_pmo_km:"≈ 180 km en voiture",route_enna:"Enna",route_enna_km:"≈ 45 km en voiture",route_etna:"Etna",route_etna_km:"≈ 90 km en voiture",
   host_eyebrow:"Vos hôtes",host_title:"Vos hôtes : Paolo et Stefano",
-  host_p1:"La Mansarda est une maison de famille, pas un hôtel. À votre arrivée, nous vous accueillons en personne, vous remettons les clés et vous indiquons les meilleurs endroits où manger et que voir à Nicosia. Un petit kit de bienvenue et un petit-déjeuner de base vous attendent.",
+  host_p1:"La Mansarda est une maison de famille, pas un hôtel. À votre arrivée, nous vous accueillons en personne, vous remettons les clés et vous indiquons les meilleurs endroits où manger et que voir à Nicosia. Un petit-déjeuner de base vous attend.",
   host_p2:"Nous répondons vite à chaque message : ce qui compte pour nous, c'est que vous vous sentiez chez vous, du premier contact au départ."
  },
  es:{
@@ -988,13 +961,13 @@ const I18N={
   badge_airbnb:"Airbnb · 6 opiniones",badge_booking:"Booking · 42 opiniones",badge_parking:"Parking gratis",
   hl_guests:"huéspedes · 1 dormitorio",hl_size:"2 camas individuales",hl_wifi:"rápido, incluido",hl_park_b:"Gratis",hl_park:"parking privado",hl_break_b:"Desayuno",hl_break:"incluido",hl_view_b:"Vista montaña",hl_view:"y casco antiguo",
   apt_eyebrow:"El apartamento",apt_title:"Una casa siciliana típica, cálida y tranquila",
-  apt_p1:"La Mansarda es un apartamento de un dormitorio en el corazón del casco antiguo de Nicosia, con techos de madera a la vista, mobiliario vintage y un ambiente relajado. Ideal para parejas, viajeros solos o familias con un niño en busca de una estancia auténtica.",
-  apt_p2:"Dispone de un dormitorio con dos camas individuales, cocina completa, baño privado, aire acondicionado y calefacción, TV con Fire Stick y un escritorio ideal para teletrabajar. A la llegada encontrarás un pequeño kit de bienvenida y un desayuno básico incluido.",
-  apt_note:"Nota: el apartamento está en el 4º piso sin ascensor (4 tramos de escaleras).",
+  apt_p1:"La Mansarda es un apartamento de un dormitorio en el corazón del casco antiguo de Nicosia, con techos de madera a la vista, mobiliario vintage y un ambiente relajado. Ideal para parejas y viajeros solos en busca de una estancia auténtica.",
+  apt_p2:"Dispone de un dormitorio con dos camas individuales, cocina completa, baño privado, aire acondicionado y calefacción, TV con Fire Stick y un escritorio con PC e impresora, ideal para teletrabajar. A la llegada encontrarás un desayuno básico incluido.",
+  apt_note:"Nota: el apartamento está en el 3º piso y medio, sin ascensor.",
   apt_cta:"Reserva tu estancia",
   gal_eyebrow:"Galería",gal_title:"Echa un vistazo a cada rincón",
   amen_eyebrow:"Servicios",amen_title:"Todo el confort, incluido",
-  am_wifi:"WiFi gratis",am_kitchen:"Cocina completa (nevera, horno, microondas)",am_coffee:"Cafetera y hervidor",am_ac:"Aire acondicionado",am_heat:"Calefacción",am_tv:"TV con Fire Stick",am_desk:"Espacio de trabajo dedicado",am_park:"Parking privado gratuito",am_break:"Desayuno incluido",am_bath:"Baño privado con set de aseo",am_hair:"Secador",am_view:"Vista a montaña y jardín",am_clean:"Limpieza esmerada",am_safe:"Detectores de humo y CO",am_extra:"Guitarra, ajedrez y sillón relax",
+  am_wifi:"WiFi gratis",am_kitchen:"Cocina completa (nevera, horno, microondas)",am_coffee:"Cafetera y hervidor",am_ac:"Aire acondicionado",am_heat:"Calefacción",am_tv:"TV con Fire Stick",am_desk:"Espacio de trabajo con PC e impresora",am_park:"Parking privado gratuito",am_break:"Desayuno incluido",am_bath:"Baño privado con set de aseo",am_hair:"Secador",am_view:"Vista a montaña y jardín",am_clean:"Limpieza esmerada",am_safe:"Detectores de humo y CO",am_extra:"Guitarra, ajedrez y sillón relax",
   nic_eyebrow:"La ubicación",nic_title:"Descubre Nicosia, la Sicilia auténtica",
   nic_lead:"Un pueblo medieval en el corazón de los montes Nebrodi, lejos del turismo de masas: callejones, iglesias, vistas a la montaña y naturaleza a pocos pasos del apartamento.",
   poi1_t:"Casco antiguo",poi1_d:"Callejones medievales, miradores y plazas a pocos minutos a pie.",
@@ -1008,20 +981,20 @@ const I18N={
   rev_google:"Déjanos una reseña en Google",
   book_eyebrow:"Reserva directa",book_title:"Disponibilidad y reserva",
   book_lead:"Elige tus fechas y envíanos la solicitud: comprobamos la disponibilidad y respondemos enseguida. Directo, sin comisiones de plataforma.",
-  req_t:"Solicita tu reserva",req_d:"Elige tus fechas y envía tu solicitud: comprobamos la disponibilidad y respondemos al momento, sin comisiones. ¿Prefieres pagar ya? Más abajo puedes reservar y pagar con tarjeta de forma segura.",
+  req_t:"Solicita tu reserva",req_d:"Elige tus fechas y envía tu solicitud: comprobamos la disponibilidad y respondemos al momento, sin comisiones.",
   req_in:"Entrada",req_out:"Salida",req_guests:"Huéspedes",req_name:"Nombre",req_msg:"Mensaje (opcional)",req_err:"Elige la entrada y la salida en el calendario de arriba.",req_wa:"Enviar por WhatsApp",req_mail:"Enviar por email",
   price_1:"1 huésped / noche",price_2:"2 huéspedes / noche",price_dep:"Fianza",price_dep_v:"Ninguna",price_checkin:"Entrada",price_checkout:"Salida",
   price_policy:"<b>Cancelación:</b> reembolso del 50% si cancelas al menos 30 días antes de la llegada; dentro de los 30 días, sin reembolso. Desayuno incluido.",
-  price_incl:"<b>Incluido en el precio:</b> desayuno · parking privado gratuito · WiFi · vistas a las montañas · kit de bienvenida",
-  price_floor:"Planta",price_floor_v:"4ª · sin ascensor",
+  price_incl:"<b>Incluido en el precio:</b> desayuno · parking privado gratuito · WiFi · vistas a las montañas",
+  price_floor:"Planta",price_floor_v:"3ª y media · sin ascensor",
   avail_degraded:"Disponibilidad por confirmar con nosotros: ahora mismo no podemos verificar todas las fechas en tiempo real. Envíanos tu solicitud y te confirmamos en breve.",
   faq_eyebrow:"FAQ",faq_title:"Preguntas frecuentes",
   faq_q1:"¿Cuáles son los horarios de entrada y salida?",faq_a1:"Entrada de 14:00 a 00:00 (indícanos tu hora de llegada); salida entre las 10:00 y las 10:30.",
   faq_q2:"¿Hay parking?",faq_a2:"Sí, parking privado gratuito en el lugar, accesible también para motos.",
   faq_q3:"¿Se admiten mascotas?",faq_a3:"No, no se admiten mascotas.",
   faq_q4:"¿Se admiten niños?",faq_a4:"Sí, los niños son bienvenidos, dentro del límite de 2 huéspedes en total.",
-  faq_q5:"¿Hay ascensor?",faq_a5:"No. El apartamento está en el 4º piso con 4 tramos de escaleras.",
-  faq_q6:"¿Cómo funciona el pago?",faq_a6:"Dos formas, ambas sin comisiones: (1) envías tu solicitud con las fechas y, tras nuestra confirmación de disponibilidad, acordamos el pago (transferencia, PayPal o a la llegada); (2) reservas y pagas al momento con tarjeta de forma segura mediante Stripe, con cargo solo tras la confirmación. El desayuno básico está incluido.",
+  faq_q5:"¿Hay ascensor?",faq_a5:"No. El apartamento está en el 3º piso y medio, sin ascensor.",
+  faq_q6:"¿Cómo funciona el pago?",faq_a6:"Envías tu solicitud con las fechas; tras nuestra confirmación de disponibilidad, acordamos juntos el pago (transferencia, PayPal o a la llegada), sin comisiones. El desayuno básico está incluido.",
   faq_q7:"¿Cuál es la política de cancelación?",faq_a7:"Cancelación estricta: reembolso del 50% hasta 30 días antes de la llegada, sin reembolso después.",
   con_eyebrow:"Contacto",con_title:"Habla con nosotros",con_lead:"Para información, fechas o peticiones especiales, escríbenos: respondemos rápido.",con_phone:"Teléfono",
   foot_about:"Apartamento de estancia corta en el casco antiguo de Nicosia (EN), Sicilia. Reserva directa, sin comisiones.",
@@ -1030,12 +1003,11 @@ const I18N={
   cookie_text:"Usamos cookies técnicas necesarias y, solo con tu consentimiento, cookies estadísticas de Google Analytics 4 para mejorar el sitio. Sin consentimiento no hay seguimiento activo. Consulta la <a href='cookie.html'>Política de cookies</a>.",
   cookie_accept:"Aceptar todo",cookie_decline:"Solo necesarias",cal_free:"Libre",cal_busy:"Ocupado",nic_guide:"→ Lee la guía: qué ver en Nicosia",cta_from:"desde",cta_night:"/ noche",cta_btn:"Reserva",gal_swipe:"← Desliza para ver todas las fotos →",cal_hint:"Toca una fecha de entrada, luego una de salida.",mini_rev:"« Casa preciosa y limpia, con vistas a la montaña. Volveremos. »",
   skip:"Saltar al contenido",
-  trust_reply:"Solemos responder en pocas horas",trust_noprepay:"Dos formas, una sola reserva: envía una solicitud o paga con tarjeta (cargo solo al confirmar)",req_datehint:"Elige las fechas en el calendario de arriba.",req_noobl:"Enviar una solicitud no te compromete a nada — en WhatsApp respondemos en pocas horas.",trust_nofee:"Precio directo, sin comisiones",
-  pay_t:"Reserva y paga online",pay_d:"Elige fechas y huéspedes y autoriza el pago de forma segura con tarjeta: el cargo se realiza solo tras confirmar la disponibilidad. Si las fechas no están disponibles, no se hace ningún cargo.",pay_secure:"Sin cargo hasta que confirmemos las fechas · pago seguro con Stripe",
+  trust_reply:"Solemos responder en pocas horas",trust_noprepay:"Pagas solo después de que confirmemos las fechas",req_datehint:"Elige las fechas en el calendario de arriba.",req_noobl:"Enviar una solicitud no te compromete a nada — en WhatsApp respondemos en pocas horas.",trust_nofee:"Precio directo, sin comisiones",
   routes_title:"Cómo llegar",routes_note:"Distancias en coche aproximadas, a confirmar.",
   route_cta:"Aeropuerto de Catania",route_cta_km:"≈ 110 km en coche",route_pmo:"Aeropuerto de Palermo",route_pmo_km:"≈ 180 km en coche",route_enna:"Enna",route_enna_km:"≈ 45 km en coche",route_etna:"Etna",route_etna_km:"≈ 90 km en coche",
   host_eyebrow:"Tus anfitriones",host_title:"Tus anfitriones: Paolo y Stefano",
-  host_p1:"La Mansarda es una casa de familia, no un hotel. Cuando llegas te recibimos en persona, te entregamos las llaves y te contamos los mejores sitios para comer y ver en Nicosia. Encontrarás un pequeño kit de bienvenida y un desayuno básico listo para ti.",
+  host_p1:"La Mansarda es una casa de familia, no un hotel. Cuando llegas te recibimos en persona, te entregamos las llaves y te contamos los mejores sitios para comer y ver en Nicosia. Encontrarás un desayuno básico listo para ti.",
   host_p2:"Respondemos rápido a cada mensaje: lo que nos importa es que te sientas como en casa, desde el primer contacto hasta la salida."
  }
 };
@@ -1274,14 +1246,6 @@ const DISC_MSG={
   weekly:{it:"Resti una settimana? −{p}% applicato",en:"Staying a week? −{p}% applied",de:"Eine Woche? −{p}% angewendet",fr:"Une semaine ? −{p}% appliqué",es:"¿Una semana? −{p}% aplicado"},
   monthly:{it:"Resti un mese? −{p}% applicato",en:"Staying a month? −{p}% applied",de:"Einen Monat? −{p}% angewendet",fr:"Un mois ? −{p}% appliqué",es:"¿Un mes? −{p}% aplicado"}
 };
-const PAY_PICK={it:"Seleziona le date per pagare",en:"Select dates to pay",de:"Daten wählen, um zu zahlen",fr:"Sélectionnez les dates pour payer",es:"Selecciona las fechas para pagar"};
-const PAY_PAY={it:"Prenota con carta",en:"Book with card",de:"Mit Karte buchen",fr:"Réserver par carte",es:"Reserva con tarjeta"};
-const PAY_WAIT={it:"Attendere…",en:"Please wait…",de:"Bitte warten…",fr:"Veuillez patienter…",es:"Espera…"};
-const PAY_ERR={it:"Problema col pagamento. Riprova o scrivici su WhatsApp.",en:"Payment problem. Try again or message us on WhatsApp.",de:"Zahlungsproblem. Bitte erneut versuchen oder schreiben Sie uns auf WhatsApp.",fr:"Problème de paiement. Réessayez ou écrivez-nous sur WhatsApp.",es:"Problema con el pago. Inténtalo de nuevo o escríbenos por WhatsApp."};
-const PAY_BUSY={it:"Quelle date includono giorni occupati. Scegli un altro periodo.",en:"Those dates include booked days. Pick another period.",de:"Dieser Zeitraum enthält belegte Tage. Wählen Sie einen anderen.",fr:"Cette période inclut des jours occupés. Choisissez-en une autre.",es:"Esas fechas incluyen días ocupados. Elige otro periodo."};
-const PAY_UNVERIFIED={it:"Verifica della disponibilità in corso: ti confermiamo a breve. Intanto puoi inviarci la richiesta su WhatsApp.",en:"Availability check in progress: we'll confirm shortly. Meanwhile you can send us your request on WhatsApp.",de:"Verfügbarkeitsprüfung läuft: Wir bestätigen in Kürze. Schreiben Sie uns in der Zwischenzeit gern auf WhatsApp.",fr:"Vérification de la disponibilité en cours : nous confirmons sous peu. Vous pouvez nous écrire sur WhatsApp entre-temps.",es:"Comprobación de disponibilidad en curso: te confirmamos en breve. Mientras tanto, puedes escribirnos por WhatsApp."};
-const NOTICE_PAID={it:"✓ Pagamento autorizzato! Verifichiamo la disponibilità e ti confermiamo via email a breve. L'addebito avviene solo alla conferma; se le date non fossero disponibili, nessun addebito.",en:"✓ Payment authorized! We'll verify availability and confirm by email shortly. You're only charged on confirmation; if the dates aren't available, no charge is made.",de:"✓ Zahlung autorisiert! Wir prüfen die Verfügbarkeit und bestätigen in Kürze per E-Mail. Die Abbuchung erfolgt erst bei Bestätigung; sind die Daten nicht verfügbar, erfolgt keine Abbuchung.",fr:"✓ Paiement autorisé ! Nous vérifions la disponibilité et confirmons par e-mail sous peu. Le débit n'a lieu qu'à la confirmation ; si les dates ne sont pas disponibles, aucun débit.",es:"✓ ¡Pago autorizado! Verificamos la disponibilidad y te confirmamos por email en breve. El cargo se realiza solo al confirmar; si las fechas no están disponibles, no se hace ningún cargo."};
-const NOTICE_CANCEL={it:"Pagamento annullato. Puoi riprovare quando vuoi o scriverci su WhatsApp.",en:"Payment canceled. You can try again anytime or message us on WhatsApp.",de:"Zahlung abgebrochen. Sie können es jederzeit erneut versuchen oder uns auf WhatsApp schreiben.",fr:"Paiement annulé. Vous pouvez réessayer ou nous écrire sur WhatsApp.",es:"Pago cancelado. Puedes reintentarlo cuando quieras o escribirnos por WhatsApp."};
 function fmtDate(iso){ // YYYY-MM-DD -> DD/MM/YYYY (formato italiano/europeo)
   const p=iso.split('-');
   return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:iso;
@@ -1320,7 +1284,6 @@ function updateEstimate(){
   // su mobile la price-card è sotto la piega: rispecchia il totale accanto al calendario
   const ch=document.getElementById('calHint');
   if(ch&&s){const nl2=s.nights===1?(NIGHT_ONE[lang]||'notte'):(NIGHTS_LBL[lang]||'notti');ch.textContent=`${s.nights} ${nl2} · ${s.total} € · ${TUTTOINCL[lang]||TUTTOINCL.it}`;}
-  updatePayBtn(s,lang);
 }
 function tr(key,fallback){const lang=document.documentElement.lang;if(lang==='it')return (IT_ORIG[key]!=null?IT_ORIG[key]:fallback);const d=I18N[lang]||{};return d[key]!=null?d[key]:(IT_ORIG[key]!=null?IT_ORIG[key]:fallback);}
 updateEstimate();
@@ -1344,59 +1307,6 @@ function showReqSent(){const el=document.getElementById('reqSent');if(!el)return
 document.getElementById('reqWa').onclick=()=>{const t=buildReq();if(t){if(typeof track==='function')track('booking_request',{method:'whatsapp'});window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(t),'_blank');showReqSent();}};
 document.getElementById('reqMail').onclick=()=>{const t=buildReq();if(t){if(typeof track==='function')track('booking_request',{method:'email'});const L=REQL[document.documentElement.lang]||REQL.it;location.href='mailto:'+REQ_EMAIL+'?subject='+encodeURIComponent(L.t)+'&body='+encodeURIComponent(t);showReqSent();}};
 
-/* ---------- Pagamento online Stripe (importo = totale calcolato dalle date) ---------- */
-function updatePayBtn(s,lang){
-  const b=document.getElementById('payBtn'); if(!b||b.dataset.loading) return;
-  lang=lang||document.documentElement.lang;
-  if(!s){ b.disabled=true; b.textContent=PAY_PICK[lang]||PAY_PICK.it; }
-  else{ b.disabled=false; b.textContent=(PAY_PAY[lang]||PAY_PAY.it)+' · '+s.total+' €'; }
-}
-(function(){
-  const b=document.getElementById('payBtn'), err=document.getElementById('payErr');
-  if(!b) return;
-  function rangeBusy(a,o){
-    if(typeof CAL==='undefined'||!CAL.busy||!CAL.busy.size) return false;
-    let d=new Date(a+'T00:00:00Z'); const end=new Date(o+'T00:00:00Z');
-    for(;d<end;d.setUTCDate(d.getUTCDate()+1)){ if(CAL.busy.has(d.toISOString().slice(0,10))) return true; }
-    return false;
-  }
-  b.addEventListener('click',async()=>{
-    const L=document.documentElement.lang; const s=calcStay();
-    if(!s) return;
-    if(err) err.classList.add('hidden');
-    if(rangeBusy(rIn.value,rOut.value)){ if(err){err.textContent=PAY_BUSY[L]||PAY_BUSY.it;err.classList.remove('hidden');} return; }
-    if(typeof track==='function')track('begin_checkout',{currency:'EUR',value:s.total,nights:s.nights,guests:Number(rGuests.value)});
-    b.dataset.loading='1'; b.disabled=true; b.innerHTML='<span class="spin" aria-hidden="true"></span>'+(PAY_WAIT[L]||PAY_WAIT.it);
-    const _ac=new AbortController(); const _to=setTimeout(()=>_ac.abort(),15000);
-    try{
-      const r=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({checkin:rIn.value,checkout:rOut.value,guests:rGuests.value,lang:L}),signal:_ac.signal});
-      const data=await r.json().catch(()=>({}));
-      if(r.ok&&data.url){ window.location.href=data.url; return; }
-      if(err){
-        let _m;
-        if(r.status===409&&data&&data.error==='sync_unverified'){ _m=PAY_UNVERIFIED[L]||PAY_UNVERIFIED.it; const w=document.getElementById('availWarn'); if(w)w.classList.remove('hidden'); }
-        else if(r.status===409){ _m=PAY_BUSY[L]||PAY_BUSY.it; }
-        else { _m=PAY_ERR[L]||PAY_ERR.it; }
-        err.textContent=_m; err.classList.remove('hidden');
-      }
-    }catch(e){
-      if(err){ err.textContent=PAY_ERR[L]||PAY_ERR.it; err.classList.remove('hidden'); }
-    }
-    clearTimeout(_to); delete b.dataset.loading; updatePayBtn(calcStay(),L);
-  });
-})();
-(function payNotice(){
-  const el=document.getElementById('payNotice'); if(!el) return;
-  const p=new URLSearchParams(location.search); const L=document.documentElement.lang;
-  let msg=null, ok=false;
-  if(p.get('paid')==='1'){ msg=NOTICE_PAID[L]||NOTICE_PAID.it; ok=true; window.__pendingPurchase={value:Number(p.get('amount'))||undefined,transaction_id:p.get('session_id')||undefined}; if(window.__gaOn&&typeof track==='function'){track('purchase',Object.assign({currency:'EUR'},window.__pendingPurchase));window.__pendingPurchase=null;} }
-  else if(p.get('canceled')==='1'){ msg=NOTICE_CANCEL[L]||NOTICE_CANCEL.it; }
-  if(!msg) return;
-  el.textContent=msg; el.className='pay-notice'+(ok?' ok':''); el.classList.remove('hidden');
-  try{ history.replaceState(null,'',location.pathname+location.hash); }catch(e){}
-  const sec=document.getElementById('prenota'); if(sec) sec.scrollIntoView({behavior:'smooth',block:'start'});
-})();
-
 /* ---------- Cookie banner + Google Analytics 4 (caricato SOLO dopo consenso) ---------- */
 const GA_ID='G-XH10EXD4VS'; /* ID di misurazione GA4 reale di La Mansarda */
 let gaLoaded=false;
@@ -1409,7 +1319,6 @@ function loadGA(){
   gtag('js',new Date());
   gtag('config',GA_ID,{anonymize_ip:true});
   window.__gaOn=true;
-  if(window.__pendingPurchase){track('purchase',Object.assign({currency:'EUR'},window.__pendingPurchase));window.__pendingPurchase=null;}
 }
 /* GA4 event helper: invia solo dopo consenso (window.__gaOn impostato da loadGA) */
 function track(name,params){try{if(!window.__gaOn)return;(window.dataLayer=window.dataLayer||[]).push(['event',name,params||{}]);}catch(e){}}
